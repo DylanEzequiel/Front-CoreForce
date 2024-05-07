@@ -2,8 +2,9 @@ import { Route, Routes } from 'react-router'
 import { NavBar } from './Components/NavBar/NavBar'
 import { Home } from './view/home/Home'
 import { BrowserRouter } from 'react-router-dom'
-import { Login } from './Components/login/Login'
 import { HomeLayout } from './layout/HomeLayout'
+import { Profile } from './Components/profile/Profile'
+
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeLayout />}/>
           <Route index element={<Home></Home>}></Route>
-          <Route index path='login' element={<Login></Login>}></Route>
+          <Route index path='/profile' element={<Profile/>}></Route>
+          
         </Routes>
       
       </BrowserRouter>
