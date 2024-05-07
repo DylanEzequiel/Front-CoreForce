@@ -2,8 +2,11 @@ import { Route, Routes } from 'react-router'
 import { NavBar } from './Components/NavBar/NavBar'
 import { Home } from './view/home/Home'
 import { BrowserRouter } from 'react-router-dom'
+import { Login } from './Components/login/Login'
 
 function App() {
+
+// TODO CREAR UN ESTADO GLOBAL PARA EL IDIOMA
  
 
   return (
@@ -13,10 +16,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index path='/home' element={<Home></Home>}></Route>
+          <Route index path='/login' element={<Login></Login>}></Route>
         </Routes>
       
       </BrowserRouter>
-
+      
     </div>
   )
 }
