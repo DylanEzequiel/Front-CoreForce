@@ -5,12 +5,13 @@ export default {
   theme: {
     extend: {
       colors:{
-        "primary":"#f57b51",
-        "secondary":"#d63447",
+        "primary": "#927fbf",
+        "secondary":"#4f3b78",
         "text":"#f6eedf",
         "comp":"#d1cebd",
       }
     },
+    
   },
   plugins: [],
 }
