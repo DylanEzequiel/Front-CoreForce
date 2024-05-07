@@ -13,6 +13,7 @@ function handleSubmit (e:any){
       <div className="w-2/3 lg:w-2/5 md:w-1/2">
         <form className="min-w-full p-10 rounded-lg shadow-lg bg-primary" onSubmit={handleSubmit}>
           <h1 className="mb-6 font-sans text-2xl font-bold text-center text-gray-600">
+            {/* ESTE ES EL EJEMPLO DE COMO HACER LOS STRINGS (VER CARPETA TRANSLATIONS) */}
             {EN["free.registration"]}
           </h1>
           <div>
