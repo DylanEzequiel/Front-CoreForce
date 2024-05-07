@@ -1,5 +1,8 @@
 
 import React from 'react'
+import { LoginButton } from '../login/Login'
+import { LogoutButton } from '../logout/Logout'
+
 // import { NavLink } from 'react-router-dom'
 
 export function NavBar ():React.ReactNode {
@@ -29,11 +32,13 @@ export function NavBar ():React.ReactNode {
                     </li>
                 </ul>
             </div>
+            <LoginButton/>
+            <LogoutButton/>
         
             <div id="userCard" className='m-1'>
                 <h4 className=''>UserName</h4>
                 <b>clientType / Suscription</b>
-                <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="userIcon" className='inline rounded-full h-12' />
+                <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="userIcon" className='inline h-12 rounded-full' />
             </div>
         </div>
   )
