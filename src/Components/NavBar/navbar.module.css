@@ -1,0 +1,8 @@
+#navbar{
+    
+    transition: background-color 0.3s ease;
+}
+#navbar.srolled {
+    background-color: #333; /* Cambia el color del navbar al hacer scroll */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
+  }
