@@ -14,7 +14,7 @@ const handleCLick=():void=>{
 
   return (
     <nav className='top-0 z-50 fixed pb-10 w-full'>
-        <div className='flex flex-wrap justify-between bg-secondary select-none'>
+        <div className='flex flex-wrap justify-between bg-slate-800 select-none shadow-md'>
             <div id="links" className=''>
                 <ul className='flex font-medium text-text'>
                     <li className={`m-3 text-center w-12 rounded-t ${display === true? "bg-slate-400":null}`}>
