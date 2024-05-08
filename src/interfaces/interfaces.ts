@@ -13,11 +13,23 @@ export interface IUserRegister{
     address: string;
 }
 
+export interface IUser{
+    name: string;
+    email: string;
+    phone_number: string;
+    birthdate: string;
+    gender: "male" | "female" | "other" ;
+    height: string;
+    profile_image:string;
+    weight: string;
+    address: string;
+}
 
 export interface ILoginSend{
     email:string;
     password:string;
 }
+
 export interface ILoginValidate{
     email:string;
     password:string;
