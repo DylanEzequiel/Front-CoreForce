@@ -39,7 +39,7 @@ export const Home = () => {
 
         </section>
       </main>
-
+      
       <section className="bg-slate-800 text-white py-28 relative my-20 flex flex-col-reverse md:flex-row-reverse">
         <div className="container px-10">
           <h2 className="md:text-4xl lg:text-6xl xl:text-8xl my-2">Why choose us ?</h2> 
