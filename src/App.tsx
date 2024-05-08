@@ -11,18 +11,18 @@ function App() {
  
 
   return (
-    <div>
-      <NavBar></NavBar>
+    <div className='bg-gray-200 h-screen'>
+      <NavBar />
       {/* aca van las rutas a las que hacemos en Pages -Dylan  */}
      
         <Routes>
           <Route path='/' element={<HomeLayout />}/>
-          <Route index element={<Home></Home>}></Route>
+          <Route index element={<Home />}></Route>
           {/* <Route index path='login' element={<Login></Login>}></Route> */}
         </Routes>
       
    
-      <Footer></Footer>
+      <Footer />
     </div>
   )
 }
