@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< Updated upstream
-=======
+
 
 ::-webkit-scrollbar { width: 10px; }
 
@@ -12,4 +11,4 @@
 ::-webkit-scrollbar-thumb { background-color: #1e293b; }
 
 ::-webkit-scrollbar-thumb:hover { background-color: hsl(0, 0%, 70%); }
->>>>>>> Stashed changes
+
