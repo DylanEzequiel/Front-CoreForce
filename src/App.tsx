@@ -4,6 +4,7 @@ import {  Route, Routes } from 'react-router-dom'
 // import { Login } from './Components/login/Login'
 import { HomeLayout } from './layout/HomeLayout'
 import Footer from './Components/Footer/Footer'
+import DasboardUser from './view/dashboardUser/DasboardUser'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
      
         <Routes>
           <Route path='/' element={<HomeLayout />}/>
+          <Route path='/profile' element={<DasboardUser />}/>
           <Route index element={<Home />}></Route>
           {/* <Route index path='login' element={<Login></Login>}></Route> */}
         </Routes>
