@@ -7,12 +7,10 @@ import Footer from './Components/Footer/Footer'
 import DasboardUser from './view/dashboardUser/DasboardUser'
 
 function App() {
-
-// TODO CREAR UN ESTADO GLOBAL PARA EL IDIOMA
- 
+  // TODO CREAR UN ESTADO GLOBAL PARA EL IDIOMA
 
   return (
-    <div className='bg-gray-200 h-screen'>
+    <div className='h-screen bg-gray-200'>
       <NavBar />
       {/* aca van las rutas a las que hacemos en Pages -Dylan  */}
      
@@ -26,7 +24,7 @@ function App() {
    
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

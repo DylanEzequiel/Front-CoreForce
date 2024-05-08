@@ -5,7 +5,9 @@ export const Profile = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  console.log(user, isAuthenticated)
   return (
+    
     isAuthenticated && (
       <div>
         <img src={user.picture} alt={user.name} />
