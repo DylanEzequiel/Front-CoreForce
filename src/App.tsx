@@ -9,26 +9,39 @@ import { Login } from './view/auth/Login'
 import { loginAction } from './redux/login/login.actions'
 import { useDispatch } from 'react-redux'
 import { Register } from './view/auth/Register'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const dispatch: any = useDispatch();
 
   return (
     <div className='bg-gray-200'>
-      <NavBar />
-      {/* aca van las rutas a las que hacemos en Pages -Dylan  */}
-      <button className="top-48" onClick={() => dispatch(loginAction())}>
-        click
-      </button>
-      <Routes>
-        <Route path="/" element={<HomeLayout />} />
-        <Route path="/profile" element={<DasboardUser />} />
-        <Route index element={<Home />}></Route>
-        <Route path='auth/register' element={<Register />}/>
-        <Route index path="auth/login" element={<Login />}></Route>
-      </Routes>
+      <ToastContainer position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"/>
 
-      <Footer />
+        <NavBar />
+        {/* aca van las rutas a las que hacemos en Pages -Dylan  */}
+        <button className="top-48" onClick={() => dispatch(loginAction())}>
+          click
+        </button>
+        <Routes>
+          <Route path="/" element={<HomeLayout />} />
+          <Route path="/profile" element={<DasboardUser />} />
+          <Route index element={<Home />}></Route>
+          <Route path='auth/register' element={<Register />}/>
+          <Route index path="auth/login" element={<Login />}></Route>
+        </Routes>
+
+        <Footer />
     </div>
   );
 }

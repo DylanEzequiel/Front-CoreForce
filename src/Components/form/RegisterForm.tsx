@@ -6,6 +6,7 @@ import {
 import { useForm } from "../../hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const RegisterForm = ():React.ReactElement => {
   const apiUrl=process.env.API_URL
@@ -52,19 +53,19 @@ export const RegisterForm = ():React.ReactElement => {
     }
     try {
       const {data} = await axios.post('http://localhost:3000/auth/signup',{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
+      toast.success("Register Succes! Log in please")
       await navigate("/auth/login")
       console.log(data)
       
     } catch (error:any) {
       console.log(error.message);
-      
+      toast.warn("Ups! something went wrong")
     }
-    
-    console.log(formState);
   };
 
   return (
     <div className="dark:border-gray-700 bg-white dark:bg-gray-800 shadow md:mt-0 xl:p-0 dark:border rounded-lg w-full sm:max-w-2xl">
+      
       <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
         <h1 className="font-bold text-gray-900 text-xl md:text-2xl dark:text-white leading-tight tracking-tight">
           Sign up to your account
