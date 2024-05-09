@@ -1,5 +1,6 @@
 import { FaHeartPulse } from "react-icons/fa6"
 import { Hero } from "../../Components/hero/Hero"
+import { Pricing } from "../../Components/pricing/Pricing"
 
 
 
@@ -7,9 +8,9 @@ export const Home = () => {
   return (
     <>
       <Hero />
-      <main className="container pt-20 mx-auto pb-36">
-        <h2 className="text-5xl font-semibold text-center text-slate-700">Our Programs</h2>
-        <p className="my-2 text-3xl font-semibold text-center text-gray-500">Build your personal routine</p>
+      <main className="container mx-auto pb-28 lg:pb-36 pt-20">
+        <h2 className="text-center text-5xl text-slate-700 font-semibold">Our Programs</h2>
+        <p className="text-center my-2 font-semibold text-3xl text-gray-500">Build your personal routine</p>
 
         <section className="grid grid-cols-1 gap-3 mt-10 md:grid-cols-2 xl:grid-cols-4">
 
@@ -40,7 +41,7 @@ export const Home = () => {
         </section>
       </main>
       
-      <section className="relative flex flex-col-reverse my-20 text-white bg-slate-800 py-28 md:flex-row-reverse">
+      <section className="bg-slate-800 text-white py-28 relative flex flex-col-reverse md:flex-row-reverse">
         <div className="container px-10">
           <h2 className="my-2 md:text-4xl lg:text-6xl xl:text-8xl">Why choose us ?</h2> 
           <p className="text-pretty text-sm py-3 font-semibold text-gray-500 xl:text-xl md:max-w-[23rem] lg:max-w-[36rem] xl:max-w-[40rem]">Select your preferred class and begin right away. Keep in mind, the only regrettable workout is the one you skipped.</p>
@@ -69,8 +70,10 @@ export const Home = () => {
           </div>
 
         </div>
-        <img src="/img/choose-img.png" alt="" className="md:absolute md:top-[37px] lg:top-[-23px] xl:right-5 xl:top-[-34px] 2xl:right-10 2xl:top-[-128px] max-w-100 md:max-w-[23rem] lg:max-w-[27rem] xl:max-w-[30rem] 2xl:max-w-[32rem]"/>
+        <img src="/img/choose-img.png" alt="" className="md:absolute md:top-[37px] lg:top-[-23px] xl:right-5 xl:top-[-34px] 2xl:right-10 2xl:top-[-128px] 3xl:top-[-77px] max-w-100 md:max-w-[23rem] lg:max-w-[27rem] xl:max-w-[30rem] 2xl:max-w-[32rem]"/>
       </section>
+
+      <Pricing />
     </>
   )
 }

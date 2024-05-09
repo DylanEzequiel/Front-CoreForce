@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  
+  font-family: "Onest", sans-serif;
+}
+
 
 ::-webkit-scrollbar { width: 10px; }
 
