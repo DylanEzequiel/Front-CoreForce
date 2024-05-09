@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Profile } from '../../Components/profile/Profile'
 import { IUser } from '../../interfaces/interfaces'
+import UserCard from '../../Components/UserCard/UserCard'
+import DataUserCard from '../../Components/UserCard/DataUserCard'
 
 const userBase:IUser={
     name: "Jhon Doe",
@@ -17,16 +18,14 @@ const userBase:IUser={
 }
 
 function DasboardUser():React.ReactElement {
-    const [user,setUser]=useState(userBase)
-    useEffect(()=>{ },[])
+    //Esto va a ser usado cuando con la BBDD recuperemos la info del user al montar la pag
+    // const [user,setUser]=useState(userBase)
+    // useEffect(()=>{ },[])
+
   return (
-    <div className='mt-20'>
-        <h1 className='m-20 text-2xl'>{user.name}</h1>
-        <h1 className='m-20 text-2xl'>{user.email}</h1>
-        <h1 className='m-20 text-2xl'>{user.phone_number}</h1>
-        <h1 className='m-20 text-2xl'>{user.birthdate}</h1>
-        <h1 className='m-20 text-2xl'>{user.gender}</h1>
-        <h1 className='m-20 text-2xl'>{user.height}</h1>
+    <div className='flex flex-row flex-wrap justify-center my-24 h-screen'>
+        <UserCard {...userBase}></UserCard>
+        <DataUserCard {...userBase}></DataUserCard>
     </div>
   )
 }
