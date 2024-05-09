@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export const RegisterForm = ():React.ReactElement => {
+  const apiUrl=process.env.API_URL
   const {
     onInputChange,
     formState,
@@ -48,7 +49,7 @@ export const RegisterForm = ():React.ReactElement => {
       setErrors(validationErrors);
       return;
     }
-    // axios.post(apiUrl+"/auth/signup",{body del post})
+    // const {data} = await axios.post(apiUrl+"/auth/signup",{name, email, address, password, gender, birthdate, phoneNumber})
     console.log(formState);
   };
 
