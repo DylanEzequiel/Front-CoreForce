@@ -4,11 +4,11 @@ import React from 'react'
 function Footer():React.ReactElement {
   return (
     
-<footer className="bg-primary m-30 p-4 w-full max-w-screen-xl">
+<footer className="w-full max-w-screen-xl p-4 bg-primary m-30">
 
     <div className="flex justify-around">
         <div className='w-1/2 text-left'>
-            <h4 className="mb-6 font-semibold text-sm text-white uppercase">Core Force Fitness</h4>
+            <h4 className="mb-6 text-sm font-semibold text-white uppercase">Core Force Fitness</h4>
             
             <p className="text-sm text-text sm:text-center">
             Welcome to Core Force Fitness, where your fitness journey receives specialized attention! Our mission is to help you to achieve your health and wellness goals with personalized support every step of the way. Whether you're a beginner or a seasoned athlete, our team of dedicated trainers is here to tailor workouts to your unique needs, ensuring you reach your full potential. Join us today and experience the difference of expert guidance and a supportive community on your path to a stronger, healthier you!
@@ -16,7 +16,7 @@ function Footer():React.ReactElement {
         </div>
 
         <div>
-            <h4 className="mb-6 font-semibold text-sm text-white uppercase">Follow me</h4>
+            <h4 className="mb-6 text-sm font-semibold text-white uppercase">Follow me</h4>
             <ul className="font-medium text-text">
                 <li className="mb-4">
                     {/* <NavLink to="https://github.com/DylanEzequiel" className="hover:underline">Github</NavLink> */}
@@ -31,7 +31,7 @@ function Footer():React.ReactElement {
         </div>
 
         <div>
-            <h4 className="mb-6 font-semibold text-sm text-white uppercase">Pages</h4>
+            <h4 className="mb-6 text-sm font-semibold text-white uppercase">Pages</h4>
             <ul className="font-medium text-text">
                 <li className="mb-4">
                     {/* <NavLink to="/" className="hover:underline">Home</NavLink> */}
