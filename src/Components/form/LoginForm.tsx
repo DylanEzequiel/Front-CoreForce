@@ -36,7 +36,9 @@ function LoginForm():React.ReactElement {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(`email:${formState.email},password:${formState.password}`)
-        // axios.post(apiUrl+"/auth/login",{email:formState.email,password:formState.password})
+        await axios.post(apiUrl+"/auth/login",{email:formState.email,password:formState.password})
+        .then((data)=>console.log(`registrado: ${data.data}`))
+        .catch(error=>alert(error.message))
     }
   return (
     <div className="dark:border-gray-700 bg-white dark:bg-gray-800 shadow m-60 md:mt-0 xl:p-0 dark:border rounded-lg w-full sm:max-w-2xl">

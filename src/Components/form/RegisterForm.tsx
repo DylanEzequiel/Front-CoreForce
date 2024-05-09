@@ -49,7 +49,14 @@ export const RegisterForm = ():React.ReactElement => {
       setErrors(validationErrors);
       return;
     }
-    // const {data} = await axios.post(apiUrl+"/auth/signup",{name, email, address, password, gender, birthdate, phoneNumber})
+    try {
+      const {data} = await axios.post(apiUrl+"/auth/signup",{name, email, address, password, gender, birthdate, phoneNumber,membershipName:"Free"})
+      console.log(data)
+      
+    } catch (error:any) {
+      alert(error.message)
+    }
+    
     console.log(formState);
   };
 
