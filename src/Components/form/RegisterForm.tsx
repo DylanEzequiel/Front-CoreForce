@@ -50,11 +50,12 @@ export const RegisterForm = ():React.ReactElement => {
       return;
     }
     try {
-      const {data} = await axios.post(apiUrl+"/auth/signup",{name, email, address, password, gender, birthdate, phoneNumber,membershipName:"Free"})
+      const {data} = await axios.post('http://localhost:3000/auth/signup',{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
       console.log(data)
       
     } catch (error:any) {
-      alert(error.message)
+      console.log(error.message);
+      
     }
     
     console.log(formState);
