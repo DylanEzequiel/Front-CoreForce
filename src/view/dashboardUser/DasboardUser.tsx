@@ -18,14 +18,19 @@ const userBase:IUser={
 }
 
 function DasboardUser():React.ReactElement {
-    //Esto va a ser usado cuando con la BBDD recuperemos la info del user al montar la pag
-    // const [user,setUser]=useState(userBase)
-    // useEffect(()=>{ },[])
+    // Esto va a ser usado cuando con la BBDD recuperemos la info del user al montar la pag
+    const [user,setUser]=useState(userBase)
+    useEffect(()=>{
+      const sessionUser= sessionStorage.getItem("User")
+      sessionUser?
+      setUser(JSON.parse(sessionUser)):
+      null
+},[])
 
   return (
     <div className='flex flex-row flex-wrap justify-center my-24 h-screen'>
-        <UserCard {...userBase}></UserCard>
-        <DataUserCard {...userBase}></DataUserCard>
+        <UserCard {...user}></UserCard>
+        <DataUserCard {...user}></DataUserCard>
     </div>
   )
 }
