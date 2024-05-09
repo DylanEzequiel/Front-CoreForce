@@ -1,13 +1,21 @@
-const body: any = {
-  client_id: "9P2OoDAlWk8ggQ9f9GLVocllrQQJRjug",
-  client_secret:
-    "JNtuKrk31iCI_oRsUEGn9i22IuHjXhCW_stkL2rHKziCk5bi47MCzjdF0eoQ3mMU",
-  audience: "https://dev-lnoda07jj1wqfmje.us.auth0.com/api/v2/",
+const apiURL=process.env.AUTH_URL
+
+interface IBodyAuth{
+  client_id:string | undefined,
+  client_secret:string | undefined,
+  audience:string,
+  grant_type:string
+}
+
+const body: IBodyAuth = {
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
+  audience: apiURL+"/api/v2/",
   grant_type: "client_credentials",
 };
 
 export const getToken = () => {
-  const url = "https://dev-lnoda07jj1wqfmje.us.auth0.com/oauth/token";
+  const url = apiURL+"/oauth/token";
   return fetch(url, {
     method: "POST",
 
@@ -21,7 +29,7 @@ export const getToken = () => {
 };
 
 export const getAuth0Users = async () => {
-  const url = "https://dev-lnoda07jj1wqfmje.us.auth0.com/api/v2/users";
+  const url = apiURL+"/api/v2/users";
   const tokenStorage = localStorage.getItem("token");
   let token;
   if (tokenStorage) {
