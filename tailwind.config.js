@@ -5,10 +5,13 @@ export default {
   theme: {
     extend: {
       colors:{
-        "primary": "#927fbf",
-        "secondary":"#4f3b78",
-        "text":"#f6eedf",
-        "comp":"#d1cebd",
+        "primary": "#1e293b",
+        "secondary":"#f97316",
+        "text":"#FFF",
+        "comp":"#9ca3af",
+      },
+      screens: {
+        '3xl': '1560px'
       }
     },
     
