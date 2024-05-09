@@ -17,7 +17,7 @@ function App() {
     <div className='bg-gray-200'>
       <NavBar />
       {/* aca van las rutas a las que hacemos en Pages -Dylan  */}
-      <button className=" top-48" onClick={() => dispatch(loginAction())}>
+      <button className="top-48" onClick={() => dispatch(loginAction())}>
         click
       </button>
       <Routes>
@@ -25,7 +25,7 @@ function App() {
         <Route path="/profile" element={<DasboardUser />} />
         <Route index element={<Home />}></Route>
         <Route path='auth/register' element={<Register />}/>
-        <Route index path="/login" element={<Login />}></Route>
+        <Route index path="auth/login" element={<Login />}></Route>
       </Routes>
 
       <Footer />

@@ -5,8 +5,9 @@ import {
 } from "../../helpers/ValidateRegister";
 import { useForm } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-export const RegisterForm = () => {
+export const RegisterForm = ():React.ReactElement => {
   const {
     onInputChange,
     formState,
@@ -47,18 +48,18 @@ export const RegisterForm = () => {
       setErrors(validationErrors);
       return;
     }
-
+    // axios.post(apiUrl+"/auth/signup",{body del post})
     console.log(formState);
   };
 
   return (
-    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-2xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+    <div className="dark:border-gray-700 bg-white dark:bg-gray-800 shadow md:mt-0 xl:p-0 dark:border rounded-lg w-full sm:max-w-2xl">
+      <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
+        <h1 className="font-bold text-gray-900 text-xl md:text-2xl dark:text-white leading-tight tracking-tight">
           Sign up to your account
         </h1>
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-          <div className="w-full relative">
+          <div className="relative w-full">
             <input
               id="name"
               type="text"
@@ -73,13 +74,13 @@ export const RegisterForm = () => {
             {errors.name && <span className="text-red-500">{errors.name}</span>}
             <label
               htmlFor="name"
-              className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+              className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
             >
               Name
             </label>
           </div>
 
-          <div className="w-full relative">
+          <div className="relative w-full">
             <input
               id="email"
               type="email"
@@ -96,13 +97,13 @@ export const RegisterForm = () => {
             )}
             <label
               htmlFor="email"
-              className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+              className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
             >
               Email
             </label>
           </div>
 
-          <div className="w-full relative">
+          <div className="relative w-full">
             <input
               id="address"
               type="text"
@@ -119,13 +120,13 @@ export const RegisterForm = () => {
             )}
             <label
               htmlFor="address"
-              className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+              className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
             >
               Address
             </label>
           </div>
 
-          <div className="w-full relative">
+          <div className="relative w-full">
             <input
               id="phoneNumber"
               type="number"
@@ -142,13 +143,13 @@ export const RegisterForm = () => {
             )}
             <label
               htmlFor="phoneNumber"
-              className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+              className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
             >
               Phone
             </label>
           </div>
 
-          <div className="w-full relative">
+          <div className="relative w-full">
             <input
               id="birthdate"
               type="date"
@@ -165,7 +166,7 @@ export const RegisterForm = () => {
             )}
             <label
               htmlFor="birthdate"
-              className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+              className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
             >
               Birthdate
             </label>
@@ -190,12 +191,12 @@ export const RegisterForm = () => {
           )}
           <label
             htmlFor="gender"
-            className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+            className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
           >
             Gender
           </label>
 
-          <div className="w-full relative">
+          <div className="relative w-full">
             <input
               id="password"
               type="password"
@@ -212,13 +213,13 @@ export const RegisterForm = () => {
             )}
             <label
               htmlFor="password"
-              className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+              className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
             >
               Password
             </label>
           </div>
 
-          <div className="w-full relative">
+          <div className="relative w-full">
             <input
               id="confirmPassword"
               type="password"
@@ -235,7 +236,7 @@ export const RegisterForm = () => {
             )}
             <label
               htmlFor="confirmPassword"
-              className="absolute text-md duration-150 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+              className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
             >
               Repeat password
             </label>
@@ -243,17 +244,17 @@ export const RegisterForm = () => {
 
           <button
             type="submit"
-            className="transition duration-200 bg-secondary focus:shadow-sm  focus:ring-opacity-50 text-white w-full py-3 rounded-sm text-lg shadow-sm hover:shadow-md font-semibold text-center inline-block"
+            className="inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200"
           >
             Register
           </button>
 
-          <div className="text-neutral-500 text-center mt-4 font-light">
+          <div className="mt-4 font-light text-center text-neutral-500">
             <div className="flex flex-row justify-center items-center gap-2">
               <p>Already have an account?</p>
               <Link
                 to={"/auth/login"}
-                className="text-neutral-100 cursor-pointer hover:underline"
+                className="text-neutral-100 hover:underline cursor-pointer"
               >
                 Log in
               </Link>

@@ -7,7 +7,7 @@ function MembershipUCard():React.ReactNode {
     const platinum="bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 hover:outline-gray-300 hover:outline  hover:shadow-xl hover:shadow-white"
     const bronce="bg-gradient-to-br from-yellow-500 via-yellow-600 to-orange-500 hover:outline hover:outline-amber-900  hover:shadow-lg hover:shadow-amber-500"
   return (
-    <div className={`m-4 bg-white rounded-lg md:w-72 min-w-60 h-44 transition-all duration-100 ${platinum}`}>
+    <div className={`m-4 bg-white rounded-lg md:w-72 min-w-60 h-44 transition-all duration-100 ${gold}`}>
         <h1>Nombre tata</h1>
         <p><b>Enjoy premium benefits. Priority customer support. Access to exclusive premium content</b></p>
     </div>
