@@ -4,11 +4,12 @@ import {
   validateRegister,
 } from "../../helpers/ValidateRegister";
 import { useForm } from "../../hooks/useForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const RegisterForm = ():React.ReactElement => {
   const apiUrl=process.env.API_URL
+  const navigate=useNavigate()
   const {
     onInputChange,
     formState,
@@ -51,6 +52,7 @@ export const RegisterForm = ():React.ReactElement => {
     }
     try {
       const {data} = await axios.post('http://localhost:3000/auth/signup',{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
+      await navigate("/auth/login")
       console.log(data)
       
     } catch (error:any) {
