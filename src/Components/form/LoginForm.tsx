@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from '../../hooks/useForm'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ValidateLogin, { IErrorsLogin } from '../../helpers/ValidateLogin'
 import axios from 'axios'
 
 function LoginForm():React.ReactElement {
     const apiUrl=process.env.API_URL
+    const navigate = useNavigate()
     //obtengo funcionalidades del custom hook de juampi (que buen hook loco)
     const {onInputChange,
         formState,
@@ -37,7 +38,12 @@ function LoginForm():React.ReactElement {
         e.preventDefault();
         console.log(`email:${formState.email},password:${formState.password}`)
         await axios.post(`http://localhost:3000/auth/login`,{email:formState.email,password:formState.password})
-        .then((data)=>console.log(`registrado: ${data.data}`))
+        .then((data)=>{
+          console.log(data.data)
+          return data.data})
+        .then((user)=>{sessionStorage.setItem("UserToken",user.token)
+          navigate("/")
+        })
         .catch(error=>alert(error))
     }
   return (
