@@ -43,7 +43,9 @@ function LoginForm():React.ReactElement {
           console.log(data.data)
             toast.success("Login succes! welcome back")
           return data.data})
-        .then((user)=>{sessionStorage.setItem("UserToken",user.token)
+        .then((user)=>{
+          sessionStorage.setItem("UserToken",user.token)
+          sessionStorage.setItem("User",JSON.stringify(user.user))
           navigate("/")
         })
         .catch(error=>{console.error(error)

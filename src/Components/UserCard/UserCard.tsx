@@ -11,7 +11,7 @@ interface IUserCard{
 function UserCard(props:IUserCard):React.ReactNode {
     const {name,email,profile_image,phone_number} =props
   return (
-    <div className='hover:outline hover:outline-gray-800 bg-white shadow-black shadow-md m-4 rounded-lg w-3/12 min-w-60 h-max transition-all duration-100'>
+    <div className='hover:outline hover:outline-gray-800 bg-white shadow-black shadow-md m-4 rounded-lg w-3/12 min-w-max h-max transition-all duration-100'>
         <div className='p-2'>
             <img src={profile_image} alt={name} className='m-auto h-40'></img>
         </div>
