@@ -2,8 +2,6 @@
 import React, { useState } from 'react'
 import MicroMenu from '../MicroMenu/MicroMenu'
 import { Link } from 'react-router-dom'
-import { LoginButton } from '../login/Login'
-import { LogoutButton } from '../logout/Logout'
 import style from "./navbar.module.css"
 import LoginRegWind from '../LoginRegWindow/LoginRegWind'
 
@@ -14,7 +12,7 @@ const handleCLick=():void=>{
 }
 
   return (
-    <nav className='top-0 z-50 fixed pb-10 w-full select-none' >
+    <nav className='fixed top-0 z-50 w-full pb-10 select-none' >
         <div className='flex flex-wrap justify-between bg-slate-800' id={style.navbar}>
             <div id="links" className='bg'>
                 <ul className='flex font-medium text-text'>
@@ -37,7 +35,7 @@ const handleCLick=():void=>{
         
             <div className='flex m-1 text-text'>
                 <LoginRegWind/>
-                <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="userIcon" className='rounded-full h-16' />
+                <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="userIcon" className='h-16 rounded-full' />
             </div>
         </div>
     </nav>
