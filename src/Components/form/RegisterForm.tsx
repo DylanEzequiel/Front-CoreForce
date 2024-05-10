@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import {
   RegisterErrors,
@@ -9,7 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const RegisterForm = ():React.ReactElement => {
-  const apiUrl=process.env.API_URL
+  // const apiUrl=process.env.API_URL
   const navigate=useNavigate()
   const {
     onInputChange,

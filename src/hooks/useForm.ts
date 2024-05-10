@@ -11,6 +11,10 @@ interface inputProps {
   confirmPassword?: string;
   birthdate?: string;
   gender?: string
+  height?: string;
+  weight?: string,
+  profile_image?: string;
+  signup_date?: string;
   
 }
 
