@@ -10,7 +10,7 @@ const initialState: LoginState = {
 
 const loginReducer = (state = initialState, action: UnknownAction): any => {
   switch (action.type) {
-    case "TEST":
+    case "LOGIN":
       return { ...state, userLogged: action.payload };
 
     default:

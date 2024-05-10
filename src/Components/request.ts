@@ -1,35 +1,31 @@
-const apiURL=process.env.AUTH_URL
+import axios from "axios";
 
-interface IBodyAuth{
-  client_id:string | undefined,
-  client_secret:string | undefined,
-  audience:string,
-  grant_type:string
+const apiURL = import.meta.env.VITE_AUTH_URL;
+
+interface IBodyAuth {
+  client_id: string | undefined;
+  client_secret: string | undefined;
+  audience: string;
+  grant_type: string;
 }
 
 const body: IBodyAuth = {
-  client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET,
-  audience: apiURL+"/api/v2/",
+  client_id: import.meta.env.VITE_CLIENT_ID,
+  client_secret: import.meta.env.VITE_CLIENT_SECRET,
+  audience: apiURL + "/api/v2/",
   grant_type: "client_credentials",
 };
 
-export const getToken = () => {
-  const url = apiURL+"/oauth/token";
-  return fetch(url, {
-    method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  })
-    .then((res) => res.json())
-    .then((data) => data).catch((error)=> console.log(error))
+export const getToken = async () => {
+  const url = apiURL + "/oauth/token";
+  const { data } = await axios.post(url, body, {
+    headers: { "Content-Type": "application/json" },
+  });
+  return data;
 };
 
 export const getAuth0Users = async () => {
-  const url = apiURL+"/api/v2/users";
+  const url = apiURL + "/api/v2/users";
   const tokenStorage = localStorage.getItem("token");
   let token;
   if (tokenStorage) {
@@ -38,13 +34,12 @@ export const getAuth0Users = async () => {
     token = await getToken();
     localStorage.setItem("token", token.access_token);
   }
-  return fetch(url, {
-    method: "GET",
+
+  const { data } = await axios(url, {
     headers: {
       authorization: `Bearer ${token}`,
       Accept: "application/json",
     },
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  });
+  return data;
 };
