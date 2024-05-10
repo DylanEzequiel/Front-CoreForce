@@ -59,8 +59,7 @@ export const RegisterForm = ():React.ReactElement => {
       console.log(data)
       
     } catch (error:any) {
-      console.log(error.message);
-      toast.warn("Ups! something went wrong")
+      toast.error(error.response.data.message)
     }
   };
 
