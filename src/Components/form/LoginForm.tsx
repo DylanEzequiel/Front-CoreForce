@@ -51,7 +51,7 @@ function LoginForm():React.ReactElement {
           navigate("/")
         })
         .catch(error=>{console.error(error)
-          toast.warn("Ups! something went wrong")
+          toast.warn(error.response.data.message)
         })
     }
   return (
