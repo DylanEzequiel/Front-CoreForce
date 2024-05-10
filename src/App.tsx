@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NavBar } from './Components/NavBar/NavBar'
 import { Home } from './view/home/Home'
 import {  Route, Routes } from 'react-router-dom'
@@ -9,6 +10,8 @@ import { Login } from './view/auth/Login'
 import { loginAction } from './redux/login/login.actions'
 import { useDispatch } from 'react-redux'
 import { Register } from './view/auth/Register'
+import { DashboardAdmin } from './view/admin/DashboardAdmin'
+import { UpdateUsers } from './view/admin/UpdateUsers'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,12 +38,18 @@ theme="light"/>
         </button>
         <Routes>
           <Route path="/" element={<HomeLayout />} />
-          <Route path="/profile" element={<DasboardUser />} />
-          <Route index element={<Home />}></Route>
+            <Route index element={<Home />}></Route>
+        <Route path="profile" element={<DasboardUser />} />
           <Route path='auth/register' element={<Register />}/>
-          <Route index path="auth/login" element={<Login />}></Route>
-        </Routes>
+          <Route path="auth/login" element={<Login />}></Route>
+      </Routes>
 
+      {/*Rutas privadas */}
+      <Routes>
+        <Route path='/dashboard/admin' element={<DashboardAdmin />}/>
+        <Route path='/dashboard/admin/:id' element={<UpdateUsers />}/>
+        </Routes>
+        
         <Footer />
     </div>
   );
