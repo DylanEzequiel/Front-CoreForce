@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { IUser } from '../../interfaces/interfaces'
 import UserCard from '../../Components/UserCard/UserCard'
 import DataUserCard from '../../Components/UserCard/DataUserCard'
+import axios from 'axios'
 
 const userBase:IUser={
     name: "Jhon Doe",
     email: "JhonDoe@gmail.com",
     profile_image:"url",
-    phone_number:"xxxxxxxx",
+    phoneNumber:"xxxxxxxx",
     birthdate: "dd/mm/yyyy",
     gender: "other",
     height: "unknown",
@@ -19,14 +20,17 @@ const userBase:IUser={
 
 function DasboardUser():React.ReactElement {
     // Esto va a ser usado cuando con la BBDD recuperemos la info del user al montar la pag
+    const apiUrl=import.meta.env.VITE_API_URL
+
     const [user,setUser]=useState(userBase)
     useEffect(()=>{
-      const sessionUser= sessionStorage.getItem("User")
-      sessionUser?
-      setUser(JSON.parse(sessionUser)):
-      null
+      const sessionUser= sessionStorage.getItem("UserId")
+      const sessionToken= sessionStorage.getItem("UserToken")
+      axios.get(`${apiUrl}/users/${sessionUser}`,{headers:{"Authorization":`Bearer ${sessionToken}`}})
+      .then(res=>setUser(res.data))
+      .catch(error=>console.error(error))
 },[])
-
+    console.log(user)
   return (
     <div className='flex flex-row flex-wrap justify-center my-24 h-screen'>
         <UserCard {...user}></UserCard>

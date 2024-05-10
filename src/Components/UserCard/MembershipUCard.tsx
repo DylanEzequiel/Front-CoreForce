@@ -2,6 +2,7 @@ import React from 'react'
 
 function MembershipUCard():React.ReactNode {
     //hacer funcion que al obtener user obtenga las membrecias y tome la correspondiente al user 
+    //!Mostrar historial de pagos
     const free="hover:outline hover:outline-gray-800 shadow-black shadow-md"
     const gold=" bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:outline hover:outline-yellow-500  hover:shadow-xl hover:shadow-yellow-200"
     const platinum="bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 hover:outline-gray-300 hover:outline  hover:shadow-xl hover:shadow-white"

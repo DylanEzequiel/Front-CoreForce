@@ -86,68 +86,68 @@ export const DashboardAdmin: React.FC = () => {
 
 
   return (
-    <div className="py-20 container mx-auto min-h-screen" id="admin">
-      <div className="text-gray-900 bg-gray-200">
-        <div className="p-4 flex">
+    <div className="mx-auto py-20 min-h-screen container" id="admin">
+      <div className="bg-gray-200 text-gray-900">
+        <div className="flex p-4">
           <h1 className="text-3xl">Users</h1>
         </div>
-        <div className="px-3 py-4 flex justify-center">
-          <table className="w-full text-md bg-white shadow-md rounded mb-4">
+        <div className="flex justify-center px-3 py-4">
+          <table className="bg-white shadow-md mb-4 rounded w-full text-md">
             <tbody>
               <tr className="border-b">
-                <th className="text-left p-3 px-5">Image</th>
-                <th className="text-left p-3 px-5">Name</th>
-                <th className="text-left p-3 px-5">Email</th>
-                <th className="text-left p-3 px-5">Adress</th>
-                <th className="text-left p-3 px-5">Phone</th>
-                <th className="text-left p-3 px-5">Birthday</th>
-                <th className="text-left p-3 px-5">Gender</th>
-                <th className="text-left p-3 px-5">Height</th>
-                <th className="text-left p-3 px-5">Weight</th>
-                <th className="text-left p-3 px-5">Role</th>
-                <th className="text-left p-3 px-5">actions</th>
+                <th className="px-5 p-3 text-left">Image</th>
+                <th className="px-5 p-3 text-left">Name</th>
+                <th className="px-5 p-3 text-left">Email</th>
+                <th className="px-5 p-3 text-left">Adress</th>
+                <th className="px-5 p-3 text-left">Phone</th>
+                <th className="px-5 p-3 text-left">Birthday</th>
+                <th className="px-5 p-3 text-left">Gender</th>
+                <th className="px-5 p-3 text-left">Height</th>
+                <th className="px-5 p-3 text-left">Weight</th>
+                <th className="px-5 p-3 text-left">Role</th>
+                <th className="px-5 p-3 text-left">actions</th>
                 <th></th>
               </tr>
               {users.map((user) => (
-                <tr className="border-b hover:bg-orange-100 bg-gray-100"
+                <tr className="bg-gray-100 hover:bg-orange-100 border-b"
                 key={user.id}
                 >
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>image</p>
                   </td>
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{user.name}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{user.email}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{user.address}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{user.phoneNumber}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{formatDate(user.birthdate)}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{user.gender}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{user.height}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <p>{user.weight}</p>
                   </td>
 
-                  <td className="p-3 px-5">
+                  <td className="px-5 p-3">
                     <select value={user.role} className="bg-transparent">
                       <option value="user">user</option>
                       <option value="trainer">trainer</option>
@@ -155,17 +155,17 @@ export const DashboardAdmin: React.FC = () => {
                     </select>
                   </td>
 
-                  <td className="p-3 px-5 flex justify-end">
+                  <td className="flex justify-end px-5 p-3">
                     <Link
                       to={`/dashboard/admin/${user.id}`}
                       type="button"
-                      className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      className="bg-blue-500 hover:bg-blue-700 focus:shadow-outline mr-3 px-2 py-1 rounded text-sm text-white focus:outline-none"
                     >
                       Update
                     </Link>
                     <button
                       type="button"
-                      className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      className="bg-red-500 hover:bg-red-700 focus:shadow-outline px-2 py-1 rounded text-sm text-white focus:outline-none"
                       onClick={() => handleDelete(user.id)}
                     >
                       Delete
