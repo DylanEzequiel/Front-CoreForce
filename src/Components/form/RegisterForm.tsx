@@ -10,7 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const RegisterForm = ():React.ReactElement => {
-  // const apiUrl=process.env.API_URL
+  const apiUrl=import.meta.env.VITE_API_URL
   const navigate=useNavigate()
   const {
     onInputChange,
@@ -53,7 +53,7 @@ export const RegisterForm = ():React.ReactElement => {
       return;
     }
     try {
-      const {data} = await axios.post('http://localhost:3000/auth/signup',{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
+      const {data} = await axios.post(`${apiUrl}/auth/signup`,{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
       toast.success("Register Succes! Log in please")
       await navigate("/auth/login")
       console.log(data)

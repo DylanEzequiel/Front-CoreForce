@@ -16,13 +16,13 @@ export interface IUserRegister{
 export interface IUser{
     name: string;
     email: string;
-    phone_number: string;
+    phoneNumber: string;
     birthdate: string;
     gender: "male" | "female" | "other" ;
-    height: string;
-    profile_image:string;
-    weight: string;
-    address: string;
+    height?: string;
+    profile_image?:string;
+    weight?: string;
+    address?: string;
 }
 
 export interface ILoginSend{
