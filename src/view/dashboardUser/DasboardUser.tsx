@@ -9,7 +9,7 @@ const userBase:IUser={
     email: "JhonDoe@gmail.com",
     profile_image:"url",
     phoneNumber:"xxxxxxxx",
-    birthdate: "dd/mm/yyyy",
+    birthdate: "1990-02-13T03:00:00.000Z",
     gender: "other",
     height: "unknown",
     //agregar en el form que sea ingreso numerico y que se le agregue un Cm al final-dylan
