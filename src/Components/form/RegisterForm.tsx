@@ -60,7 +60,7 @@ export const RegisterForm = ():React.ReactElement => {
       
     } catch (error:any) {
       toast.error(error.response.data.message)
-    }
+     }
   };
 
   return (

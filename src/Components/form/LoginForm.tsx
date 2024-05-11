@@ -50,8 +50,8 @@ function LoginForm():React.ReactElement {
           console.log(user)
           navigate("/")
         })
-        .catch(error=>{console.error(error)
-          toast.warn(error.response.data.message)
+        .catch(error=>{
+          toast.error(error.response.data.message)
         })
     }
   return (

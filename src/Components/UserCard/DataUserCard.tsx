@@ -4,6 +4,7 @@ import MembershipUCard from './MembershipUCard'
 
 function DataUserCard(props:IUser):React.ReactNode {
     const {address,weight,height,birthdate,gender}=props
+    
     const fecha = new Date(birthdate);
     const fechaFormateada = fecha.toISOString().split('T')[0];
   return (

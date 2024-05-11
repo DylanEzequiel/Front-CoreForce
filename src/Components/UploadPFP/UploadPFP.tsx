@@ -2,36 +2,33 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { FaFileUpload, FaPencilAlt } from "react-icons/fa";
 import { IoIosCloseCircle } from 'react-icons/io';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 const UploadPFP = ():React.ReactNode => {
-    // const cld = new Cloudinary({cloud: {cloudName: 'dwim6d20e'}});
-    const cld_name=import.meta.env.VITE_CLD_NAME
-    const preset_key=import.meta.env.VITE_CLD_PRESET
-    const cldURL=import.meta.env.VITE_CLD_URL
-    const [image,setImage]=useState()
     const [state,setState]=useState(false)
-
+    const sessionUser= sessionStorage.getItem("UserId")
+    const navigate=useNavigate()
     function handleClick (){
       setState(!state)
-      
     }
 
 
    async function handleSubmit(event:any){
         const file =event.target.files[0]
-        console.log(file)
         const formPFP=new FormData();
         formPFP.append("file",file)
-        formPFP.append("upload_preset",preset_key)
-        await axios.post(`${cldURL}/${cld_name}/image/upload`,formPFP)
+        console.log(formPFP)
+        await axios.post(`http://localhost:3000/files/uploadImage/${sessionUser}`,formPFP)
         .then(res=>{
           toast.success("Photo Updated!",{autoClose:1500})
           setTimeout(()=>{
             toast("You look nice! 😉",{autoClose:2000})
           },1000)
-          setImage(res.data.secure_url)
           handleClick()
+          navigate("/profile")
+          return res.data.secure_url
         })
+       
         .catch(err=>console.error(err))
     }
   return (
