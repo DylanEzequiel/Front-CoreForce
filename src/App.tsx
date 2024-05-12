@@ -14,6 +14,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateLayout from "./layout/PrivateLayout";
 import { ListUsers } from "./view/admin/ListUsers";
+import { PricingPage } from "./view/pricing/PricingPage";
+import { Galleries } from "./view/galleries/Galleries";
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
           <Route path="profile" element={<DasboardUser />} />
           <Route path="auth/register" element={<Register />} />
           <Route path="auth/login" element={<Login />}></Route>
+          <Route path="pricing" element={<PricingPage />}/>
+          <Route path="gallery" element={<Galleries />}/>
         </Route>
       </Routes>
 
@@ -47,7 +51,7 @@ function App() {
         <Route path="/dashboard" element={<PrivateLayout />}>
           <Route index path="admin" element={<DashboardAdmin />} />
           <Route path="users" element={<ListUsers />} />
-          <Route path="users/:id" element={<UpdateUsers />} />
+          <Route path="admin/:id" element={<UpdateUsers />} />
         </Route>
       </Routes>
 

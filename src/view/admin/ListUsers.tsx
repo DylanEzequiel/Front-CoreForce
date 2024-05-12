@@ -5,15 +5,16 @@ import { Users } from "../../interfaces/users/interfaces";
 import { formatDate } from "../../helpers/date/formatDate";
 import { Link } from "react-router-dom";
 
-
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNGMyMjNiNC1mMGFlLTQ1ZGItOTc4My1hMTYyYmJiZjBlZWIiLCJ1c2VySWQiOiJhNGMyMjNiNC1mMGFlLTQ1ZGItOTc4My1hMTYyYmJiZjBlZWIiLCJuYW1lIjoibHVjYXMiLCJlbWFpbCI6Imx1Y2FzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxNTQ3MzQ0MCwiZXhwIjoxNzE1NDc3MDQwfQ.RHv2XC6XLLSJS_7yJLx6UFBAGSRwRD80FbdfATfmJWM";
-  
 export const ListUsers = () => {
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [users, setusers] = useState<Users[]>([]);
+  const [filters, setFilters] = useState({
+    userType: "all",
+    membership: "all",
+    gender: "all",
+  });
+  const sessionToken = sessionStorage.getItem("UserToken");
 
- 
   useEffect(() => {
     const getAllUsers = async (): Promise<void> => {
       const { data } = await axios.get(
@@ -21,21 +22,53 @@ export const ListUsers = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${sessionToken}`,
           },
         }
       );
-      console.log(data)
       setusers(data);
-      
     };
-
     getAllUsers();
-  }, []);
+  }, [sessionToken]);
 
+  //Cambiar filtros
+  const handleFilterChange = (filterName, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: value,
+    }));
+  };
 
+  const getUsersByFilters = async () => {
+    const url = `${apiUrl}/users?page=1&limit=5`;
+
+    // Filtrar solo los filtros seleccionados
+    const filteredParams = Object.entries(filters)
+      .filter(([value]) => value !== "")
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
+
+    const urlWithParams = filteredParams ? `${url}&${filteredParams}` : url;
+
+    console.log(urlWithParams);
+    try {
+      const { data } = await axios.get(
+        `${urlWithParams}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionToken}`,
+          },
+        }
+      );
+      setusers(data)
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  //Eliminar usuario
   const handleDelete = async (id: string) => {
-    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -43,113 +76,180 @@ export const ListUsers = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/users/${id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          }
-        }).then((result) => {
-
-          Swal.fire({
-            title: "Deleted!",
-            text: `${result.data}`,
-            icon: "success"
+        axios
+          .delete(`${apiUrl}/users/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${sessionToken}`,
+            },
+          })
+          .then((result) => {
+            Swal.fire({
+              title: "Deleted!",
+              text: `${result.data}`,
+              icon: "success",
+            });
           });
-        })
       }
     });
-    
-  }
+  };
 
   return (
-    <div className="bg-gray-200 text-gray-900">
-        <div className="flex p-4">
-          <h1 className="text-3xl">Users</h1>
-        </div>
-        <div className="flex justify-center px-3 py-4">
-          <table className="bg-white shadow-md mb-4 rounded w-full text-md">
-            <tbody>
-              <tr className="border-b">
-                <th className="px-5 p-3 text-left">Image</th>
-                <th className="px-5 p-3 text-left">Name</th>
-                <th className="px-5 p-3 text-left">Email</th>
-                <th className="px-5 p-3 text-left">Adress</th>
-                <th className="px-5 p-3 text-left">Phone</th>
-                <th className="px-5 p-3 text-left">Birthday</th>
-                <th className="px-5 p-3 text-left">Gender</th>
-                <th className="px-5 p-3 text-left">Height</th>
-                <th className="px-5 p-3 text-left">Weight</th>
-                <th className="px-5 p-3 text-left">Role</th>
-                <th className="px-5 p-3 text-left">actions</th>
-                <th></th>
-              </tr>
-              {users.map((user) => (
-                <tr className="bg-gray-100 hover:bg-orange-100 border-b"
-                key={user.id}
-                >
-                  <td className="px-5 p-3">
-                    <p>image</p>
-                  </td>
-                  <td className="px-5 p-3">
-                    <p>{user.name}</p>
-                  </td>
+    <div className="rounded-md border bg-white px-5 pt-6 pb-3 shadow-default border-comp  sm:px-7 xl:pb-1">
+      <div className="flex flex-1 items-center gap-2 justify-between">
+        <h1 className="text-2xl py-5 font-semibold">Users</h1>
 
-                  <td className="px-5 p-3">
-                    <p>{user.email}</p>
-                  </td>
+        <div>
+          <select
+            value={filters.userType}
+            onChange={(e) => handleFilterChange("userType", e.target.value)}
+          >
+            <option value="all">All users</option>
+            <option value="user">User</option>
+            <option value="trainer">Trainer</option>
+            <option value="admin">Admin</option>
+          </select>
 
-                  <td className="px-5 p-3">
-                    <p>{user.address}</p>
-                  </td>
+          <select
+            value={filters.membership}
+            onChange={(e) => handleFilterChange("membership", e.target.value)}
+          >
+            <option value="all">All Memberships</option>
+            <option value="Free">Free</option>
+            <option value="Bronze">Bronze</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Platinum">Platinum</option>
+          </select>
 
-                  <td className="px-5 p-3">
-                    <p>{user.phoneNumber}</p>
-                  </td>
+          <select
+            value={filters.gender}
+            onChange={(e) => handleFilterChange("gender", e.target.value)}
+          >
+            <option value="all">All genders</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Othes</option>
+          </select>
 
-                  <td className="px-5 p-3">
-                    <p>{formatDate(user.birthdate)}</p>
-                  </td>
-
-                  <td className="px-5 p-3">
-                    <p>{user.gender}</p>
-                  </td>
-
-                  <td className="px-5 p-3">
-                    <p>{user.height}</p>
-                  </td>
-
-                  <td className="px-5 p-3">
-                    <p>{user.weight}</p>
-                  </td>
-
-                  <td className="px-5 p-3">
-                    <p>{user.role}</p>
-                  </td>
-
-                  <td className="flex justify-end px-5 p-3">
-                    <Link
-                      to={`/dashboard/admin/${user.id}`}
-                      type="button"
-                      className="bg-blue-500 hover:bg-blue-700 focus:shadow-outline mr-3 px-2 py-1 rounded text-sm text-white focus:outline-none"
-                    >
-                      Update
-                    </Link>
-                    <button
-                      type="button"
-                      className="bg-red-500 hover:bg-red-700 focus:shadow-outline px-2 py-1 rounded text-sm text-white focus:outline-none"
-                      onClick={() => handleDelete(user.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <button onClick={getUsersByFilters}>Filter</button>
         </div>
       </div>
-  )
-}
+
+      <div className="max-w-full overflow-x-auto">
+        <table className="w-full table-auto">
+          <thead>
+            <tr className="bg-gray-200 text-left">
+              <th className="min-w-[220px] py-4 px-4 font-medium text-black xl:pl-11">
+                Image
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Name
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Email
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Adress
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Phone
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Birthday
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Gender
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Height
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Weight
+              </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                Role
+              </th>
+              <th className="min-w-[120px] py-4 px-4 font-medium text-black">
+                Status
+              </th>
+              <th className="py-4 px-4 font-medium text-black">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td className="border-b border-[#eee] py-5 px-4 pl-9 xl:pl-11">
+                  <img
+                    src={user.profile_image!}
+                    className="w-10 h-10 rounded-full"
+                  />
+                </td>
+                <td className="border-b border-[#eee] py-5 px-4">
+                  <h5 className="text-black font-medium">{user.name}</h5>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4">
+                  <p className="text-black">{user.email}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4">
+                  <p className="text-black">{user.address}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4">
+                  <p className="text-black">{user.phoneNumber}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4">
+                  <p className="text-black">{formatDate(user.birthdate)}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4">
+                  <p className="text-black">{user.gender}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                  <p className="text-black">{user.height}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                  <p className="text-black">{user.weight}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                  <p className="text-black">{user.role}</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                  <p className="text-black">status</p>
+                </td>
+
+                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                  <div className="flex items-center space-x-3.5">
+                    <Link
+                      className="hover:text-primary"
+                      to={`/dashboard/admin/${user.id}`}
+                    >
+                      editar
+                    </Link>
+                    <button className="hover:text-primary">desactivar</button>
+                    <button
+                      className="hover:text-primary"
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      borrar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};

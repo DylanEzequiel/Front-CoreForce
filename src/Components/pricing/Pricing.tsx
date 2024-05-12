@@ -16,7 +16,7 @@ export const Pricing = () => {
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 mt-6">
         <div className="bg-primary rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">
           <div className="mb-8">
-            <h3 className="text-2xl font-semibold text-white">Basic</h3>
+            <h3 className="text-2xl font-semibold text-white">Bronze</h3>
             <p className="mt-4 text-gray-400">
               Get started with our basic features
             </p>

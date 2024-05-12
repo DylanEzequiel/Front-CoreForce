@@ -2,10 +2,10 @@
 
 const Gallery: React.FC = () => {
   return (
-    <section className="py-5 my-5 bg-slate-800 text-white">
+    <section className="py-5 my-5  text-white">
        
       <div className="container mx-auto py-10">
-        <h2 className="text-center text-5xl text-white font-semibold">Meet Your Trainer</h2> 
+        <h2 className="text-center text-5xl text-slate-800 font-semibold">Meet Your Trainer</h2> 
         <p className="text-center font-semibold text-xl text-gray-500">Our training programs are crafted with your fitness journey in mind, ensuring personalized guidance and expert support every step of the way.</p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 my-16">
 
