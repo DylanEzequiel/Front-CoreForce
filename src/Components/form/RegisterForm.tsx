@@ -55,19 +55,20 @@ export const RegisterForm = ():React.ReactElement => {
     try {
       const {data} = await axios.post(`${apiUrl}/auth/signup`,{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
       toast.success("Register Succes! Log in please")
-      await navigate("/auth/login")
+      navigate("/auth/login")
       console.log(data)
       
     } catch (error:any) {
       toast.error(error.response.data.message)
+      console.log(error)
      }
   };
 
   return (
-    <div className="dark:border-gray-700 bg-white dark:bg-gray-800 shadow md:mt-0 xl:p-0 dark:border rounded-lg w-full sm:max-w-2xl">
+    <div className="border-gray-700 bg-gray-800 shadow md:mt-0 xl:p-0 border rounded-lg w-full sm:max-w-2xl">
       
       <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
-        <h1 className="font-bold text-gray-900 text-xl md:text-2xl dark:text-white leading-tight tracking-tight">
+        <h1 className="font-bold  text-xl md:text-2xl text-white leading-tight tracking-tight">
           Sign up to your account
         </h1>
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>

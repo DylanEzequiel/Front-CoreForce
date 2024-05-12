@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 
 function LoginForm():React.ReactElement {
     const apiUrl=import.meta.env.VITE_API_URL
-    console.log(apiUrl)
     const navigate = useNavigate()
    
     //obtengo funcionalidades del custom hook de juampi (que buen hook loco)
@@ -39,17 +38,19 @@ function LoginForm():React.ReactElement {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(`email:${formState.email},password:${formState.password}`)
+        // const {data} = await axios.get(`${apiUrl}/users/email`, {params: {email}})
+        // sessionStorage.setItem('UserRole', data.role)
         await axios.post(`${apiUrl}/auth/login`,{email:formState.email,password:formState.password})
         .then((data)=>{
           console.log(data.data)
-            toast.success("Login succes! welcome back")
+          toast.success("Login succes! welcome back")
           return data.data})
-        .then((user)=>{
-          sessionStorage.setItem("UserToken",user.token)
-          sessionStorage.setItem("UserId",user.userId)
-          console.log(user)
-          navigate("/")
-        })
+          .then((user)=>{
+            sessionStorage.setItem("UserToken",user.token)
+            sessionStorage.setItem("UserId",user.userId)
+            console.log(user)
+            navigate("/")
+          })
         .catch(error=>{
           toast.error(error.response.data.message)
         })
