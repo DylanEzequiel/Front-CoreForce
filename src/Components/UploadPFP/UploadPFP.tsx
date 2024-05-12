@@ -25,11 +25,10 @@ const UploadPFP = ():React.ReactNode => {
             toast("You look nice! 😉",{autoClose:2000})
           },1000)
           handleClick()
-          navigate("/profile")
-          return res.data.secure_url
         })
        
-        .catch(err=>console.error(err))
+        .catch(err=>{
+          toast.error("Ups! something went wrong")})
     }
   return (
     <div className='inline hover:bg-slate-400 m-4'>

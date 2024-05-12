@@ -78,12 +78,12 @@ export const RegisterForm = ():React.ReactElement => {
               name="name"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.name ? "border-red-500" : "border-neutral-500"
+                errors.name ? "border-orange-500" : "border-neutral-500"
               }`}
               onChange={onInputChange}
               value={name}
             />
-            {errors.name && <span className="text-red-500">{errors.name}</span>}
+            {errors.name && <span className="text-orange-500">{errors.name}</span>}
             <label
               htmlFor="name"
               className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
@@ -99,13 +99,13 @@ export const RegisterForm = ():React.ReactElement => {
               name="email"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.email ? "border-red-500" : "border-neutral-500"
+                errors.email ? "border-orange-500" : "border-neutral-500"
               }`}
               value={email}
               onChange={onInputChange}
             />
             {errors.email && (
-              <span className="text-red-500">{errors.email}</span>
+              <span className="text-orange-500">{errors.email}</span>
             )}
             <label
               htmlFor="email"
@@ -122,13 +122,13 @@ export const RegisterForm = ():React.ReactElement => {
               name="address"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.address ? "border-red-500" : "border-neutral-500"
+                errors.address ? "border-orange-500" : "border-neutral-500"
               }`}
               onChange={onInputChange}
               value={address}
             />
             {errors.address && (
-              <span className="text-red-500">{errors.address}</span>
+              <span className="text-orange-500">{errors.address}</span>
             )}
             <label
               htmlFor="address"
@@ -145,13 +145,13 @@ export const RegisterForm = ():React.ReactElement => {
               name="phoneNumber"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.phoneNumber ? "border-red-500" : "border-neutral-500"
+                errors.phoneNumber ? "border-orange-500" : "border-neutral-500"
               }`}
               onChange={onInputChange}
               value={phoneNumber}
             />
             {errors.phoneNumber && (
-              <span className="text-red-500">{errors.phoneNumber}</span>
+              <span className="text-orange-500">{errors.phoneNumber}</span>
             )}
             <label
               htmlFor="phoneNumber"
@@ -168,13 +168,13 @@ export const RegisterForm = ():React.ReactElement => {
               name="birthdate"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.birthdate ? "border-red-500" : "border-neutral-500"
+                errors.birthdate ? "border-orange-500" : "border-neutral-500"
               }`}
               onChange={onInputChange}
               value={birthdate}
             />
             {errors.birthdate && (
-              <span className="text-red-500">{errors.birthdate}</span>
+              <span className="text-orange-500">{errors.birthdate}</span>
             )}
             <label
               htmlFor="birthdate"
@@ -188,7 +188,7 @@ export const RegisterForm = ():React.ReactElement => {
             id="gender"
             name="gender"
             className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4 ${
-              errors.gender ? "border-red-500" : "border-neutral-500"
+              errors.gender ? "border-orange-500" : "border-neutral-500"
             }`}
             onChange={onInputChange}
             value={gender}
@@ -199,7 +199,7 @@ export const RegisterForm = ():React.ReactElement => {
             <option value="other">Other</option>
           </select>
           {errors.gender && (
-            <span className="text-red-500">{errors.gender}</span>
+            <span className="text-orange-500">{errors.gender}</span>
           )}
           <label
             htmlFor="gender"
@@ -215,13 +215,13 @@ export const RegisterForm = ():React.ReactElement => {
               name="password"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.password ? "border-red-500" : "border-neutral-500"
+                errors.password ? "border-orange-500" : "border-neutral-500"
               }`}
               onChange={onInputChange}
               value={password}
             />
             {errors.password && (
-              <span className="text-red-500">{errors.password}</span>
+              <span className="text-orange-500">{errors.password}</span>
             )}
             <label
               htmlFor="password"
@@ -238,13 +238,13 @@ export const RegisterForm = ():React.ReactElement => {
               name="confirmPassword"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.confirmPassword ? "border-red-500" : "border-neutral-500"
+                errors.confirmPassword ? "border-orange-500" : "border-neutral-500"
               }`}
               onChange={onInputChange}
               value={confirmPassword}
             />
             {errors.confirmPassword && (
-              <span className="text-red-500">{errors.confirmPassword}</span>
+              <span className="text-orange-500">{errors.confirmPassword}</span>
             )}
             <label
               htmlFor="confirmPassword"
