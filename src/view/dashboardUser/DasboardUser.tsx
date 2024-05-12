@@ -3,6 +3,7 @@ import { IUser } from '../../interfaces/interfaces'
 import UserCard from '../../Components/UserCard/UserCard'
 import DataUserCard from '../../Components/UserCard/DataUserCard'
 import axios from 'axios'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const userBase:IUser={
     name: "Jhon Doe",
@@ -21,19 +22,23 @@ const userBase:IUser={
 function DasboardUser():React.ReactElement {
     // Esto va a ser usado cuando con la BBDD recuperemos la info del user al montar la pag
     const apiUrl=import.meta.env.VITE_API_URL
-
-    const [user,setUser]=useState(userBase)
+    const { user} = useAuth0();
+    console.log(user)
+    const [userD,setUserD]=useState(userBase)
     useEffect(()=>{
       const sessionUser= sessionStorage.getItem("UserId")
       const sessionToken= sessionStorage.getItem("UserToken")
       axios.get(`${apiUrl}/users/${sessionUser}`,{headers:{"Authorization":`Bearer ${sessionToken}`}})
-      .then(res=>setUser(res.data))
+      .then(res=>setUserD(res.data))
       .catch(error=>console.error(error))
 },[])
+
+
+
   return (
     <div className='flex flex-row flex-wrap justify-center my-24 h-screen'>
-        <UserCard {...user}></UserCard>
-        <DataUserCard {...user}></DataUserCard>
+        <UserCard {...userD}></UserCard>
+        <DataUserCard {...userD}></DataUserCard>
     </div>
   )
 }
