@@ -69,13 +69,13 @@ function LoginForm():React.ReactElement {
                 name="email"
                 placeholder=" "
                 className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                    errorsLog.email ? "border-red-500" : "border-neutral-500"
+                    errorsLog.email ? "border-orange-500" : "border-neutral-500"
                 }`}
                 value={email}
                 onChange={onInputChange}
                 />
                 {errorsLog.email && (
-                <span className="text-red-500">{errorsLog.email}</span>
+                <span className="text-orange-500">{errorsLog.email}</span>
                 )}
                 <label
                 htmlFor="email"
@@ -91,13 +91,13 @@ function LoginForm():React.ReactElement {
               name="password"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errorsLog.password ? "border-red-500" : "border-neutral-500"
+                errorsLog.password ? "border-orange-500" : "border-neutral-500"
               }`}
               onChange={onInputChange}
               value={password}
             />
             {errorsLog.password && (
-              <span className="text-red-500">{errorsLog.password}</span>
+              <span className="text-orange-500">{errorsLog.password}</span>
             )}
             <label
               htmlFor="password"
