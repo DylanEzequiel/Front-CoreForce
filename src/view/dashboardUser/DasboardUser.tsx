@@ -7,7 +7,7 @@ import axios from 'axios'
 const userBase:IUser={
     name: "Jhon Doe",
     email: "JhonDoe@gmail.com",
-    profile_image:"url",
+    profile_image:"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/man-user-circle-icon.png",
     phoneNumber:"xxxxxxxx",
     birthdate: "1990-02-13T03:00:00.000Z",
     gender: "other",
@@ -30,7 +30,6 @@ function DasboardUser():React.ReactElement {
       .then(res=>setUser(res.data))
       .catch(error=>console.error(error))
 },[])
-    console.log(user)
   return (
     <div className='flex flex-row flex-wrap justify-center my-24 h-screen'>
         <UserCard {...user}></UserCard>
