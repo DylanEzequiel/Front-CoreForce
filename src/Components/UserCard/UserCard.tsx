@@ -8,15 +8,13 @@ import { useNavigate } from 'react-router'
 function UserCard(props:IUser):React.ReactNode {
     const {name,email,profile_image,phoneNumber} =props
     const [userImage,setUserImage]=useState(profile_image)
-    
-    console.log(profile_image + "bye")
+  
     
     useEffect(()=>{
       setUserImage(profile_image)
     },[profile_image])
 
 
-    console.log(userImage + "hi")
     const navigate =useNavigate()
     const HandleLogout=()=>{
       sessionStorage.clear()

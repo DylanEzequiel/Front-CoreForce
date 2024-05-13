@@ -21,6 +21,7 @@ export interface IUser{
     gender: "male" | "female" | "other" ;
     height?: string;
     profile_image?:string;
+    user_membership:any;
     weight?: string;
     address?: string;
 }
