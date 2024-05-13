@@ -6,7 +6,7 @@ import Header from "../Components/dashboard/header/Header";
 const PrivateLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
-    <div className="bg-bodyAdmin">
+    <div className="bg-gray-100">
       <div className="flex min-h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative flex flex-1 flex-col overflow-y-auto">

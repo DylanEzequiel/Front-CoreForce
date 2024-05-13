@@ -33,25 +33,24 @@ function LoginRegWind(): React.ReactNode {
             >
               {sessionUser ? (
                 <>
-                <li className="hover:bg-slate-500 px-4 py-2 duration-300">
-                    <Link to={'/profile'}>Perfil</Link>
-                  </li>
-                  <li className="hover:bg-slate-500 px-4 py-2 duration-300">
-                    <Link to={'/dashboard/admin'}>Dashboard</Link>
-                  </li>
-                  <li className="hover:bg-slate-500 px-4 py-2 duration-300">
-                    <button onClick={handleLogout}>Logout</button>
-                  </li>
+                <Link to={'/profile'} >
+                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">Perfil</p>
+                  </Link>
+                  <Link to={'/dashboard/admin'} >
+                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">Dashboard</p>
+                  </Link>
+                    <button onClick={handleLogout} className="hover:bg-slate-500 px-4 py-2 duration-300">Logout</button>
+                  
                 </>
               ) : (
                 <>
-                  <li className="hover:bg-slate-500 px-4 py-2 duration-300">
-                    <Link to="/auth/login">Login</Link>
-                  </li>
+                  <Link to={'/auth/login'} >
+                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">Login</p>
+                  </Link>
                   <hr />
-                  <li className="hover:bg-slate-500 px-4 py-2 duration-300">
-                    <Link to="/auth/register">SignUp</Link>
-                  </li>
+                  <Link to={'/auth/register'} >
+                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">SignUp</p>
+                  </Link>
                 </>
               )}
             </ul>

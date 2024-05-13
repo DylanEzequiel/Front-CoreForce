@@ -9,6 +9,8 @@ const Header = (
     setSidebarOpen: (arg0: boolean) => void;
   }
 ) => {
+ 
+
   return (
     <header className="sticky top-0 z-40 flex w-full bg-white drop-shadow-sm">
       <div className="flex flex-grow items-center justify-between lg:justify-end px-4 py-4 shadow-md md:px-6 2xl:px-11">

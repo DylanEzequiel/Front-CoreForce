@@ -16,6 +16,8 @@ import PrivateLayout from "./layout/PrivateLayout";
 import { ListUsers } from "./view/admin/ListUsers";
 import { PricingPage } from "./view/pricing/PricingPage";
 import { Galleries } from "./view/galleries/Galleries";
+// import { ErrorPage } from "./view/errorPage/ErrorPage";
+import { About } from "./view/about/About";
 
 function App() {
   return (
@@ -40,9 +42,11 @@ function App() {
           <Route index element={<Home />}></Route>
           <Route path="profile" element={<DasboardUser />} />
           <Route path="auth/register" element={<Register />} />
-          <Route path="auth/login" element={<Login />}></Route>
+          <Route path="auth/login" element={<Login /> }/>
           <Route path="pricing" element={<PricingPage />}/>
           <Route path="gallery" element={<Galleries />}/>
+          <Route path="about" element={<About />}/>
+          {/* <Route path="/*" element={<ErrorPage />}/> */}
         </Route>
       </Routes>
 
