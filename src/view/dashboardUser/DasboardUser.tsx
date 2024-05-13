@@ -3,27 +3,25 @@ import { IUser } from '../../interfaces/interfaces'
 import UserCard from '../../Components/UserCard/UserCard'
 import DataUserCard from '../../Components/UserCard/DataUserCard'
 import axios from 'axios'
-import { useAuth0 } from '@auth0/auth0-react'
 
 const userBase:IUser={
-    name: "Jhon Doe",
-    email: "JhonDoe@gmail.com",
-    profile_image:"https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/man-user-circle-icon.png",
-    phoneNumber:"xxxxxxxx",
+    name: "Loading..",
+    email: "Loading...",
+    profile_image:"https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg",
+    phoneNumber:"Loading...",
     birthdate: "1990-02-13T03:00:00.000Z",
     gender: "other",
-    height: "unknown",
+    height: "",
     //agregar en el form que sea ingreso numerico y que se le agregue un Cm al final-dylan
-    weight:"unknown" ,
+    weight:"" ,
+    user_membership:[{membership:{name:"Free"}}],
     //Lo mismo de arriba pero con Kg- dylan
-    address: "unknown"
+    address: "Loading..."
 }
 
 function DasboardUser():React.ReactElement {
     // Esto va a ser usado cuando con la BBDD recuperemos la info del user al montar la pag
     const apiUrl=import.meta.env.VITE_API_URL
-    const { user} = useAuth0();
-    console.log(user)
     const [userD,setUserD]=useState(userBase)
     useEffect(()=>{
       const sessionUser= sessionStorage.getItem("UserId")
