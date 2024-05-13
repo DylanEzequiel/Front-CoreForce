@@ -1,18 +1,24 @@
 import { FaArrowRight } from "react-icons/fa"
+import { useNavigate } from "react-router"
 
 export const Hero = () => {
-  return (
-    <section className="-z-10 py-32 bg-[url('/img/hero-1.jpg')] bg-no-repeat bg-cover bg-center">
-      <div className="max-w-[120rem] w-[90%] mx-auto py-52 flex flex-col items-start justify-between">
+  const navigate =useNavigate()
 
-        <h1 className="text-gray-300 font-semibold text-pretty text-5xl md:text-6xl flex flex-col gap-5">
+    function handleClick(){
+      navigate("/auth/login")
+    }
+  return (
+    <section className="-z-10 bg-[url('/img/hero-1.jpg')] bg-cover bg-no-repeat bg-center py-32">
+      <div className="flex flex-col justify-between items-start mx-auto py-52 w-[90%] max-w-[120rem]">
+
+        <h1 className="flex flex-col gap-5 font-semibold text-5xl text-gray-300 text-pretty md:text-6xl">
           <span>¡Welcome to </span>
           <span className="text-8xl">CoreForce!</span>
         </h1>
 
-        <p className="text-pretty text-gray-300 text-xl font-normal max-w-[45rem]">In CoreForce, we transform your body and your well-being. With top-quality workouts and programs, we offer you an exceptional experience. <span className="text-slate-500 font-bold">Join us to achieve your fitness goals and feel strong and confident at all times.</span></p>
+        <p className="max-w-[45rem] font-normal text-gray-300 text-pretty text-xl">In CoreForce, we transform your body and your well-being. With top-quality workouts and programs, we offer you an exceptional experience. <span className="font-bold text-slate-500">Join us to achieve your fitness goals and feel strong and confident at all times.</span></p>
 
-        <button className="bg-orange-500 py-3 px-4 mt-5 flex justify-center items-center gap-2 text-white font-semibold text-lg hover:bg-orange-600 transition-all rounded-sm">
+        <button className="flex justify-center items-center gap-2 bg-orange-500 hover:bg-orange-600 mt-5 px-4 py-3 rounded-sm font-semibold text-lg text-white transition-all" onClick={handleClick} >
           Get Started
           <FaArrowRight />
         </button>

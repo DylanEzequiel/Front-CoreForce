@@ -68,7 +68,7 @@ export const RegisterForm = ():React.ReactElement => {
     <div className="border-gray-700 bg-gray-800 shadow md:mt-0 xl:p-0 border rounded-lg w-full sm:max-w-2xl">
       
       <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
-        <h1 className="font-bold  text-xl md:text-2xl text-white leading-tight tracking-tight">
+        <h1 className="font-bold text-white text-xl md:text-2xl leading-tight tracking-tight">
           Sign up to your account
         </h1>
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
