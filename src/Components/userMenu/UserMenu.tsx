@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { LuUser } from "react-icons/lu";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiProfileFill } from "react-icons/ri";
 import { CiLogout } from "react-icons/ci";
 
@@ -11,6 +11,15 @@ export const UserMenu = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+
+  const navigate = useNavigate();
+    
+  const handleLogout = () => {
+    sessionStorage.removeItem("UserId");
+    sessionStorage.removeItem("UserToken");
+    navigate("/");
+  };
+
   return (
     <div className="relative">
       <Link
@@ -40,9 +49,9 @@ export const UserMenu = () => {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7 border-comp">
+        <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7">
           <li>
-            <Link to={'/dashboard/profile'}
+            <Link to={'#'}
               className="flex items-center gap-3 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <RiProfileFill size={20}/>
@@ -51,7 +60,9 @@ export const UserMenu = () => {
           </li>
         </ul>
 
-        <button className="flex items-center gap-3 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button className="flex items-center gap-3 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+          onClick={handleLogout}
+        >
           <CiLogout size={20}/>
           Log Out
         </button>

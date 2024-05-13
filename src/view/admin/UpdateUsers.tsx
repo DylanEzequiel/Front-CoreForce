@@ -3,16 +3,15 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { User } from "../../interfaces/users/interfaces";
-import { RegisterErrors } from "../../helpers/ValidateRegister";
+import { EditErros, RegisterErrors } from "../../helpers/ValidateRegister";
 import Swal from "sweetalert2";
-import { formatDate } from '../../helpers/date/formatDate';
+import { formatDate, fornatDateEdit } from '../../helpers/date/formatDate';
 
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNGMyMjNiNC1mMGFlLTQ1ZGItOTc4My1hMTYyYmJiZjBlZWIiLCJ1c2VySWQiOiJhNGMyMjNiNC1mMGFlLTQ1ZGItOTc4My1hMTYyYmJiZjBlZWIiLCJuYW1lIjoibHVjYXMiLCJlbWFpbCI6Imx1Y2FzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxNTUxODk3NCwiZXhwIjoxNzE1NTIyNTc0fQ.7FJEsBRoc9yCHI3hUu9nvc7ZNIcvlC_a_kCa86UGzRo";
 
 export const UpdateUsers = () => {
   const { id } = useParams();
+  const sessionToken = sessionStorage.getItem("UserToken");
   const navigate = useNavigate()
   const [user, setUser] = useState<User>({
     id: '',
@@ -32,7 +31,7 @@ export const UpdateUsers = () => {
 
   
 
-  const [errors, setErrors] = useState<RegisterErrors>({});
+  const [errors, setErrors] = useState<EditErros>({});
  
 
   useEffect(() => {
@@ -40,26 +39,28 @@ export const UpdateUsers = () => {
       const { data } = await axios.get(`http://localhost:3000/users/${id}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${sessionToken}`,
         },
       });
       
       setUser(data);
+      console.log(data)
     };
 
     getUserById();
-  }, [id]);
+  }, [id, sessionToken]);
 
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const {user_membership, ...resto} = user
     console.log(user_membership)
-   
+    console.log(resto)
+    
     try {
       await axios.put(`http://localhost:3000/users/${id}`, resto,{
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${sessionToken}`,
         },
       });
 
@@ -72,7 +73,7 @@ export const UpdateUsers = () => {
       });
       
       setTimeout(() => {
-        navigate('/dashboard/admin')
+        navigate('/dashboard/users')
       }, 1600);
     } catch (error) {
       console.log(error)
@@ -80,7 +81,9 @@ export const UpdateUsers = () => {
   }
 
   return (
-    <section className="min-h-screen py-20 container mx-auto">
+    <section className="min-h-screen container mx-auto">
+      <h1 className="text-center text-primary py-5 font-semibold text-2xl">Edit User</h1>
+
       <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
         <div className="relative w-full">
           <input
@@ -195,7 +198,7 @@ export const UpdateUsers = () => {
               ...user,
               birthdate: new Date(e.target.value)
             })}
-            value={formatDate(user.birthdate)}
+            value={fornatDateEdit(user.birthdate)}
           />
           {errors.birthdate && (
             <span className="text-red-500">{errors.birthdate}</span>
@@ -207,6 +210,31 @@ export const UpdateUsers = () => {
             Birthdate
           </label>
         </div>
+
+        <select
+          id="role"
+          name="role"
+          className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4 ${
+            errors.role ? "border-red-500" : "border-neutral-500"
+          }`}
+          onChange={e => setUser({
+            ...user,
+            role: e.target.value
+          })}
+          value={user.role}
+        >
+          <option value="">Select Role</option>
+          <option value="user">User</option>
+          <option value="trainer">Trainer</option>
+          <option value="admin">Admin</option>
+        </select>
+        {errors.gender && <span className="text-red-500">{errors.gender}</span>}
+        <label
+          htmlFor="role"
+          className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
+        >
+          Role
+        </label>
 
         <select
           id="gender"

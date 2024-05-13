@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from "react";
 import { FaArrowLeft, FaUsers } from "react-icons/fa";
+import { GiBiceps } from "react-icons/gi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineDashboard } from "react-icons/md";
 import { NavLink, useLocation } from "react-router-dom";
@@ -14,7 +15,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const sidebar = useRef<any>(null);
   const trigger = useRef<any>(null);
   const location = useLocation();
+  
   const { pathname } = location;
+
+
   return (
     <aside
       ref={sidebar}
@@ -24,7 +28,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     >
       <div className="flex items-center justify-between gap-2 px-6 py-5 lg:py-6">
         <NavLink to={"/"}>
-          <p className="text-1xl p-2 font-semibold text-comp">CoreForce</p>
+          <div className="flex items-center gap-1">
+            <p className="text-3xl p-2 font-semibold text-comp">CoreForce</p>
+            <GiBiceps size={23} className="text-secondary"/>
+          </div>
         </NavLink>
         <button
           className="block lg:hidden"
@@ -71,9 +78,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
               <li>
                 <NavLink
-                  to={'/dashboard/setting'}
+                  to={'#'}
                   className={`group relative flex items-center gap-2 rounded-sm py-2 px-4 font-medium text-white duration-300 ease-in-out hover:bg-secondary ${
-                    pathname.includes('dashboard/setting') &&
+                    pathname.includes('dasettingshboard/') &&
                     'bg-secondary'
                   }`}
                 >

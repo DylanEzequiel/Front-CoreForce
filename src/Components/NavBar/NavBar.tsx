@@ -39,7 +39,7 @@ const [navbarColor, setNavbarColor] = useState('transparent');
   }, [location.pathname]); 
 
   return (
-    <nav className='fixed top-0 z-50 w-full pb-10 select-none' >
+    <nav className={`fixed top-0 z-50 w-full pb-10 select-none ${location.pathname === '/dashboard' ? 'hidden': 'block'}` }>
         <div className='flex px-2 md:px-6 flex-wrap justify-between items-center shadow-md ' id={style.navbar} style={{ backgroundColor: navbarColor }}>
             <Link to={'/'} className='text-gray-300 text-lg font-semibold flex gap-2 items-center justify-center'>
                 <span>CoreForce</span>

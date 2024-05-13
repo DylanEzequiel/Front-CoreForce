@@ -11,6 +11,7 @@ export interface Users {
   height:        string;
   weight:        string;
   role:          string;
+  isActive:      boolean;
 }
 
 export interface User {

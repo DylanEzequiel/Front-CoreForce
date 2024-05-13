@@ -56,7 +56,7 @@ function LoginForm():React.ReactElement {
         })
     }
   return (
-    <div className="dark:border-gray-700 bg-white dark:bg-gray-800 shadow m-60 md:mt-0 xl:p-0 dark:border rounded-lg w-full sm:max-w-2xl">
+    <div className="border-gray-700  bg-gray-800 shadow m-60 md:mt-0 xl:p-0 dark:border rounded-lg w-full sm:max-w-2xl">
         <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
             <h1 className="font-bold text-gray-900 text-xl md:text-2xl dark:text-white leading-tight tracking-tight">
           Log in to your account
