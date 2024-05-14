@@ -24,6 +24,7 @@ const [navbarColor, setNavbarColor] = useState('transparent');
       } else {
         setNavbarColor(navbarColor => {
           // Si la ruta es "/", el color debe ser transparente, de lo contrario, usa "#111827"
+          console.log(navbarColor)
           return location.pathname === "/" ? 'transparent' : "#111827";
         });
       }
@@ -40,8 +41,8 @@ const [navbarColor, setNavbarColor] = useState('transparent');
 
   return (
     <nav className={`fixed top-0 z-50 w-full pb-10 select-none ${location.pathname === '/dashboard' ? 'hidden': 'block'}` }>
-        <div className='flex px-2 md:px-6 flex-wrap justify-between items-center shadow-md ' id={style.navbar} style={{ backgroundColor: navbarColor }}>
-            <Link to={'/'} className='text-gray-300 text-lg font-semibold flex gap-2 items-center justify-center'>
+        <div className='flex flex-wrap justify-between items-center shadow-md px-2 md:px-6' id={style.navbar} style={{ backgroundColor: navbarColor }}>
+            <Link to={'/'} className='flex justify-center items-center gap-2 font-semibold text-gray-300 text-lg'>
                 <span>CoreForce</span>
                 <span>
                     <GiBiceps />
@@ -66,7 +67,7 @@ const [navbarColor, setNavbarColor] = useState('transparent');
                 </ul>
             </div>
         
-            <div className='flex m-4 text-text items-center'>
+            <div className='flex items-center m-4 text-text'>
                 <LoginRegWind/>
                 
             </div>
