@@ -1,40 +1,76 @@
 
-import React from 'react'
-// import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+// import MicroMenu from '../MicroMenu/MicroMenu'
+import { Link, useLocation } from 'react-router-dom'
+import style from "./navbar.module.css"
+import LoginRegWind from '../LoginRegWindow/LoginRegWind'
+import { GiBiceps } from 'react-icons/gi'
+
 
 export function NavBar ():React.ReactNode {
+// const [display, setDisplay] = useState(false)
+// const handleCLick=():void=>{
+//     setDisplay(!display)
+// }
+
+const [navbarColor, setNavbarColor] = useState('transparent');
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 50) {
+        setNavbarColor("#111827"); // Cambia el color a lo que desees cuando el scroll llegue a cierto punto
+      } else {
+        setNavbarColor(navbarColor => {
+          // Si la ruta es "/", el color debe ser transparente, de lo contrario, usa "#111827"
+          return location.pathname === "/" ? 'transparent' : "#111827";
+        });
+      }
+    };
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Limpia el listener del evento cuando el componente se desmonta
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [location.pathname]); 
+
   return (
-        <div className='flex flex-wrap justify-between bg-secondary'>
-            <div id="links" className=''>
+    <nav className={`fixed top-0 z-50 w-full pb-10 select-none ${location.pathname === '/dashboard' ? 'hidden': 'block'}` }>
+        <div className='flex px-2 md:px-6 flex-wrap justify-between items-center shadow-md ' id={style.navbar} style={{ backgroundColor: navbarColor }}>
+            <Link to={'/'} className='text-gray-300 text-lg font-semibold flex gap-2 items-center justify-center'>
+                <span>CoreForce</span>
+                <span>
+                    <GiBiceps />
+                </span>
+            </Link>
+            <div id="links" className='bg'>
                 <ul className='flex font-medium text-text'>
-                    <li className='m-3'>
-                        {/* <NavLink to="/"> */}
-                            <b >About Us</b>
-                        {/* </NavLink> */}
+                    {/* <li className={`m-3 text-center w-12  rounded-t ${display ? "bg-slate-400" :null}`}>
+                            <b onClick={handleCLick} className='hover:cursor-pointer'>Info
+                                {display? <MicroMenu></MicroMenu>:null}
+                            </b>
+                    </li> */}
+                    <li className='m-3' >
+                        <Link to={'/about'}>About us</Link>
                     </li>
-                    <li className='m-3'>
-                        {/* <NavLink to="/"> */}
-                            <b >Join us</b>
-                        {/* </NavLink> */}
+                    <li className='m-3' >
+                        <Link to="/pricing">Pricing</Link> 
                     </li>
-                    <li className='m-3'>
-                        {/* <NavLink to="/"> */}
-                            <b>Location</b>
-                        {/* </NavLink> */}
-                    </li>
-                    <li className='m-3'>
-                        {/* <NavLink to="/"> */}
-                            <b >Pay Methods</b>
-                        {/* </NavLink> */}
+                    <li className='m-3' >
+                        <Link to="/gallery">Gallery</Link> 
                     </li>
                 </ul>
             </div>
         
-            <div id="userCard" className='m-1'>
-                <h4 className=''>UserName</h4>
-                <b>clientType / Suscription</b>
-                <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="userIcon" className='inline rounded-full h-12' />
+            <div className='flex m-4 text-text items-center'>
+                <LoginRegWind/>
+                
             </div>
         </div>
+    </nav>
   )
 }
