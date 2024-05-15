@@ -1,29 +1,34 @@
 import React, { useState } from "react";
-import { FaRegUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/auth/authStore";
 
 function LoginRegWind(): React.ReactNode {
   const [display, setDisplay] = useState(false);
   const navigate = useNavigate();
-  const sessionUser = sessionStorage.getItem("UserId");
   function handleClick(): void {
     setDisplay(!display);
   }
+  const { user, userId } = useAuthStore((state) => ({
+    userId: state.userId,
+    user: state.userData,
+  }));
+  const {logout} = useAuthStore();
+ 
 
   const handleLogout = () => {
-    sessionStorage.removeItem("UserId");
-    sessionStorage.removeItem("UserToken");
+    logout();
     navigate("/");
   };
 
   return (
-    <div
-      className={`flex items-center gap-2 p-3 text-center hover:cursor-pointer rounded-t relative ${
+    <button
+      className={`flex items-center gap-2 py-2 px-4 text-center hover:cursor-pointer rounded-t relative bg-secondary ${
         display === true ? "bg-slate-400 hover:cursor-default" : null
       }`}
+      onClick={handleClick}
     >
       <b onClick={handleClick}>
-        {sessionUser ? "user" : "Get Started"}
+        {userId ? "user" : "Get Started"}
         {display ? (
           <div className="z-50 right-0 mt-4 flex w-64 flex-col rounded-md border border-comp bg-white shadow-md absolute">
             <ul
@@ -31,25 +36,41 @@ function LoginRegWind(): React.ReactNode {
                 display === true ? "bg-slate-400 hover:cursor-default" : null
               }`}
             >
-              {sessionUser ? (
+              {userId ? (
                 <>
-                <Link to={'/profile'} >
-                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">Perfil</p>
-                  </Link>
-                  <Link to={'/dashboard/admin'} >
-                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">Dashboard</p>
-                  </Link>
-                    <button onClick={handleLogout} className="hover:bg-slate-500 px-4 py-2 duration-300">Logout</button>
-                  
+                  {user?.role === "user" ? (
+                    <Link to={"/profile"}>
+                      <p className="hover:bg-slate-500 px-4 py-2 duration-300">
+                        Perfil
+                      </p>
+                    </Link>
+                  ) : null}
+                  {user?.role === "admin" ? (
+                    <Link to={"/dashboard/admin"}>
+                      <p className="hover:bg-slate-500 px-4 py-2 duration-300">
+                        Dashboard
+                      </p>
+                    </Link>
+                  ) : null}
+                  <button
+                    onClick={handleLogout}
+                    className="hover:bg-slate-500 px-4 py-2 duration-300"
+                  >
+                    Logout
+                  </button>
                 </>
               ) : (
                 <>
-                  <Link to={'/auth/login'} >
-                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">Login</p>
+                  <Link to={"/auth/login"}>
+                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">
+                      Login
+                    </p>
                   </Link>
                   <hr />
-                  <Link to={'/auth/register'} >
-                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">SignUp</p>
+                  <Link to={"/auth/register"}>
+                    <p className="hover:bg-slate-500 px-4 py-2 duration-300">
+                      SignUp
+                    </p>
                   </Link>
                 </>
               )}
@@ -59,8 +80,14 @@ function LoginRegWind(): React.ReactNode {
           </div>
         ) : null}
       </b>
-      <FaRegUserCircle size={30} />
-    </div>
+      {
+        userId ? (
+          <div className="w-8 h-8">
+          <img src={user?.profile_image} alt="" />
+        </div>
+        ): null
+      }
+    </button>
   );
 }
 

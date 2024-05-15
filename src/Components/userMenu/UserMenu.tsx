@@ -1,22 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState } from "react";
-import { LuUser } from "react-icons/lu";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { RiProfileFill } from "react-icons/ri";
 import { CiLogout } from "react-icons/ci";
+import { useAuthStore } from "../../store/auth/authStore";
 
 
 export const UserMenu = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+  const { user } = useAuthStore((state) => ({
+    user: state.userData,
+  }));
+  const {logout} = useAuthStore();
 
   const navigate = useNavigate();
     
   const handleLogout = () => {
-    sessionStorage.removeItem("UserId");
-    sessionStorage.removeItem("UserToken");
+    logout();
     navigate("/");
   };
 
@@ -30,12 +33,14 @@ export const UserMenu = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black">
-            User
+            {user?.name}
           </span>
-          <span className="block text-xs">Admin</span>
+          <span className="block text-xs">{user?.role}</span>
         </span>
 
-        <LuUser size={32} className="text-primary"/>
+        <div className="w-11 h-11">
+          <img src={user?.profile_image} alt="" />
+        </div>
 
         <MdKeyboardArrowDown className="hidden fill-current sm:block"/>
       </Link>

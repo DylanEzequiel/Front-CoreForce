@@ -4,7 +4,7 @@ const Gallery: React.FC = () => {
   return (
     <section className="my-5 py-5">
        
-      <div className="mx-auto py-10 container">
+      <div className="mx-auto py-10 container px-2">
         <h2 className="font-semibold text-5xl text-center text-slate-800">Meet Your Trainer</h2> 
         <p className="font-semibold text-center text-gray-500 text-xl">Our training programs are crafted with your fitness journey in mind, ensuring personalized guidance and expert support every step of the way.</p>
         <div className="gap-3 grid grid-cols-1 lg:grid-cols-3 my-16">

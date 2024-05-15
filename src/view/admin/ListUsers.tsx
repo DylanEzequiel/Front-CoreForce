@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Users } from "../../interfaces/users/interfaces";
@@ -6,29 +6,29 @@ import { formatDate } from "../../helpers/date/formatDate";
 import { Link } from "react-router-dom";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
+import clienteAxios from "../../service/axiosService";
+import { useAuthStore } from "../../store/auth/authStore";
 
 export const ListUsers = () => {
-  const apiUrl = import.meta.env.VITE_API_URL;
   const [users, setusers] = useState<Users[]>([]);
   const [filters, setFilters] = useState({
     userType: "user",
     membership: "all",
     gender: "all",
   });
-  const sessionToken = sessionStorage.getItem("UserToken");
+ 
+  const { token } = useAuthStore((state) => ({
+    token: state.token,
+  }));
 
   const getAllUsers = async (): Promise<void> => {
-    const { data } = await axios.get(
-      "http://localhost:3000/users?page=1&limit=5",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionToken}`,
-        },
-      }
-    );
+    const { data } = await clienteAxios.get("/users?page=1&limit=5", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setusers(data);
-    console.log(data)
   };
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const ListUsers = () => {
   };
 
   const getUsersByFilters = async () => {
-    const url = `${apiUrl}/users?page=1&limit=5`;
+    const url = `/users?page=1&limit=5`;
 
     // Filtrar solo los filtros seleccionados
     const filteredParams = Object.entries(filters)
@@ -54,18 +54,15 @@ export const ListUsers = () => {
 
     const urlWithParams = filteredParams ? `${url}&${filteredParams}` : url;
     try {
-      const { data } = await axios.get(
-        `${urlWithParams}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${sessionToken}`,
-          },
-        }
-      );
-      setusers(data)
+      const { data } = await clienteAxios.get(`${urlWithParams}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setusers(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -81,13 +78,17 @@ export const ListUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .put(`${apiUrl}/users/logicaldelete/${id}`, {},{
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${sessionToken}`,
-            },
-          })
+        clienteAxios
+          .put(
+            `/users/logicaldelete/${id}`,
+            {},
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
           .then((result) => {
             Swal.fire({
               title: "Deleted!",
@@ -112,12 +113,20 @@ export const ListUsers = () => {
             className={`relative z-20 w-full rounded border border-stroke bg-transparent py-2 px-6 outline-none transition focus:border-primary active:border-primary`}
           >
             <option value="" disabled className="text-gray-500">
-            Select type user
-          </option>
-            <option value="user" className="text-gray-500">users</option>
-            <option value="trainer" className="text-gray-500">Trainer</option>
-            <option value="admin" className="text-gray-500">Admin</option>
-            <option value="all" className="text-gray-500">EveryOne</option>
+              Select type user
+            </option>
+            <option value="user" className="text-gray-500">
+              users
+            </option>
+            <option value="trainer" className="text-gray-500">
+              Trainer
+            </option>
+            <option value="admin" className="text-gray-500">
+              Admin
+            </option>
+            <option value="all" className="text-gray-500">
+              EveryOne
+            </option>
           </select>
 
           <select
@@ -126,8 +135,8 @@ export const ListUsers = () => {
             className={`relative z-20 w-full rounded border border-stroke bg-transparent py-2 px-6 outline-none transition focus:border-primary active:border-primary`}
           >
             <option value="" disabled className="text-gray-500">
-            Select Membership
-          </option>
+              Select Membership
+            </option>
             <option value="all">All Memberships</option>
             <option value="Free">Free</option>
             <option value="Bronze">Bronze</option>
@@ -142,15 +151,20 @@ export const ListUsers = () => {
             className={`relative z-20 w-full rounded border border-stroke bg-transparent py-2 px-6 outline-none transition focus:border-primary active:border-primary`}
           >
             <option value="" disabled className="text-gray-500">
-            Select gender
-          </option>
+              Select gender
+            </option>
             <option value="all">All genders</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Othes</option>
           </select>
 
-          <button onClick={getUsersByFilters} className="bg-primary text-white px-4">Filter</button>
+          <button
+            onClick={getUsersByFilters}
+            className="bg-primary text-white px-4"
+          >
+            Filter
+          </button>
         </div>
       </div>
 
@@ -228,11 +242,15 @@ export const ListUsers = () => {
                 </td>
 
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black">{user.height ? user.height : '0 cm'}</p>
+                  <p className="text-black">
+                    {user.height ? user.height : "0 cm"}
+                  </p>
                 </td>
 
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black">{user.weight ? user.weight : '0 kg'}</p>
+                  <p className="text-black">
+                    {user.weight ? user.weight : "0 kg"}
+                  </p>
                 </td>
 
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
@@ -240,7 +258,15 @@ export const ListUsers = () => {
                 </td>
 
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${user.isActive ? 'bg-green-400 text-green-400': 'text-red-500 bg-red-500'}`}>{user.isActive ? 'Active' : 'Desactive'}</p>
+                  <p
+                    className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
+                      user.isActive
+                        ? "bg-green-400 text-green-400"
+                        : "text-red-500 bg-red-500"
+                    }`}
+                  >
+                    {user.isActive ? "Active" : "Desactive"}
+                  </p>
                 </td>
 
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
@@ -249,14 +275,20 @@ export const ListUsers = () => {
                       className="hover:text-primary"
                       to={`/dashboard/admin/${user.id}`}
                     >
-                      <FaRegEdit size={20} className="text-comp hover:text-primary transition-all duration-200"/>
+                      <FaRegEdit
+                        size={20}
+                        className="text-comp hover:text-primary transition-all duration-200"
+                      />
                     </Link>
                     {/* <button className="hover:text-primary">desactivar</button> */}
                     <button
                       className="hover:text-primary"
                       onClick={() => handleDesactive(user.id)}
                     >
-                      <FaRegTrashCan size={20} className="text-comp hover:text-red-500 transition-all duration-300"/>
+                      <FaRegTrashCan
+                        size={20}
+                        className="text-comp hover:text-red-500 transition-all duration-300"
+                      />
                     </button>
                   </div>
                 </td>

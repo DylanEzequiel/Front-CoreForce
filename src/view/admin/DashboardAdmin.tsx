@@ -2,15 +2,18 @@ import { FaUsers } from "react-icons/fa";
 import { CardData } from "../../Components/dashboard/cardData/CardData";
 import { MdPaid, MdVisibility } from "react-icons/md";
 import { PiSneakerMoveFill } from "react-icons/pi";
+import { useAuthStore } from "../../store/auth/authStore";
 
 export const DashboardAdmin: React.FC = () => {
   
-
+  const { user } = useAuthStore((state) => ({
+    user: state.userData,
+  }));
   
   return (
     <div className="py-4" id="admin">
       <h1 className="text-5xl py-6 text-slate-700 font-semibold">Admin Dashboard</h1>
-
+      <p className="text-comp text-2xl font-semibold">Welcome {user?.name}</p>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7 mt-6">
 
         <CardData
