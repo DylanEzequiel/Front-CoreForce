@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { User } from "../../interfaces/users/interfaces";
-import { EditErros, RegisterErrors } from "../../helpers/ValidateRegister";
+import { EditErros} from "../../helpers/ValidateRegister";
 import Swal from "sweetalert2";
 import {  fornatDateEdit } from '../../helpers/date/formatDate';
 import clienteAxios from "../../service/axiosService";
@@ -34,7 +34,7 @@ export const UpdateUsers = () => {
 
   
 
-  const [errors, setErrors] = useState<EditErros>({});
+  const errors:EditErros={}
  
 
   useEffect(() => {
@@ -84,8 +84,8 @@ export const UpdateUsers = () => {
   }
 
   return (
-    <section className="min-h-screen container mx-auto">
-      <h1 className="text-center text-primary py-5 font-semibold text-2xl">Edit User</h1>
+    <section className="mx-auto min-h-screen container">
+      <h1 className="py-5 font-semibold text-2xl text-center text-primary">Edit User</h1>
 
       <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
         <div className="relative w-full">
@@ -316,7 +316,7 @@ export const UpdateUsers = () => {
 
         <button
           type="submit"
-          className="inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200 hover:bg-orange-600"
+          className="inline-block bg-secondary hover:bg-orange-600 focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200"
         >
           Update
         </button>
