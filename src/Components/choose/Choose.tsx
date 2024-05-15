@@ -4,7 +4,7 @@ const Choose = () => {
   return (
     <section className="bg-slate-800 text-white pt-28 pb-0 md:pb-28 relative flex flex-col md:flex-row-reverse">
         <div className="container px-10">
-          <h2 className="my-2 text-6xl text-center md:text-start md:text-4xl lg:text-6xl xl:text-8xl">Why choose us ?</h2> 
+          <h2 className="my-2 text-4xl text-center md:text-start md:text-4xl lg:text-6xl xl:text-8xl">Why choose us ?</h2> 
           <p className="text-pretty text-lg py-3 font-semibold text-gray-500 xl:text-xl md:max-w-[23rem] lg:max-w-[36rem] xl:max-w-[40rem]">Select your preferred class and begin right away. Keep in mind, the only regrettable workout is the one you skipped.</p>
           <div className="grid max-w-lg gap-10 grid-col-1 sm:grid-cols-2 mb-10 md:mb-0">
             

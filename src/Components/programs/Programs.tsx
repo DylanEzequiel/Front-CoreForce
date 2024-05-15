@@ -52,7 +52,7 @@ const Programs: React.FC = () => {
         Build your personal routine
       </p>
 
-      <div className="grid grid-cols-1 gap-3 mt-10 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 mt-10 md:grid-cols-2 xl:grid-cols-4 px-2">
         {
           trainingPrograms.map( program => (
             <div className="max-w-sm px-10 mx-auto text-white transition-all border border-gray-200 rounded-md shadow-2xl bg-slate-800 py-28 hover:scale-105" key={program.id}>

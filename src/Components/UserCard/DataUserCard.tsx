@@ -2,10 +2,13 @@ import React from 'react'
 import { IUser } from '../../interfaces/interfaces'
 import MembershipUCard from './MembershipUCard'
 
+
 function DataUserCard(props:IUser):React.ReactNode {
     const {address,weight,height,birthdate,gender,user_membership}=props
     const fecha = new Date(birthdate);
     const fechaFormateada = fecha.toISOString().split('T')[0];
+
+
   return (
     <div>
         <div>

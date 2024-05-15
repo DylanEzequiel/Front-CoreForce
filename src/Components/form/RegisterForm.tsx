@@ -6,11 +6,11 @@ import {
 } from "../../helpers/ValidateRegister";
 import { useForm } from "../../hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
+import clienteAxios from "../../service/axiosService";
 
 export const RegisterForm = ():React.ReactElement => {
-  const apiUrl=import.meta.env.VITE_API_URL
+  
   const navigate=useNavigate()
   const {
     onInputChange,
@@ -53,7 +53,7 @@ export const RegisterForm = ():React.ReactElement => {
       return;
     }
     try {
-      const {data} = await axios.post(`${apiUrl}/auth/signup`,{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
+      const {data} = await clienteAxios.post(`/auth/signup`,{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
       toast.success("Register Succes! Log in please")
       navigate("/auth/login")
       console.log(data)

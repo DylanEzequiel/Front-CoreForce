@@ -1,13 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useForm } from '../../hooks/useForm'
 import { Link, useNavigate } from 'react-router-dom'
 import ValidateLogin, { IErrorsLogin } from '../../helpers/ValidateLogin'
-import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useAuthStore } from '../../store/auth/authStore'
+import clienteAxios from '../../service/axiosService'
 
 function LoginForm():React.ReactElement {
-    const apiUrl=import.meta.env.VITE_API_URL
     const navigate = useNavigate()
+    const {fetchUserData, setTokenAndUserId} = useAuthStore()
    
     //obtengo funcionalidades del custom hook de juampi (que buen hook loco)
     const {onInputChange,
@@ -37,10 +39,8 @@ function LoginForm():React.ReactElement {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(`email:${formState.email},password:${formState.password}`)
-        // const {data} = await axios.get(`${apiUrl}/users/email`, {params: {email}})
-        // sessionStorage.setItem('UserRole', data.role)
-        await axios.post(`${apiUrl}/auth/login`,{email:formState.email,password:formState.password})
+        
+        await clienteAxios.post(`/auth/login`,{email:formState.email,password:formState.password})
         .then((data)=>{
           console.log(data.data)
           toast.success("Login succes! welcome back")
@@ -48,15 +48,16 @@ function LoginForm():React.ReactElement {
           .then((user)=>{
             sessionStorage.setItem("UserToken",user.token)
             sessionStorage.setItem("UserId",user.userId)
-            console.log(user)
+            setTokenAndUserId(user.token, user.userId)
+            fetchUserData()
             navigate("/")
           })
         .catch(error=>{
           toast.error(error.response.data.message)
-        })
+        });
     }
   return (
-    <div className="border-gray-700  bg-gray-800 shadow m-60 md:mt-0 xl:p-0 dark:border rounded-lg w-full sm:max-w-2xl">
+    <div className="border-gray-700  bg-gray-800 shadow m-6 md:mt-0 xl:p-0 border rounded-lg w-full sm:max-w-2xl">
         <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
             <h1 className="font-bold text-gray-900 text-xl md:text-2xl dark:text-white leading-tight tracking-tight">
           Log in to your account

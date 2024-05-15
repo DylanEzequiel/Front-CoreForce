@@ -14,11 +14,11 @@ export interface IUserRegister{
 }
 
 export interface IUser{
-    name: string;
-    email: string;
-    phoneNumber: string;
-    birthdate: string;
-    gender: "male" | "female" | "other" ;
+    name?: string;
+    email?: string;
+    phoneNumber?: string;
+    birthdate: Date;
+    gender?: string ;
     height?: string;
     profile_image?:string;
     user_membership:any;
