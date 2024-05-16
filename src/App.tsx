@@ -18,6 +18,7 @@ import { PricingPage } from "./view/pricing/PricingPage";
 import { Galleries } from "./view/galleries/Galleries";
 // import { ErrorPage } from "./view/errorPage/ErrorPage";
 import { About } from "./view/about/About";
+import { ErrorPage } from "./view/errorPage/ErrorPage";
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
           <Route path="pricing" element={<PricingPage />}/>
           <Route path="gallery" element={<Galleries />}/>
           <Route path="about" element={<About />}/>
-          {/* <Route path="/*" element={<ErrorPage />}/> */}
+           <Route path="*" element={<ErrorPage />}/>
         </Route>
       </Routes>
 

@@ -1,8 +1,9 @@
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import LoginForm from "../../Components/form/LoginForm";
+import { AuthGoogle } from "../../Components/Google/AuthGoogle";
 
 export const Login = () => {
-  const { loginWithPopup } = useAuth0();
+  // const { loginWithPopup } = useAuth0();
   return (
       <div className="py-20 min-h-screen">
       <div className="flex flex-col justify-start items-center mx-auto px-6 py-8 pt-18">
@@ -12,9 +13,10 @@ export const Login = () => {
         </div>
 
         <LoginForm></LoginForm>
-      <button className="m-3 text-black" onClick={() => loginWithPopup()}>
+      {/* <button className="m-3 text-black" onClick={() => loginWithPopup()}>
         Login with Auth0
-      </button>
+      </button> */}
+      <AuthGoogle />
         
       </div>
     </div>
