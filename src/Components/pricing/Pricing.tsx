@@ -4,10 +4,12 @@ import { useNavigate } from "react-router";
 
 
 export const Pricing = () => {
+
+
     const navigate =useNavigate()
 
     function handleClick(){
-      navigate("/auth/login")
+      navigate("/payment")
     }
 
   return (
