@@ -1,5 +1,5 @@
 
-import axios from 'axios'
+// import axios from 'axios'
 import React from 'react'
 import {
   initMercadoPago,
