@@ -1,6 +1,6 @@
 
 // import axios from 'axios'
-import React, { useState } from 'react'
+import React from 'react'
 import {
   initMercadoPago,
   createCardToken,
@@ -9,9 +9,9 @@ import {
   ExpirationDate,
 } from "@mercadopago/sdk-react";
 import { FaCcMastercard } from "react-icons/fa";
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useAuthStore } from '../../store/auth/authStore';
+import clienteAxios from '../../service/axiosService';
 
 initMercadoPago("APP_USR-44f608af-4cd8-4676-a64d-e88b49592df7");
 
@@ -35,22 +35,24 @@ function PayForm():React.ReactElement {
     });
     console.log(response?.id)
   
-      axios.post("url",{
+    clienteAxios.post("/payments/subscription",{
         userId,
         membershipId:membershipId,
         card_token_id:response?.id
       }).then(res=>
-        Swal.fire({icon:"success",
+       { Swal.fire({icon:"success",
           title:"Suscription complete!",
           text:"Redirecting"
         })
+        console.log(res)
+      }
       )
-      .catch(err=>
+      .catch(err=>{
       Swal.fire({icon: "error",
       title: "Oops...",
       text: "Something went wrong!"})
+      console.log(err)}
       )
-
       // 5031 7557 3453 0604
       // 11/25
 
