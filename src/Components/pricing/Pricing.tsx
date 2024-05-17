@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 const subscriptionPlans = [
   {
-    id: "4541d7ca-ae0a-4e1f-a7b2-c71dfd65382a",
+    id: "6ea4d468-041d-4ae4-a243-0fa75585de1f",
     name: "Silver Membership",
     description:
       "Extended access with additional perks. Enhanced customer support. Limited access to premium content.",
@@ -11,7 +11,7 @@ const subscriptionPlans = [
     duration: "60 days",
   },
   {
-    id: "5fcfecd2-f532-482e-9d18-c9115f07a7ea",
+    id: "e51a5611-2ee8-4e71-93be-a55e67c8d848",
     name: "Gold Membership",
     description:
       "Enjoy premium benefits. Priority customer support. Access to exclusive premium content.",
@@ -19,7 +19,7 @@ const subscriptionPlans = [
     duration: "90 days",
   },
   {
-    id: "8b6f72af-8a13-4cd2-ae43-81f3b484ba0c",
+    id: "34c445ed-f679-4552-af28-a13dafde9a00",
     name: "Platinum Membership",
     description:
       "Get exclusive privileges. Dedicated customer support. Access to all premium content. Priority access to new features.",
@@ -39,8 +39,8 @@ const membershipPlans = subscriptionPlans.map((plan) => ({
 export const Pricing = () => {
   const navigate = useNavigate();
 
-  function handleClick( id: string ) {
-    localStorage.setItem("MembershipId",id)
+  function handleClick(id: string) {
+    localStorage.setItem("MembershipId", id);
     navigate("/payment");
   }
 
@@ -86,7 +86,6 @@ export const Pricing = () => {
                     <span>{desc}</span>
                   </li>
                 ))}
-
               </ul>
             </div>
 
