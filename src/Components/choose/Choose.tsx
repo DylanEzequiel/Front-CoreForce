@@ -31,7 +31,7 @@ const Choose = () => {
           </div>
 
         </div>
-        <img src="/img/choose-img.png" alt="" className="md:absolute md:top-[37px] lg:top-[-23px] xl:right-5 xl:top-[-34px] 2xl:right-10 2xl:top-[-128px] 3xl:top-[-77px] max-w-100 md:max-w-[23rem] lg:max-w-[27rem] xl:max-w-[30rem] 2xl:max-w-[32rem]"/>
+        <img src="/img/choose-img.png" alt="" className="md:absolute md:top-[61px] lg:top-[-7px] xl:right-5 xl:top-[-34px] 2xl:right-10 2xl:top-[-128px] 3xl:top-[-77px] max-w-100 md:max-w-[23rem] lg:max-w-[27rem] xl:max-w-[30rem] 2xl:max-w-[32rem]"/>
       </section>
   )
 }
