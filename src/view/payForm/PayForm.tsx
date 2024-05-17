@@ -21,7 +21,7 @@ function PayForm():React.ReactElement {
     userId: state.userId,
     user: state.userData,
   }));
-
+  const membershipId=localStorage.getItem("MembershipId")
 
 
 
@@ -37,7 +37,7 @@ function PayForm():React.ReactElement {
   
       axios.post("url",{
         userId,
-        membershipId:"",
+        membershipId:membershipId,
         card_token_id:response?.id
       }).then(res=>
         Swal.fire({icon:"success",
@@ -59,7 +59,7 @@ function PayForm():React.ReactElement {
  }
 
   return (
-    <div className='py-48'>
+    <div className='py-48 min-h-52'>
       <h2 className="font-semibold text-5xl text-center text-slate-700">
         Add Your Card Information!
       </h2>

@@ -3,35 +3,27 @@ import { useNavigate } from "react-router";
 
 const subscriptionPlans = [
   {
-    id: "901d7e97-5939-4dac-b3a3-492ce0acdc18",
-    name: "Bronze",
-    description:
-      "Access to basic features. Limited customer support. No access to premium content.",
-    price: 10,
-    duration: "30 days",
-  },
-  {
     id: "4541d7ca-ae0a-4e1f-a7b2-c71dfd65382a",
-    name: "Silver",
+    name: "Silver Membership",
     description:
       "Extended access with additional perks. Enhanced customer support. Limited access to premium content.",
-    price: 17,
+    price: 6000,
     duration: "60 days",
   },
   {
     id: "5fcfecd2-f532-482e-9d18-c9115f07a7ea",
-    name: "Gold",
+    name: "Gold Membership",
     description:
       "Enjoy premium benefits. Priority customer support. Access to exclusive premium content.",
-    price: 30,
+    price: 10000,
     duration: "90 days",
   },
   {
     id: "8b6f72af-8a13-4cd2-ae43-81f3b484ba0c",
-    name: "Platinum",
+    name: "Platinum Membership",
     description:
       "Get exclusive privileges. Dedicated customer support. Access to all premium content. Priority access to new features.",
-    price: 70,
+    price: 15000,
     duration: "365 days",
   },
 ];
@@ -48,8 +40,8 @@ export const Pricing = () => {
   const navigate = useNavigate();
 
   function handleClick( id: string ) {
-    console.log(id)
-    navigate("/auth/login");
+    localStorage.setItem("MembershipId",id)
+    navigate("/payment");
   }
 
   // console.log(membershipPlans);
