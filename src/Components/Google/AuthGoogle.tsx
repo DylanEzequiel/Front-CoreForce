@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FaGoogle } from "react-icons/fa";
 import { auth } from "../../firebase/firebase";
-
 import { useNavigate } from "react-router";
 import clienteAxios from "../../service/axiosService";
+import { useAuthStore } from "../../store/auth/authStore";
 
 /*
   Stages:
@@ -15,36 +15,28 @@ import clienteAxios from "../../service/axiosService";
   4: not logged
 */
 export const AuthGoogle: React.FC = () => {
-
-
-  let navigate = useNavigate();
-
-
-
- 
+  const {setUserData, setTokenAndUserId} = useAuthStore()
+  const navigate = useNavigate();
 
   const signInWithGoogle = async(googleProvider: GoogleAuthProvider) => {
     try {
       const res = await signInWithPopup(auth, googleProvider)
       const user = res.user 
-      console.log(res);
-
-      //Navegar al home
-      // Enviar datos del usuario al backend
-      const response = await clienteAxios.post('/api/user', {
-        firebaseId: user.uid,
-        displayName: user.displayName,
-        email: user.email
-        // Aquí puedes enviar otros datos relevantes del usuario si es necesario
+     
+      
+      // Enviar datos del usuario al backend y revisamos si el uid existe
+      const {data} = await clienteAxios.post('/firebase/google', {
+        firebaseId: user.uid, // "wVoIJoXDaMedktgkrMxAiwYzzS32" //"wVoIJoXDaMedktgkrMxAiwYzzS32"
+        name: user.displayName,
+        email: user.email,
+        imagen: user.photoURL
+       
       })
-
-      if (response.status === 200) {
-        // Si el usuario se creó correctamente o ya existía en la base de datos
-        console.log('Usuario creado o ya existente');
-      } else {
-        // Si el usuario no existe, mostrar el modal para completar los campos adicionales
-        
-      }
+      console.log(data)
+      setTokenAndUserId(data.firebaseId, data.id)
+      setUserData(data);
+      navigate('/');
+      
     } catch (error) {
       console.log(error)
     }
