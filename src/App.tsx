@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Home } from "./view/home/Home";
-import { Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import { Login } from './Components/login/Login'
 import { HomeLayout } from "./layout/HomeLayout";
 
@@ -22,12 +22,55 @@ import RatePage from "./view/ratePage/RatePage";
 import PayFormComp from "./view/payForm/PayFormComp";
 import {loadStripe} from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js";
+import { Profile } from "./view/admin/Profile";
+import { SettingUser } from "./Components/user/SettingUser";
+import { AuthLayout } from "./layout/AuthLayout";
+
 import MPPayForm from "./view/payForm/PayFormComp";
 
 
 function App() {
   
   const stripePromise = loadStripe("pk_test_51PH8NuBo3feRciaDBfMEClW56SUbX1GoDzS2jSdXSb3HM42Fdk9Gge4vWBIcnxkFbqAiWJs3FnKZ4WCd8CZiO1Em00L4Nuie9F")
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <HomeLayout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: 'profile', element: <DasboardUser /> },
+        { path: 'profile/setting', element: <SettingUser /> },
+        { path: 'auth/register', element: <Register /> },
+        { path: 'auth/login', element: <Login /> },
+        { path: 'pricing', element: <PricingPage /> },
+        { path: 'gallery', element: <Galleries /> },
+        { path: 'about', element: <About /> },
+        { path: 'payment', element: <PayFormComp /> },
+        { path: 'ratepage', element: <RatePage /> },
+        
+      ],
+    },
+    {
+      path: '/dashboard',
+      element: <PrivateLayout />,
+      children: [
+        { path: 'admin', element: <DashboardAdmin /> },
+        { path: 'users', element: <ListUsers /> },
+        { path: 'admin/:id', element: <UpdateUsers /> },
+        { path: 'profile', element: <Profile /> },
+        
+      ],
+    },{
+      path: '/auth',
+      element: <AuthLayout />,
+      children: [
+        { path: 'signin', element: <Login /> },
+        { path: 'signup', element: <Register /> }
+      ]
+    }
+   
+  ]);
   
   return (
     <div className="bg-gray-200">
@@ -47,33 +90,39 @@ function App() {
           theme="light"
           />
 
-      
-        {/* aca van las rutas a las que hacemos en Pages -Dylan  */}
-        <Routes>
+          <RouterProvider router={router} />
+    
+        {/* <Routes>
           <Route path="/" element={<HomeLayout />}>
             <Route index element={<Home />}></Route>
             <Route path="profile" element={<DasboardUser />} />
+            <Route path="profile/setting" element={<SettingUser />} />
             <Route path="auth/register" element={<Register />} />
             <Route path="auth/login" element={<Login /> }/>
             <Route path="pricing" element={<PricingPage />}/>
             <Route path="gallery" element={<Galleries />}/>
             <Route path="about" element={<About />}/>
 
-            {/* Estas de aca son rutas que serian privadas pero las dejo aca por tests -Dylan */}
-            <Route path="payment" element={<PayFormComp/>}/>
+        
+            <Route path="payment" element={<PayForm/>}/>
             <Route path="ratepage" element={<RatePage/>}/>
-            {/* <Route path="/*" element={<ErrorPage />}/> */}
+           
           </Route>
         </Routes>
 
-        {/*Rutas privadas */}
         <Routes>
           <Route path="/dashboard" element={<PrivateLayout />}>
             <Route index path="admin" element={<DashboardAdmin />} />
             <Route path="users" element={<ListUsers />} />
             <Route path="admin/:id" element={<UpdateUsers />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Routes>
+
+    
+        <Routes>
+          
+        </Routes> */}
 
         
       </Elements>
