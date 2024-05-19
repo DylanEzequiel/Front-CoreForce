@@ -39,8 +39,9 @@ const membershipPlans = subscriptionPlans.map((plan) => ({
 export const Pricing = () => {
   const navigate = useNavigate();
 
-  function handleClick(id: string) {
+  function handleClick(id: string,name:string) {
     localStorage.setItem("MembershipId", id);
+    localStorage.setItem("MembershipName", name);
     navigate("/payment");
   }
 
@@ -91,7 +92,7 @@ export const Pricing = () => {
 
             <button
               className="block bg-secondary py-3 w-full font-medium text-center text-text px6"
-              onClick={() => handleClick(membership.id)}
+              onClick={() => handleClick(membership.id,membership.name)}
             >
               Get Started
             </button>

@@ -3,13 +3,20 @@ import React, { useState } from 'react'
 import { FaCcStripe } from 'react-icons/fa'
 import clienteAxios from '../../../service/axiosService'
 import LoadingIcons from 'react-loading-icons'
+import { useAuthStore } from '../../../store/auth/authStore'
 
 function STPayForm():React.ReactNode {
     const [loading, setLoading]=useState(false)
+    const { userId } = useAuthStore((state) => ({
+        userId: state.userId,
+        user: state.userData,
+      }));
+      const membershipName=localStorage.getItem("MembershipName")
     const stripe = useStripe()
     const elements = useElements()
     async function handleSubmit(e:any){
         e.preventDefault()
+         
         const {error, paymentMethod }=await stripe?.createPaymentMethod({
             type:"card",
             card: elements?.getElement(CardElement)
@@ -18,9 +25,15 @@ function STPayForm():React.ReactNode {
         if(!error){
             console.log(paymentMethod)
             try {
-                await clienteAxios.post("url",{
-                    id:paymentMethod.id,
-                    amount:2000
+                await clienteAxios.post("stripe/checkout",{
+                    stripe:{
+                        id:paymentMethod.id,
+                        amount:2000,
+                    },
+                    userData:{
+                        userId,
+                        membershipName
+                    }
                 })
                 elements?.getElement(CardElement)?.clear()
                 

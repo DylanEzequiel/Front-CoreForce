@@ -26,7 +26,6 @@ import { Profile } from "./view/admin/Profile";
 import { SettingUser } from "./Components/user/SettingUser";
 import { AuthLayout } from "./layout/AuthLayout";
 
-import MPPayForm from "./view/payForm/PayFormComp";
 
 
 function App() {
