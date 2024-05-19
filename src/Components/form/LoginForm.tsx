@@ -121,20 +121,20 @@ function LoginForm(): React.ReactElement {
             >
               Login
             </button>
-            <AuthGoogle />
           </div>
-          <div className="mt-4 font-light text-center text-neutral-500">
+        </form>
+          <AuthGoogle />
+        <div className="mt-4 font-light text-center text-neutral-500">
             <div className="flex flex-row justify-center items-center gap-2">
               <p>Dont have an account?</p>
               <Link
-                to={"/auth/signup"}
+                to={"/auth/signin"}
                 className="text-primary hover:underline cursor-pointer"
               >
                 Sign Up
               </Link>
             </div>
           </div>
-        </form>
       </div>
     </div>
   );

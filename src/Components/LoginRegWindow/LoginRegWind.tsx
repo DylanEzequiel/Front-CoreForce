@@ -70,13 +70,13 @@ function LoginRegWind(): React.ReactNode {
                 <>
                   <Link to={"/auth/signup"}>
                     <p className="hover:bg-slate-500 px-4 py-2 duration-300">
-                      Login
+                      Sign Up
                     </p>
                   </Link>
                   <hr />
                   <Link to={"/auth/signin"}>
                     <p className="hover:bg-slate-500 px-4 py-2 duration-300">
-                      SignUp
+                      Sign in
                     </p>
                   </Link>
                 </>
