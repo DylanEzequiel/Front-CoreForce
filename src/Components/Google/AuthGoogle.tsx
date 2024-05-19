@@ -15,7 +15,7 @@ import { useAuthStore } from "../../store/auth/authStore";
   4: not logged
 */
 export const AuthGoogle: React.FC = () => {
-  const {setUserData, setTokenAndUserId} = useAuthStore()
+  const {fetchUserData, setTokenAndUserId} = useAuthStore()
   const navigate = useNavigate();
 
   const signInWithGoogle = async(googleProvider: GoogleAuthProvider) => {
@@ -33,9 +33,10 @@ export const AuthGoogle: React.FC = () => {
        
       })
       console.log(data)
-      setTokenAndUserId(data.firebaseId, data.id)
-      setUserData(data);
-      navigate('/');
+      setTokenAndUserId(data.token, data.userId);
+        fetchUserData();
+        navigate("/");
+      
       
     } catch (error) {
       console.log(error)
