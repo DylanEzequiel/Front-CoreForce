@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth/authStore";
+import { FaRegCircleUser } from "react-icons/fa6";
 
 function LoginRegWind(): React.ReactNode {
   const [display, setDisplay] = useState(false);
@@ -12,8 +13,7 @@ function LoginRegWind(): React.ReactNode {
     userId: state.userId,
     user: state.userData,
   }));
-  const {logout} = useAuthStore();
- 
+  const { logout } = useAuthStore();
 
   const handleLogout = () => {
     logout();
@@ -22,13 +22,13 @@ function LoginRegWind(): React.ReactNode {
 
   return (
     <button
-      className={`flex items-center gap-2 py-2 px-4 text-center hover:cursor-pointer rounded-t relative bg-secondary ${
+      className={`flex items-center gap-2 py-2 px-4 text-center hover:cursor-pointer  ${
         display === true ? "bg-slate-400 hover:cursor-default" : null
       }`}
       onClick={handleClick}
     >
       <b onClick={handleClick}>
-        {userId ? "user" : "Get Started"}
+        {userId ? "user" : <FaRegCircleUser size={30}/>}
         {display ? (
           <div className="z-50 right-0 mt-4 flex w-64 flex-col rounded-md border border-comp bg-white shadow-md absolute">
             <ul
@@ -39,11 +39,18 @@ function LoginRegWind(): React.ReactNode {
               {userId ? (
                 <>
                   {user?.role === "user" ? (
-                    <Link to={"/profile"}>
+                    <>
+                      <Link to={"/profile"}>
+                        <p className="hover:bg-slate-500 px-4 py-2 duration-300">
+                          Perfil
+                        </p>
+                      </Link>
+                      <Link to={"/profile/setting"}>
                       <p className="hover:bg-slate-500 px-4 py-2 duration-300">
-                        Perfil
+                        Setting
                       </p>
                     </Link>
+                    </>
                   ) : null}
                   {user?.role === "admin" ? (
                     <Link to={"/dashboard/admin"}>
@@ -54,20 +61,20 @@ function LoginRegWind(): React.ReactNode {
                   ) : null}
                   <button
                     onClick={handleLogout}
-                    className="hover:bg-slate-500 px-4 py-2 duration-300"
+                    className="hover:bg-slate-500 px-4 py-2 duration-300 w-full"
                   >
                     Logout
                   </button>
                 </>
               ) : (
                 <>
-                  <Link to={"/auth/login"}>
+                  <Link to={"/auth/signup"}>
                     <p className="hover:bg-slate-500 px-4 py-2 duration-300">
                       Login
                     </p>
                   </Link>
                   <hr />
-                  <Link to={"/auth/register"}>
+                  <Link to={"/auth/signin"}>
                     <p className="hover:bg-slate-500 px-4 py-2 duration-300">
                       SignUp
                     </p>
@@ -80,13 +87,11 @@ function LoginRegWind(): React.ReactNode {
           </div>
         ) : null}
       </b>
-      {
-        userId ? (
-          <div className="w-8 h-8">
+      {userId ? (
+        <div className="w-8 h-8">
           <img src={user?.profile_image} alt="" />
         </div>
-        ): null
-      }
+      ) : null}
     </button>
   );
 }

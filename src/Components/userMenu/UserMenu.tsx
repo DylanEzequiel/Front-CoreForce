@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RiProfileFill } from "react-icons/ri";
 import { CiLogout } from "react-icons/ci";
 import { useAuthStore } from "../../store/auth/authStore";
+import { IoMdSettings } from "react-icons/io";
 
 
 export const UserMenu = () => {
@@ -56,11 +57,19 @@ export const UserMenu = () => {
       >
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7">
           <li>
-            <Link to={'#'}
+            <Link to={'/dashboard/profile'}
               className="flex items-center gap-3 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <RiProfileFill size={20}/>
               My Profile
+            </Link>        
+          </li>
+          <li>
+            <Link to={'#'}
+              className="flex items-center gap-3 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+            >
+              <IoMdSettings size={20}/>
+              Setting
             </Link>
           </li>
         </ul>
