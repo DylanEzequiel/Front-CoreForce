@@ -19,9 +19,10 @@ import { Galleries } from "./view/galleries/Galleries";
 // import { ErrorPage } from "./view/errorPage/ErrorPage";
 import { About } from "./view/about/About";
 import RatePage from "./view/ratePage/RatePage";
-import PayForm from "./view/payForm/PayForm";
+import PayFormComp from "./view/payForm/PayFormComp";
 import {loadStripe} from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js";
+import MPPayForm from "./view/payForm/PayFormComp";
 
 
 function App() {
@@ -59,7 +60,7 @@ function App() {
             <Route path="about" element={<About />}/>
 
             {/* Estas de aca son rutas que serian privadas pero las dejo aca por tests -Dylan */}
-            <Route path="payment" element={<PayForm/>}/>
+            <Route path="payment" element={<PayFormComp/>}/>
             <Route path="ratepage" element={<RatePage/>}/>
             {/* <Route path="/*" element={<ErrorPage />}/> */}
           </Route>
