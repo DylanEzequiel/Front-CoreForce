@@ -64,8 +64,8 @@ function App() {
       path: '/auth',
       element: <AuthLayout />,
       children: [
-        { path: 'signup', element: <Login /> },
-        { path: 'signin', element: <Register /> }
+        { path: 'signup', element: <Register />},
+        { path: 'signin', element: <Login />  }  
       ]
     }
    
