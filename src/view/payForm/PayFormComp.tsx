@@ -32,7 +32,7 @@ function PayFormComp():React.ReactElement {
     }
   return (
     <div className='py-40 min-h-screen'>
-      <h2 className="font-semibold text-5xl text-center text-slate-700">
+      <h2 className="m-4 font-semibold text-5xl text-center text-slate-700">
         Add Your Card Information!
       </h2>
 

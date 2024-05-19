@@ -10,6 +10,7 @@ function STPayForm():React.ReactNode {
     const elements = useElements()
     async function handleSubmit(e:any){
         e.preventDefault()
+         
         const {error, paymentMethod }=await stripe?.createPaymentMethod({
             type:"card",
             card: elements?.getElement(CardElement)

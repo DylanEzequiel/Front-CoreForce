@@ -12,6 +12,7 @@ import { useAuthStore } from '../../../store/auth/authStore';
 import clienteAxios from '../../../service/axiosService';
 import { SiMercadopago } from 'react-icons/si';
 import LoadingIcons from 'react-loading-icons';
+import { useNavigate } from 'react-router';
 
 
 
@@ -23,8 +24,8 @@ function MPPayform():React.ReactElement {
         userId: state.userId,
         user: state.userData,
       }));
-      const membershipId=localStorage.getItem("MembershipId")
-    
+    const membershipId=localStorage.getItem("MembershipId")
+    const navigate = useNavigate()
     
     
      const handleSubmit=async(e:any)=>{
@@ -51,6 +52,7 @@ function MPPayform():React.ReactElement {
                 text: "Redirecting",
               });
               setLoading(!loading)
+              navigate("/profile")
               console.log(res);
             })
             .catch((err) => {
