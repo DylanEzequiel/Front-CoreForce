@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 const subscriptionPlans = [
   {
     id: "6ea4d468-041d-4ae4-a243-0fa75585de1f",
-    name: "Silver Membership",
+    name: "Silver",
     description:
       "Extended access with additional perks. Enhanced customer support. Limited access to premium content.",
     price: 6000,
@@ -12,7 +12,7 @@ const subscriptionPlans = [
   },
   {
     id: "e51a5611-2ee8-4e71-93be-a55e67c8d848",
-    name: "Gold Membership",
+    name: "Gold",
     description:
       "Enjoy premium benefits. Priority customer support. Access to exclusive premium content.",
     price: 10000,
@@ -20,7 +20,7 @@ const subscriptionPlans = [
   },
   {
     id: "34c445ed-f679-4552-af28-a13dafde9a00",
-    name: "Platinum Membership",
+    name: "Platinum",
     description:
       "Get exclusive privileges. Dedicated customer support. Access to all premium content. Priority access to new features.",
     price: 15000,
@@ -39,7 +39,7 @@ const membershipPlans = subscriptionPlans.map((plan) => ({
 export const Pricing = () => {
   const navigate = useNavigate();
 
-  function handleClick(id: string,name:string) {
+  function handleClick(id: string, name: string) {
     localStorage.setItem("MembershipId", id);
     localStorage.setItem("MembershipName", name);
     navigate("/payment");
@@ -92,7 +92,7 @@ export const Pricing = () => {
 
             <button
               className="block bg-secondary py-3 w-full font-medium text-center text-text px6"
-              onClick={() => handleClick(membership.id,membership.name)}
+              onClick={() => handleClick(membership.id, membership.name)}
             >
               Get Started
             </button>
