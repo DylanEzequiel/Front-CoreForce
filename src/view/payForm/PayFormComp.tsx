@@ -31,7 +31,7 @@ function PayFormComp():React.ReactElement {
       setStDisplay(!Stdisplay)
     }
   return (
-    <div className='py-40 min-h-52'>
+    <div className='py-40 min-h-screen'>
       <h2 className="font-semibold text-5xl text-center text-slate-700">
         Add Your Card Information!
       </h2>
