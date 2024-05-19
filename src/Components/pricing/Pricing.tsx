@@ -52,7 +52,7 @@ export const Pricing = () => {
         Choose Your Plan
       </h2>
 
-      <p className="font-semibold text-center text-gray-500 text-xl">
+      <p className="font-semibold text-center text-gray-200 text-xl">
         Our pricing plans are designed with transparency and value in mind.
       </p>
 
@@ -67,7 +67,7 @@ export const Pricing = () => {
                 <h3 className="font-semibold text-2xl text-white">
                   {membership.name}
                 </h3>
-                <p className="mt-4 text-gray-400">
+                <p className="mt-4 text-gray-300">
                   {membership.description[0]}
                 </p>
               </div>
@@ -76,10 +76,10 @@ export const Pricing = () => {
                 <span className="font-extrabold text-5xl text-white">
                   ${membership.price}
                 </span>
-                <span className="font-medium text-comp text-xl">/mo</span>
+                <span className="font-medium text-slate-300 text-xl">/mo</span>
               </div>
 
-              <ul className="space-y-4 mb-8 text-comp">
+              <ul className="space-y-4 mb-8 text-slate-200">
                 {membership.description.slice(1).map((desc) => (
                   <li className="flex items-center gap-2" key={desc}>
                     <FaCheck className="text-secondary" size={20} />
