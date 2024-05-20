@@ -8,6 +8,7 @@ import { useForm } from "../../hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import clienteAxios from "../../service/axiosService";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const RegisterForm = (): React.ReactElement => {
   const navigate = useNavigate();
@@ -36,6 +37,8 @@ export const RegisterForm = (): React.ReactElement => {
 
   const [errors, setErrors] = useState<RegisterErrors>({});
   const validationErrors = validateRegister(formState);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepPassword, setShowRepPassword] = useState(false);
 
   useEffect(() => {
     // Validar solo cuando el campo ha sido tocado
@@ -70,6 +73,14 @@ export const RegisterForm = (): React.ReactElement => {
       toast.error(error.response.data.message);
       console.log(error);
     }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const toggleShowRepPassword = () => {
+    setShowRepPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -220,7 +231,7 @@ export const RegisterForm = (): React.ReactElement => {
           <div className="relative w-full">
             <input
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
@@ -238,12 +249,18 @@ export const RegisterForm = (): React.ReactElement => {
             >
               Password
             </label>
+            <div
+                onClick={toggleShowPassword}
+                className="absolute top-5 right-6 text-slate-800 cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
           </div>
 
           <div className="relative w-full">
             <input
               id="confirmPassword"
-              type="password"
+              type={showRepPassword ? "text" : "password"}
               name="confirmPassword"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
@@ -263,6 +280,12 @@ export const RegisterForm = (): React.ReactElement => {
             >
               Repeat password
             </label>
+            <div
+                onClick={toggleShowRepPassword}
+                className="absolute top-5 right-6 text-slate-800 cursor-pointer"
+              >
+                {showRepPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
           </div>
 
           <button

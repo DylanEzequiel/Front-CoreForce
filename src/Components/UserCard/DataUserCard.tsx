@@ -1,6 +1,6 @@
 import React from 'react'
 import { IUser } from '../../interfaces/interfaces'
-import MembershipUCard from './MembershipUCard'
+import MembershipUCard from './MembershipUCard';
 
 
 function DataUserCard(props:IUser):React.ReactNode {

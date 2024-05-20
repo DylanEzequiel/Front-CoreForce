@@ -57,7 +57,7 @@ export const Pricing = () => {
         Our pricing plans are designed with transparency and value in mind.
       </p>
 
-      <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-6">
+      <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6">
         {membershipPlans.map((membership) => (
           <div
             className="flex flex-col justify-between bg-primary shadow-lg p-6 rounded-lg transform hover:scale-105 transition duration-300"
