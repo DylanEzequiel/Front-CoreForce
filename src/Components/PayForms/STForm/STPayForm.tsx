@@ -4,6 +4,8 @@ import { FaCcStripe } from 'react-icons/fa'
 import clienteAxios from '../../../service/axiosService'
 import LoadingIcons from 'react-loading-icons'
 import { useAuthStore } from '../../../store/auth/authStore'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router'
 
 function STPayForm():React.ReactNode {
     const [loading, setLoading]=useState(false)
@@ -11,6 +13,8 @@ function STPayForm():React.ReactNode {
         userId: state.userId,
         user: state.userData,
       }));
+      const { fetchUserData  } = useAuthStore();
+      const navigate = useNavigate()
       const membershipName=localStorage.getItem("MembershipName")
     const stripe = useStripe()
     const elements = useElements()
@@ -36,7 +40,26 @@ function STPayForm():React.ReactNode {
                         userId,
                         membershipName
                     }
-                })
+                }).then((res) => {
+                    Swal.fire({
+                      icon: "success",
+                      title: "Suscription complete!",
+                      text: "Redirecting",
+                    });
+                    setLoading(!loading)
+                    fetchUserData();
+                    navigate("/profile")
+                    console.log(res);
+                  })
+                  .catch((err) => {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: "Something went wrong!",
+                    });
+                    console.log(err);
+                    setLoading(!loading)
+                  });
                 elements?.getElement(CardElement)?.clear()
                 
             } catch (error) {

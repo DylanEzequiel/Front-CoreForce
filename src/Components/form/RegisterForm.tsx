@@ -299,7 +299,7 @@ export const RegisterForm = (): React.ReactElement => {
             <div className="flex flex-row justify-center items-center gap-2">
               <p>Already have an account?</p>
               <Link
-                to={"/auth/signup"}
+                to={"/auth/signin"}
                 className="text-slate-800 hover:underline cursor-pointer"
               >
                 Sign in
