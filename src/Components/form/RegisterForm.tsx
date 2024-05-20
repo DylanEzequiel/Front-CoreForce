@@ -6,12 +6,12 @@ import {
 } from "../../helpers/ValidateRegister";
 import { useForm } from "../../hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
+import clienteAxios from "../../service/axiosService";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-export const RegisterForm = ():React.ReactElement => {
-  const apiUrl=import.meta.env.VITE_API_URL
-  const navigate=useNavigate()
+export const RegisterForm = (): React.ReactElement => {
+  const navigate = useNavigate();
   const {
     onInputChange,
     formState,
@@ -37,6 +37,8 @@ export const RegisterForm = ():React.ReactElement => {
 
   const [errors, setErrors] = useState<RegisterErrors>({});
   const validationErrors = validateRegister(formState);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepPassword, setShowRepPassword] = useState(false);
 
   useEffect(() => {
     // Validar solo cuando el campo ha sido tocado
@@ -53,24 +55,44 @@ export const RegisterForm = ():React.ReactElement => {
       return;
     }
     try {
-      const {data} = await axios.post(`${apiUrl}/auth/signup`,{name, email, address, password, confirmPassword, gender, birthdate, phoneNumber,membershipName:"Free"})
-      toast.success("Register Succes! Log in please")
-      navigate("/auth/login")
-      console.log(data)
-      
-    } catch (error:any) {
-      toast.error(error.response.data.message)
-      console.log(error)
-     }
+      const { data } = await clienteAxios.post(`/auth/signup`, {
+        name,
+        email,
+        address,
+        password,
+        confirmPassword,
+        gender,
+        birthdate,
+        phoneNumber,
+        membershipName: "Free",
+      });
+      toast.success("Register Succes! Log in please");
+      navigate("/auth/login");
+      console.log(data);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const toggleShowRepPassword = () => {
+    setShowRepPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
-    <div className="border-gray-700 bg-gray-800 shadow md:mt-0 xl:p-0 border rounded-lg w-full sm:max-w-2xl">
-      
+    <div className="w-full p-4 sm:p-12 xl:p-16">
       <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
-        <h1 className="font-bold text-white text-xl md:text-2xl leading-tight tracking-tight">
-          Sign up to your account
-        </h1>
+        <span className="mb-1.5 block font-medium text-gray-400">
+          Start for free
+        </span>
+        <h2 className="mb-9 text-2xl font-bold text-slate-700 sm:text-2xl">
+        Sign Up to CoreForce
+        </h2>
+
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
           <div className="relative w-full">
             <input
@@ -79,12 +101,14 @@ export const RegisterForm = ():React.ReactElement => {
               name="name"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.name ? "border-orange-500" : "border-neutral-500"
+                errors.name ? "border-orange-500" : "border-neutral-200"
               }`}
               onChange={onInputChange}
               value={name}
             />
-            {errors.name && <span className="text-orange-500">{errors.name}</span>}
+            {errors.name && (
+              <span className="text-orange-500">{errors.name}</span>
+            )}
             <label
               htmlFor="name"
               className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
@@ -100,7 +124,7 @@ export const RegisterForm = ():React.ReactElement => {
               name="email"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.email ? "border-orange-500" : "border-neutral-500"
+                errors.email ? "border-orange-500" : "border-neutral-200"
               }`}
               value={email}
               onChange={onInputChange}
@@ -123,7 +147,7 @@ export const RegisterForm = ():React.ReactElement => {
               name="address"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.address ? "border-orange-500" : "border-neutral-500"
+                errors.address ? "border-orange-500" : "border-neutral-200"
               }`}
               onChange={onInputChange}
               value={address}
@@ -146,7 +170,7 @@ export const RegisterForm = ():React.ReactElement => {
               name="phoneNumber"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.phoneNumber ? "border-orange-500" : "border-neutral-500"
+                errors.phoneNumber ? "border-orange-500" : "border-neutral-200"
               }`}
               onChange={onInputChange}
               value={phoneNumber}
@@ -169,7 +193,7 @@ export const RegisterForm = ():React.ReactElement => {
               name="birthdate"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.birthdate ? "border-orange-500" : "border-neutral-500"
+                errors.birthdate ? "border-orange-500" : "border-neutral-200"
               }`}
               onChange={onInputChange}
               value={birthdate}
@@ -189,7 +213,7 @@ export const RegisterForm = ():React.ReactElement => {
             id="gender"
             name="gender"
             className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4 ${
-              errors.gender ? "border-orange-500" : "border-neutral-500"
+              errors.gender ? "border-orange-500" : "border-neutral-200"
             }`}
             onChange={onInputChange}
             value={gender}
@@ -202,21 +226,16 @@ export const RegisterForm = ():React.ReactElement => {
           {errors.gender && (
             <span className="text-orange-500">{errors.gender}</span>
           )}
-          <label
-            htmlFor="gender"
-            className="top-5 left-4 z-10 absolute text-md transform origin-[0] -translate-y-3 peer-focus:-translate-y-4 peer-placeholder-shown:translate-y-0 duration-150 peer-placeholder-shown:scale-100 peer-focus:scale-75"
-          >
-            Gender
-          </label>
+         
 
           <div className="relative w-full">
             <input
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.password ? "border-orange-500" : "border-neutral-500"
+                errors.password ? "border-orange-500" : "border-neutral-200"
               }`}
               onChange={onInputChange}
               value={password}
@@ -230,16 +249,24 @@ export const RegisterForm = ():React.ReactElement => {
             >
               Password
             </label>
+            <div
+                onClick={toggleShowPassword}
+                className="absolute top-5 right-6 text-slate-800 cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
           </div>
 
           <div className="relative w-full">
             <input
               id="confirmPassword"
-              type="password"
+              type={showRepPassword ? "text" : "password"}
               name="confirmPassword"
               placeholder=" "
               className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
-                errors.confirmPassword ? "border-orange-500" : "border-neutral-500"
+                errors.confirmPassword
+                  ? "border-orange-500"
+                  : "border-neutral-200"
               }`}
               onChange={onInputChange}
               value={confirmPassword}
@@ -253,6 +280,12 @@ export const RegisterForm = ():React.ReactElement => {
             >
               Repeat password
             </label>
+            <div
+                onClick={toggleShowRepPassword}
+                className="absolute top-5 right-6 text-slate-800 cursor-pointer"
+              >
+                {showRepPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
           </div>
 
           <button
@@ -266,10 +299,10 @@ export const RegisterForm = ():React.ReactElement => {
             <div className="flex flex-row justify-center items-center gap-2">
               <p>Already have an account?</p>
               <Link
-                to={"/auth/login"}
-                className="text-neutral-100 hover:underline cursor-pointer"
+                to={"/auth/signup"}
+                className="text-slate-800 hover:underline cursor-pointer"
               >
-                Log in
+                Sign in
               </Link>
             </div>
           </div>
