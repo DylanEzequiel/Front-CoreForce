@@ -59,6 +59,15 @@ function LoginRegWind(): React.ReactNode {
                       </p>
                     </Link>
                   ) : null}
+                  {
+                    user?.role === 'trainer' ? (
+                      <Link to={"/user/trainer"}>
+                      <p className="hover:bg-slate-500 px-4 py-2 duration-300">
+                        Dashboard - Trainer
+                      </p>
+                    </Link>
+                    ): null
+                  }
                   <button
                     onClick={handleLogout}
                     className="hover:bg-slate-500 px-4 py-2 duration-300 w-full"

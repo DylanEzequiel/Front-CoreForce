@@ -22,13 +22,13 @@ import RatePage from "./view/ratePage/RatePage";
 import PayFormComp from "./view/payForm/PayFormComp";
 import {loadStripe} from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js";
-<<<<<<< Updated upstream
 import { Profile } from "./view/admin/Profile";
 import { SettingUser } from "./Components/user/SettingUser";
 import { AuthLayout } from "./layout/AuthLayout";
+import { UserLayout } from "./layout/UserLayout";
+import { Trainer } from "./view/trainer/Trainer";
+import { TrainerChat } from "./view/trainer/TrainerChat";
 
-=======
->>>>>>> Stashed changes
 
 
 function App() {
@@ -70,6 +70,14 @@ function App() {
         { path: 'signup', element: <Register />},
         { path: 'signin', element: <Login />  }  
       ]
+    }, {
+      path: '/user',
+      element: <UserLayout />,
+      children: [
+        {path: 'trainer', element: <Trainer />},
+        {path: 'trainer/chat', element: <TrainerChat />},
+      ]
+
     }
    
   ]);
