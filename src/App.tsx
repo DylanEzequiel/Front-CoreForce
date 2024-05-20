@@ -22,13 +22,10 @@ import RatePage from "./view/ratePage/RatePage";
 import PayFormComp from "./view/payForm/PayFormComp";
 import {loadStripe} from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js";
-<<<<<<< Updated upstream
 import { Profile } from "./view/admin/Profile";
 import { SettingUser } from "./Components/user/SettingUser";
 import { AuthLayout } from "./layout/AuthLayout";
 
-=======
->>>>>>> Stashed changes
 
 
 function App() {
