@@ -7,10 +7,12 @@ import { toast } from "react-toastify";
 import { useAuthStore } from "../../store/auth/authStore";
 import clienteAxios from "../../service/axiosService";
 import { AuthGoogle } from "../Google/AuthGoogle";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function LoginForm(): React.ReactElement {
   const navigate = useNavigate();
   const { fetchUserData, setTokenAndUserId } = useAuthStore();
+  const [showPassword, setShowPassword] = useState(false);
 
   //obtengo funcionalidades del custom hook de juampi (que buen hook loco)
   const { onInputChange, formState, touched, email, password } = useForm({
@@ -59,13 +61,19 @@ function LoginForm(): React.ReactElement {
         toast.error(error.response.data.message);
       });
   };
+
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   return (
     <div className="w-full p-4 sm:p-12 xl:p-16">
       <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
-      <span className="mb-1.5 block font-medium text-gray-400">Start for free</span>
-              <h2 className="mb-9 text-2xl font-bold text-black sm:text-2xl">
-                Sign In to CoreForce
-              </h2>
+        <span className="mb-1.5 block font-medium text-gray-400">
+          Start for free
+        </span>
+        <h2 className="mb-9 text-2xl font-bold text-black sm:text-2xl">
+          Sign In to CoreForce
+        </h2>
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
           <div className="relative w-full">
             <div className="relative mt-4 w-full">
@@ -93,7 +101,7 @@ function LoginForm(): React.ReactElement {
             <div className="relative mt-4 w-full">
               <input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder=" "
                 className={`peer w-full px-4 py-2 pt-6 font-light bg-white border-2 rounded-md outline-none transition pl-4  ${
@@ -113,6 +121,12 @@ function LoginForm(): React.ReactElement {
               >
                 Password
               </label>
+              <div
+                onClick={toggleShowPassword}
+                className="absolute top-5 right-6 text-slate-800 cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
             </div>
 
             <button
@@ -123,18 +137,18 @@ function LoginForm(): React.ReactElement {
             </button>
           </div>
         </form>
-          <AuthGoogle />
+        <AuthGoogle />
         <div className="mt-4 font-light text-center text-neutral-500">
-            <div className="flex flex-row justify-center items-center gap-2">
-              <p>Dont have an account?</p>
-              <Link
-                to={"/auth/signin"}
-                className="text-primary hover:underline cursor-pointer"
-              >
-                Sign Up
-              </Link>
-            </div>
+          <div className="flex flex-row justify-center items-center gap-2">
+            <p>Dont have an account?</p>
+            <Link
+              to={"/auth/signin"}
+              className="text-primary hover:underline cursor-pointer"
+            >
+              Sign Up
+            </Link>
           </div>
+        </div>
       </div>
     </div>
   );
