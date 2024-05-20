@@ -26,6 +26,7 @@ function MPPayform():React.ReactElement {
       }));
     const membershipId=localStorage.getItem("MembershipId")
     const navigate = useNavigate()
+    const { fetchUserData  } = useAuthStore();
     
     
      const handleSubmit=async(e:any)=>{
@@ -52,6 +53,7 @@ function MPPayform():React.ReactElement {
                 text: "Redirecting",
               });
               setLoading(!loading)
+              fetchUserData();
               navigate("/profile")
               console.log(res);
             })

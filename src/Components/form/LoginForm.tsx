@@ -142,7 +142,7 @@ function LoginForm(): React.ReactElement {
           <div className="flex flex-row justify-center items-center gap-2">
             <p>Dont have an account?</p>
             <Link
-              to={"/auth/signin"}
+              to={"/auth/signup"}
               className="text-primary hover:underline cursor-pointer"
             >
               Sign Up
