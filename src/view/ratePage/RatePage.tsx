@@ -5,7 +5,7 @@ function RatePage():React.ReactElement {
     
 
   return (
-    <div className='mx-10 my-2 pt-20 pb-28 lg:pb-36 min-h-full'>
+    <div className='mx-10 my-16 pt-20 pb-28 lg:pb-36 min-h-full'>
         <h2 className="font-semibold text-5xl text-center text-slate-700">
         Rate our service
       </h2>

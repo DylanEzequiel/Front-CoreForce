@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 const subscriptionPlans = [
   {
-    id: "6ea4d468-041d-4ae4-a243-0fa75585de1f",
+    id: "acbcfe0b-37f6-4b2e-894e-bfe501309ed6",
     name: "Silver",
     description:
       "Extended access with additional perks. Enhanced customer support. Limited access to premium content.",
@@ -11,7 +11,7 @@ const subscriptionPlans = [
     duration: "60 days",
   },
   {
-    id: "e51a5611-2ee8-4e71-93be-a55e67c8d848",
+    id: "5e44acdb-5e94-4f8f-8374-ff1b5e9fdb25",
     name: "Gold",
     description:
       "Enjoy premium benefits. Priority customer support. Access to exclusive premium content.",
@@ -19,7 +19,7 @@ const subscriptionPlans = [
     duration: "90 days",
   },
   {
-    id: "34c445ed-f679-4552-af28-a13dafde9a00",
+    id: "a3b74948-ae9b-4a4a-beb5-4044c554d26f",
     name: "Platinum",
     description:
       "Get exclusive privileges. Dedicated customer support. Access to all premium content. Priority access to new features.",
