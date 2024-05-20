@@ -17,10 +17,12 @@ function STPayForm():React.ReactNode {
     async function handleSubmit(e:any){
         e.preventDefault()
          
-        const {error, paymentMethod }=await stripe?.createPaymentMethod({
+        const {error, paymentMethod }=await stripe!.createPaymentMethod({
             type:"card",
-            card: elements?.getElement(CardElement)
+            card: elements!.getElement(CardElement)!
         })
+
+
         setLoading(!loading)
         if(!error){
             console.log(paymentMethod)
