@@ -27,7 +27,6 @@ import { AuthLayout } from "./layout/AuthLayout";
 import { UserLayout } from "./layout/UserLayout";
 import { Trainer } from "./view/trainer/Trainer";
 import { TrainerChat } from "./view/trainer/TrainerChat";
-import STPayForm from "./Components/PayForms/STForm/STPayForm";
 import StripeView from "./view/stripeForm/StripeView";
 
 
