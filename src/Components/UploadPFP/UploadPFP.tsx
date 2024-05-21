@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react'
 import { FaFileUpload, FaPencilAlt } from "react-icons/fa";
 import { IoIosCloseCircle } from 'react-icons/io';
 import { toast } from 'react-toastify';
+import clienteAxios from '../../service/axiosService';
 
 
 
@@ -20,7 +20,7 @@ const UploadPFP = ({ setUserImage}:any):React.ReactNode => {
       const file =event.target.files[0]
       const formPFP=new FormData();
       formPFP.append("file",file)
-      await axios.post(`http://localhost:3000/files/uploadImage/${sessionUser}`,formPFP)
+      await clienteAxios.post(`/files/uploadImage/${sessionUser}`,formPFP)
       .then(res=>{
         toast.success("Photo Updated!",{autoClose:1500})
         setTimeout(()=>{

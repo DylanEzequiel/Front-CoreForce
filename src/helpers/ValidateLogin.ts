@@ -9,7 +9,7 @@ export interface IErrorsLogin{
 
 export default function ValidateLogin({email,password,confirmPassword}:any):IErrorsLogin{
     const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    const passwordRegEx= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,15}$/
+    const passwordRegEx= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$/
     const errors:IErrorsLogin={
         email:"",
         password:"",

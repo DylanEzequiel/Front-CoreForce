@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
-import { useNavigate } from "react-router";
+import PayPopUp from "../payPopUp/PayFormComp";
 
 const subscriptionPlans = [
   {
@@ -37,14 +38,16 @@ const membershipPlans = subscriptionPlans.map((plan) => ({
 }));
 
 export const Pricing = () => {
-  const navigate = useNavigate();
-
+  const [popUp,setPopUp]=useState(false)
   function handleClick(id: string, name: string) {
     localStorage.setItem("MembershipId", id);
     localStorage.setItem("MembershipName", name);
-    navigate("/payment");
+    setPopUp(!popUp)
+    
   }
-
+  function handlePop(){
+    setPopUp(!popUp)
+  }
   // console.log(membershipPlans);
 
   return (
@@ -53,7 +56,7 @@ export const Pricing = () => {
         Choose Your Plan
       </h2>
 
-      <p className="font-semibold text-center text-gray-200 text-xl">
+      <p className="font-semibold text-center text-gray-600 text-xl">
         Our pricing plans are designed with transparency and value in mind.
       </p>
 
@@ -98,6 +101,19 @@ export const Pricing = () => {
             </button>
           </div>
         ))}
+        {popUp && 
+        <div>
+          <div onClick={handlePop} className='top-0 right-0 left-0 fixed bg-gray-600/50 backdrop-blur-sm w-full min-h-screen'>
+
+          </div>
+          <PayPopUp/>
+        </div>
+          }
+      </div>
+    </section>
+  );
+};
+
 
         {/* price 1
         <div className="flex flex-col justify-between bg-primary shadow-lg p-6 rounded-lg transform hover:scale-105 transition duration-300">
@@ -241,7 +257,3 @@ export const Pricing = () => {
             Get Started
           </button>
         </div> */}
-      </div>
-    </section>
-  );
-};

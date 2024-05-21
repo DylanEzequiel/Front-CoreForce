@@ -69,7 +69,7 @@ function STPayForm():React.ReactNode {
         setLoading(!loading)
     }
   return (
-    <div className="border-gray-700 bg-gray-800 shadow m-auto md:mt-0 xl:p-0 border rounded-lg w-full sm:max-w-2xl h-max">
+    <div className="border-gray-700 bg-gray-800 shadow m-auto md:mt-0 xl:p-0 border rounded-lg w-full sm:max-w-2xl h-full">
         
         <FaCcStripe className='m-auto px-1 text-7xl text-white' style={{"strokeWidth":0.5}} />
         <form onSubmit={handleSubmit} >
