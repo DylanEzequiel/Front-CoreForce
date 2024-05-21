@@ -49,7 +49,7 @@ function GymRatingCard():React.ReactNode {
              
                 <div className='mb-44 w-full h-96'>
                     <Map  defaultCenter={[-34.758700954993344, -58.219587057419744]} defaultZoom={18}>
-                        <Marker width={50} anchor={[-34.758700954993344, -58.219587057419744]} />
+                        <Marker width={50} anchor={[-34.758700954993344, -58.219587057419744]} /> 
                     </Map>
                     <div className='h-20'>
                         <p className="my-2 font-semibold text-gray-500 text-left text-lg"> in a scale 1 to 5 rate our service</p>
