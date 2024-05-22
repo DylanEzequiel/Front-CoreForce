@@ -28,6 +28,7 @@ import { UserLayout } from "./layout/UserLayout";
 import { Trainer } from "./view/trainer/Trainer";
 import { TrainerChat } from "./view/trainer/TrainerChat";
 import StripeView from "./view/stripeForm/StripeView";
+import Routines from "./view/routines/Routines";
 
 
 
@@ -51,7 +52,7 @@ function App() {
         { path: 'about', element: <About /> },
         { path: 'payment', element: <StripeView /> },
         { path: 'ratepage', element: <RatePage /> },
-        
+        { path: 'postRoutine', element: <Routines />}
       ],
     },
     {

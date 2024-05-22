@@ -19,7 +19,22 @@ export default {
         '3xl': '1560px',
         '2xsm': '375px',
          xsm: '425px',
-      }
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.1s ease-out',
+        fadeOut: 'fadeOut 0.5s ease-in',
+      },
+      
     },
     
   },
