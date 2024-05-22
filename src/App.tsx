@@ -19,7 +19,6 @@ import { Galleries } from "./view/galleries/Galleries";
 // import { ErrorPage } from "./view/errorPage/ErrorPage";
 import { About } from "./view/about/About";
 import RatePage from "./view/ratePage/RatePage";
-import PayFormComp from "./view/payForm/PayFormComp";
 import {loadStripe} from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js";
 import { Profile } from "./view/admin/Profile";
@@ -28,12 +27,14 @@ import { AuthLayout } from "./layout/AuthLayout";
 import { UserLayout } from "./layout/UserLayout";
 import { Trainer } from "./view/trainer/Trainer";
 import { TrainerChat } from "./view/trainer/TrainerChat";
+import StripeView from "./view/stripeForm/StripeView";
 
 
 
 function App() {
+  const stripeAPI= import.meta.env.VITE_STRIPE_KEY_TEST
   
-  const stripePromise = loadStripe("pk_test_51PH8NuBo3feRciaDBfMEClW56SUbX1GoDzS2jSdXSb3HM42Fdk9Gge4vWBIcnxkFbqAiWJs3FnKZ4WCd8CZiO1Em00L4Nuie9F")
+  const stripePromise = loadStripe(stripeAPI)
 
   const router = createBrowserRouter([
     {
@@ -48,7 +49,7 @@ function App() {
         { path: 'pricing', element: <PricingPage /> },
         { path: 'gallery', element: <Galleries /> },
         { path: 'about', element: <About /> },
-        { path: 'payment', element: <PayFormComp /> },
+        { path: 'payment', element: <StripeView /> },
         { path: 'ratepage', element: <RatePage /> },
         
       ],

@@ -14,9 +14,10 @@ import { SiMercadopago } from 'react-icons/si';
 import LoadingIcons from 'react-loading-icons';
 import { useNavigate } from 'react-router';
 
+//! NOT USED (only for reference)
 
 
-initMercadoPago("APP_USR-44f608af-4cd8-4676-a64d-e88b49592df7");
+initMercadoPago("mercado api");
 
 function MPPayform():React.ReactElement {
   const [loading, setLoading]=useState(false)
@@ -115,6 +116,7 @@ function MPPayform():React.ReactElement {
             </div>
             <button
             type="submit"
+            disabled={loading}
             className="inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md mt-8 py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200">
             {loading?<LoadingIcons.ThreeDots  className='m-auto'/>:"Pay"} 
           </button>
