@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import PayPopUp from "../payPopUp/PayFormComp";
+import { useAuthStore } from "../../store/auth/authStore";
+import Swal from "sweetalert2";
 
 const subscriptionPlans = [
   {
@@ -39,10 +41,25 @@ const membershipPlans = subscriptionPlans.map((plan) => ({
 
 export const Pricing = () => {
   const [popUp,setPopUp]=useState(false)
-  function handleClick(id: string, name: string) {
-    localStorage.setItem("MembershipId", id);
-    localStorage.setItem("MembershipName", name);
-    setPopUp(!popUp)
+  const { userId } = useAuthStore((state) => ({
+    userId: state.userId,
+    user: state.userData,
+  }));
+
+
+  function handleClick(id: string, name: string, userId:string | null) {
+    if(!userId){
+      Swal.fire({
+        title:"You need to login first",
+        icon:"error"
+      })
+      setPopUp(false)
+    }
+    else{
+      localStorage.setItem("MembershipId", id);
+      localStorage.setItem("MembershipName", name);
+      setPopUp(true)
+    }
     
   }
   function handlePop(){
@@ -95,14 +112,14 @@ export const Pricing = () => {
 
             <button
               className="block bg-secondary py-3 w-full font-medium text-center text-text px6"
-              onClick={() => handleClick(membership.id, membership.name)}
+              onClick={() => handleClick(membership.id, membership.name,userId)}
             >
               Get Started
             </button>
           </div>
         ))}
         {popUp && 
-        <div>
+        <div className={`animate-fadeIn`}>
           <div onClick={handlePop} className='top-0 right-0 left-0 fixed bg-gray-600/50 backdrop-blur-sm w-full min-h-screen'>
 
           </div>
