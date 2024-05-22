@@ -40,16 +40,11 @@ function LoginRegWind(): React.ReactNode {
                 <>
                   {user?.role === "user" ? (
                     <>
-                      <Link to={"/profile"}>
+                      <Link to={"/user/profile"}>
                         <p className="hover:bg-slate-500 px-4 py-2 duration-300">
                           Perfil
                         </p>
                       </Link>
-                      <Link to={"/profile/setting"}>
-                      <p className="hover:bg-slate-500 px-4 py-2 duration-300">
-                        Setting
-                      </p>
-                    </Link>
                     </>
                   ) : null}
                   {user?.role === "admin" ? (

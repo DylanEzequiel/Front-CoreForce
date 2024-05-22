@@ -5,7 +5,7 @@ export const Hero = () => {
   const navigate =useNavigate()
 
     function handleClick(){
-      navigate("/auth/login")
+      navigate("/auth/signin")
     }
   return (
     <section className="-z-10 bg-[url('/img/hero-1.jpg')] bg-cover bg-no-repeat bg-center py-32">

@@ -21,6 +21,7 @@ export interface UserMembership {
   id: string;
   start_date: Date;
   end_date: Date;
+  membership: {id?: string, name?: string, description?: string, duration?: string, price?: number}
 }
 
 interface authState {

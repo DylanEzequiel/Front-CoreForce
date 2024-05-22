@@ -3,8 +3,14 @@ import { IoMenuOutline } from "react-icons/io5";
 import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
 import { TrainerLinks } from "../Components/trainer/TrainerLinks";
+import { useAuthStore } from "../store/auth/authStore";
+import { UserLinks } from "../Components/user/UserLinks";
 
 export const UserLayout = () => {
+  const { user } = useAuthStore((state) => ({
+    user: state.userData,
+  }));
+
   return (
     <>
       <button
@@ -35,7 +41,15 @@ export const UserLayout = () => {
                 </div>
               </NavLink>
             </div>
-            <TrainerLinks />
+            {user?.role === "user" ? (
+              <>
+                <UserLinks />
+              </>
+            ) : (
+              <>
+                <TrainerLinks />
+              </>
+            )}
           </ul>
         </div>
       </aside>

@@ -27,6 +27,12 @@ import { AuthLayout } from "./layout/AuthLayout";
 import { UserLayout } from "./layout/UserLayout";
 import { Trainer } from "./view/trainer/Trainer";
 import { TrainerChat } from "./view/trainer/TrainerChat";
+import { CreateRoutine } from "./Components/trainer/CreateRoutine";
+import { StudentList } from "./Components/trainer/StudentList";
+import Programs from "./Components/programs/Programs";
+import { SelectTrainer } from "./Components/user/SelectTrainer";
+import { PaymentHistorial } from "./Components/user/PaymentHistorial";
+import { Pricing } from "./Components/pricing/Pricing";
 import StripeView from "./view/stripeForm/StripeView";
 import Routines from "./view/routines/Routines";
 
@@ -43,10 +49,7 @@ function App() {
       element: <HomeLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: 'profile', element: <DasboardUser /> },
         { path: 'profile/setting', element: <SettingUser /> },
-        { path: 'auth/register', element: <Register /> },
-        { path: 'auth/login', element: <Login /> },
         { path: 'pricing', element: <PricingPage /> },
         { path: 'gallery', element: <Galleries /> },
         { path: 'about', element: <About /> },
@@ -78,6 +81,13 @@ function App() {
       children: [
         {path: 'trainer', element: <Trainer />},
         {path: 'trainer/chat', element: <TrainerChat />},
+        {path: 'trainer/create-routine', element: <CreateRoutine />},
+        {path: 'trainer/student-list', element: <StudentList />},
+        {path: 'profile', element: <DasboardUser />},
+        {path: 'routines', element: <Programs />},
+        {path: 'select-trainer', element: <SelectTrainer />},
+        {path: 'payment-history', element: <PaymentHistorial />},
+        {path: 'update-plan', element: <Pricing />},
       ]
 
     }

@@ -46,7 +46,7 @@ const Programs: React.FC = () => {
   return (
     <section>
       <h2 className="text-center text-5xl text-slate-700 font-semibold">
-        Our Programs
+        Select Programs
       </h2>
       <p className="text-center my-2 font-semibold text-3xl text-gray-500">
         Build your personal routine
@@ -55,7 +55,7 @@ const Programs: React.FC = () => {
       <div className="grid grid-cols-1 gap-3 mt-10 md:grid-cols-2 xl:grid-cols-4 px-2">
         {
           trainingPrograms.map( program => (
-            <div className="max-w-sm px-10 mx-auto text-white transition-all border border-gray-200 rounded-md shadow-2xl bg-slate-800 py-28 hover:scale-105" key={program.id}>
+            <div className="max-w-sm px-10 mx-auto text-white transition-all border border-gray-200 rounded-md shadow-2xl bg-slate-800 py-28 hover:scale-105 cursor-pointer" key={program.id}>
             <program.icon size={30} className="text-orange-500" />
             <h3 className="py-2 text-2xl">{program.name}</h3>
             <p className="text-lg font-light text-gray-400">
