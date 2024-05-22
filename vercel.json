@@ -1,0 +1,76 @@
+{
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/profile",
+        "destination": "/profile.html"
+      },
+      {
+        "source": "/profile/setting",
+        "destination": "/profile/setting.html"
+      },
+      {
+        "source": "/auth/register",
+        "destination": "/auth/register.html"
+      },
+      {
+        "source": "/auth/login",
+        "destination": "/auth/login.html"
+      },
+      {
+        "source": "/pricing",
+        "destination": "/pricing.html"
+      },
+      {
+        "source": "/gallery",
+        "destination": "/gallery.html"
+      },
+      {
+        "source": "/about",
+        "destination": "/about.html"
+      },
+      {
+        "source": "/payment",
+        "destination": "/payment.html"
+      },
+      {
+        "source": "/ratepage",
+        "destination": "/ratepage.html"
+      },
+      {
+        "source": "/dashboard/admin",
+        "destination": "/dashboard/admin.html"
+      },
+      {
+        "source": "/dashboard/users",
+        "destination": "/dashboard/users.html"
+      },
+      {
+        "source": "/dashboard/admin/:id",
+        "destination": "/dashboard/admin/[id].html"
+      },
+      {
+        "source": "/dashboard/profile",
+        "destination": "/dashboard/profile.html"
+      },
+      {
+        "source": "/auth/signup",
+        "destination": "/auth/signup.html"
+      },
+      {
+        "source": "/auth/signin",
+        "destination": "/auth/signin.html"
+      },
+      {
+        "source": "/user/trainer",
+        "destination": "/user/trainer.html"
+      },
+      {
+        "source": "/user/trainer/chat",
+        "destination": "/user/trainer/chat.html"
+      }
+    ]
+  }
