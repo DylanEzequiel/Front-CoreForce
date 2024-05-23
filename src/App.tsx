@@ -53,9 +53,7 @@ function App() {
         { path: 'pricing', element: <PricingPage /> },
         { path: 'gallery', element: <Galleries /> },
         { path: 'about', element: <About /> },
-        { path: 'payment', element: <StripeView /> },
         { path: 'ratepage', element: <RatePage /> },
-        { path: 'postRoutine', element: <Routines />}
       ],
     },
     {
@@ -81,6 +79,7 @@ function App() {
       children: [
         {path: 'trainer', element: <Trainer />},
         {path: 'trainer/chat', element: <TrainerChat />},
+        {path: 'trainer/upload-exercises', element: <Routines />},
         {path: 'trainer/create-routine', element: <CreateRoutine />},
         {path: 'trainer/student-list', element: <StudentList />},
         {path: 'profile', element: <DasboardUser />},
@@ -88,6 +87,7 @@ function App() {
         {path: 'select-trainer', element: <SelectTrainer />},
         {path: 'payment-history', element: <PaymentHistorial />},
         {path: 'update-plan', element: <Pricing />},
+        { path: 'payment', element: <StripeView /> },
       ]
 
     }
