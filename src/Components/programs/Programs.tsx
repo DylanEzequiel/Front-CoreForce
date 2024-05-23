@@ -2,6 +2,8 @@ import { IconType } from "react-icons";
 import { FaHeartPulse } from "react-icons/fa6";
 import { GiBodyBalance, GiMightyForce } from "react-icons/gi";
 import { GrRun } from "react-icons/gr";
+import RoutinesContainer from "../RoutinesContainer/RoutinesContainer";
+
 
 
 interface CategoryListProps {
@@ -10,6 +12,8 @@ interface CategoryListProps {
   icon: IconType;
   description: string;
 }
+
+
 
 const trainingPrograms: CategoryListProps[] = [
   {
@@ -42,23 +46,26 @@ const trainingPrograms: CategoryListProps[] = [
 
 const Programs: React.FC = () => {
 
-
+ 
   return (
     <section>
-      <h2 className="text-center text-5xl text-slate-700 font-semibold">
+      <h2 className="font-semibold text-5xl text-center text-slate-700">
         Select Programs
       </h2>
-      <p className="text-center my-2 font-semibold text-3xl text-gray-500">
+      <p className="my-2 font-semibold text-3xl text-center text-gray-500">
         Build your personal routine
       </p>
 
-      <div className="grid grid-cols-1 gap-3 mt-10 md:grid-cols-2 xl:grid-cols-4 px-2">
+      <div className="gap-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mt-10 px-2">
+
+{/* mapeamos y renderizamos los tipos de rutinas que hay disponibles */}
+
         {
           trainingPrograms.map( program => (
-            <div className="max-w-sm px-10 mx-auto text-white transition-all border border-gray-200 rounded-md shadow-2xl bg-slate-800 py-28 hover:scale-105 cursor-pointer" key={program.id}>
+            <div className="border-gray-200 bg-slate-800 shadow-2xl mx-auto px-10 py-28 border rounded-md max-w-sm text-white transition-all hover:scale-105 cursor-pointer" key={program.id}>
             <program.icon size={30} className="text-orange-500" />
             <h3 className="py-2 text-2xl">{program.name}</h3>
-            <p className="text-lg font-light text-gray-400">
+            <p className="font-light text-gray-400 text-lg">
               {program.description}
             </p>
           </div>
@@ -67,6 +74,9 @@ const Programs: React.FC = () => {
         }
     
       </div>
+        
+        <RoutinesContainer />
+     
     </section>
   );
 };

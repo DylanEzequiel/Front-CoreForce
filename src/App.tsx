@@ -34,7 +34,7 @@ import { SelectTrainer } from "./Components/user/SelectTrainer";
 import { PaymentHistorial } from "./Components/user/PaymentHistorial";
 import { Pricing } from "./Components/pricing/Pricing";
 import StripeView from "./view/stripeForm/StripeView";
-import Routines from "./view/routines/Routines";
+import UploadRoutines from "./view/UploadRoutines/UploadRoutines";
 
 
 
@@ -53,6 +53,7 @@ function App() {
         { path: 'pricing', element: <PricingPage /> },
         { path: 'gallery', element: <Galleries /> },
         { path: 'about', element: <About /> },
+        { path: 'routines', element: <Programs /> },
         { path: 'ratepage', element: <RatePage /> },
       ],
     },
@@ -79,7 +80,7 @@ function App() {
       children: [
         {path: 'trainer', element: <Trainer />},
         {path: 'trainer/chat', element: <TrainerChat />},
-        {path: 'trainer/upload-exercises', element: <Routines />},
+        {path: 'trainer/upload-exercises', element: <UploadRoutines />},
         {path: 'trainer/create-routine', element: <CreateRoutine />},
         {path: 'trainer/student-list', element: <StudentList />},
         {path: 'profile', element: <DasboardUser />},
