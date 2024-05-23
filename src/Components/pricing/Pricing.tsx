@@ -121,7 +121,6 @@ export const Pricing = () => {
         {popUp && 
         <div className={`animate-fadeIn`}>
           <div onClick={handlePop} className='top-0 right-0 left-0 fixed bg-gray-600/50 backdrop-blur-sm w-full min-h-screen'>
-
           </div>
           <PayPopUp/>
         </div>

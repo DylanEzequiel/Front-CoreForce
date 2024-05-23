@@ -3,26 +3,26 @@ import { Link } from "react-router-dom"
 
 export const Trainer = () => {
   return (
-    <div className="container mx-auto p-4 min-h-screen">
-      <header className="mb-4 grid grid-cols-1 md:grid-cols-2 items-center">
+    <div className="mx-auto p-4 min-h-screen container">
+      <header className="items-center grid grid-cols-1 md:grid-cols-2 mb-4">
         <div className="text-center">
-        <h1 className="text-6xl font-bold">Welcome, Trainer!</h1>
+        <h1 className="font-bold text-6xl">Welcome, Trainer!</h1>
         <p className="text-gray-700 text-lg">Here are your latest updates and quick access to important features.</p>
         </div>
-        <img src="/img/home-img.png" className="w-2/3 mx-auto"/>
+        <img src="/img/home-img.png" className="mx-auto w-2/3"/>
       </header>
 
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Quick Access</h2>
+        <h2 className="mb-4 font-semibold text-2xl">Quick Access</h2>
         <ul>
           <li>
             <Link
-              to="/#"
-              className="flex items-center p-4 mb-2 text-gray-900 bg-white rounded-lg shadow hover:bg-gray-100 dark:hover:bg-gray-700"
+              to="/user/trainer/upload-exercises"
+              className="flex items-center bg-white hover:bg-gray-100 dark:hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
-              <span className="flex-1 ms-3 whitespace-nowrap">Upload Exercises</span>
-              <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium   rounded-full bg-gray-700 text-gray-300">
+              <span className="flex-1 whitespace-nowrap ms-3">Upload Exercises</span>
+              <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
                 New
               </span>
             </Link>
@@ -30,10 +30,10 @@ export const Trainer = () => {
           <li>
             <Link
               to="/#"
-              className="flex items-center p-4 mb-2 text-gray-900 bg-white rounded-lg shadow  hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center bg-white hover:bg-gray-100 dark:hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
-              <span className="flex-1 ms-3 whitespace-nowrap">Chat</span>
-              <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium rounded-full bg-gray-700 text-gray-300">
+              <span className="flex-1 whitespace-nowrap ms-3">Chat</span>
+              <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
                 3
               </span>
             </Link>
@@ -41,10 +41,10 @@ export const Trainer = () => {
           <li>
             <Link
               to="/#"
-              className="flex items-center p-4 mb-2 text-gray-900 bg-white rounded-lg shadow  hover:bg-gray-700"
+              className="flex items-center bg-white hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
-              <span className="flex-1 ms-3 whitespace-nowrap">Progress Tracking</span>
-              <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium  rounded-full bg-gray-700 text-gray-300">
+              <span className="flex-1 whitespace-nowrap ms-3">Progress Tracking</span>
+              <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
                 Pro
               </span>
             </Link>
@@ -53,10 +53,10 @@ export const Trainer = () => {
             <Link
               to="/
               #"
-              className="flex items-center p-4 mb-2 text-gray-900 bg-white rounded-lg shadow  hover:bg-gray-700"
+              className="flex items-center bg-white hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
-              <span className="flex-1 ms-3 whitespace-nowrap">Diet Plans</span>
-              <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium  rounded-full bg-gray-700 text-gray-300">
+              <span className="flex-1 whitespace-nowrap ms-3">Diet Plans</span>
+              <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
                 New
               </span>
             </Link>
@@ -64,10 +64,10 @@ export const Trainer = () => {
           <li>
             <Link
               to="/#"
-              className="flex items-center p-4 mb-2 text-gray-900 bg-white rounded-lg shadow  hover:bg-gray-700"
+              className="flex items-center bg-white hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
-              <span className="flex-1 ms-3 whitespace-nowrap">Notifications</span>
-              <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium  rounded-full bg-gray-700 text-gray-300">
+              <span className="flex-1 whitespace-nowrap ms-3">Notifications</span>
+              <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
                 5
               </span>
             </Link>
@@ -76,8 +76,8 @@ export const Trainer = () => {
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Latest Notifications</h2>
-        <div className="bg-white p-4 rounded-lg shadow">
+        <h2 className="mb-4 font-semibold text-2xl">Latest Notifications</h2>
+        <div className="bg-white shadow p-4 rounded-lg">
           <p className="text-gray-700">You have 5 new messages and 3 new exercise submissions to review.</p>
           {/* Add more detailed notifications here */}
         </div>

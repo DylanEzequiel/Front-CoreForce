@@ -27,7 +27,7 @@ function PayPopUp():React.ReactElement {
 
     function handleClickSt(){
       setDisplay(!display)
-      navigate("/payment")
+      navigate("/user/payment")
     }
   return (
     <div className='z-30 fixed inset-0 m-auto w-1/2 min-w-80 h-max md:h-2/6 lg:h-1/2' >
