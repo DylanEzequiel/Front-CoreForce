@@ -2,7 +2,7 @@ import { useState } from "react";
 
 interface ChatMessage {
   role: "user" | "model";
-  parts: string;
+  parts: { text: string }[];
 }
 
 export const Chatbot = () => {
@@ -28,9 +28,16 @@ export const Chatbot = () => {
 
       setChatHistory((oldChatHistory) => [
         ...oldChatHistory,
-        { role: "user", parts: value },
-        { role: "model", parts: data },
+        {
+          role: "user",
+          parts: [{ text: value }],
+        },
+        {
+          role: "model",
+          parts: [{ text: data }],
+        },
       ]);
+
       setValue("");
     } catch (error) {
       console.error(error);
@@ -52,7 +59,9 @@ export const Chatbot = () => {
           {chatHistory.map((chatItem, index) => (
             <div key={index}>
               <p className="answer">
-                {chatItem.role}: {chatItem.parts}
+                {/*  {chatItem.role}:{" "} */}
+                {chatItem.role === "user" ? "You" : "Fitness trainer"}:{" "}
+                {chatItem.parts.map((part) => part.text).join(", ")}
               </p>
             </div>
           ))}
