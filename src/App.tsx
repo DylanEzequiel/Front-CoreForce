@@ -34,8 +34,14 @@ import { SelectTrainer } from "./Components/user/SelectTrainer";
 import { PaymentHistorial } from "./Components/user/PaymentHistorial";
 import { Pricing } from "./Components/pricing/Pricing";
 import StripeView from "./view/stripeForm/StripeView";
+
 import Routines from "./view/routines/Routines";
 import { Chatbot } from "./view/chatbot/chatbot";
+
+import UploadRoutines from "./view/UploadRoutines/UploadRoutines";
+
+
+
 
 function App() {
   const stripeAPI = import.meta.env.VITE_STRIPE_KEY_TEST;
@@ -48,11 +54,16 @@ function App() {
       element: <HomeLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "profile/setting", element: <SettingUser /> },
-        { path: "pricing", element: <PricingPage /> },
-        { path: "gallery", element: <Galleries /> },
-        { path: "about", element: <About /> },
-        { path: "ratepage", element: <RatePage /> },
+
+       
+
+        { path: 'profile/setting', element: <SettingUser /> },
+        { path: 'pricing', element: <PricingPage /> },
+        { path: 'gallery', element: <Galleries /> },
+        { path: 'about', element: <About /> },
+        { path: 'routines', element: <Programs /> },
+        { path: 'ratepage', element: <RatePage /> },
+
       ],
     },
     {
@@ -77,6 +88,7 @@ function App() {
       path: "/user",
       element: <UserLayout />,
       children: [
+
         { path: "trainer", element: <Trainer /> },
         { path: "trainer/chat", element: <TrainerChat /> },
         { path: "trainer/upload-exercises", element: <Routines /> },
@@ -91,6 +103,11 @@ function App() {
         { path: "chatbot", element: <Chatbot /> },
       ],
     },
+      ]
+
+    }
+   
+
   ]);
 
   return (

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import clienteAxios from '../../service/axiosService';
 import { FaRegFilePdf } from 'react-icons/fa';
 
-function Routines():React.ReactElement {
+function UploadRoutines():React.ReactElement {
     const [file, setFile]=useState<File | null>(null)
     const [data,setData]=useState({
         "typeRoutine":"cardio",
@@ -23,6 +23,7 @@ function Routines():React.ReactElement {
   async function handleSubmit(event:any){
     event.preventDefault()
     if(file){
+      
         const formPFP=new FormData();
         formPFP.append("file",file)
         formPFP.append("typeRoutine",data.typeRoutine)
@@ -115,4 +116,4 @@ function Routines():React.ReactElement {
   )
 }
 
-export default Routines
+export default UploadRoutines
