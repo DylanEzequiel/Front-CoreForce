@@ -46,3 +46,18 @@ export interface ITrainer{
 }
 
 
+export interface IUserComplete{
+        id: string,
+		name: string,
+		email: string,
+		profile_image: string,
+		phoneNumber: string,
+		birthdate:Date,
+		signup_date: string,
+		gender: string,
+		address: string,
+		height: null | string,
+		weight: null | string,
+		role: string,
+		isActive: true | false
+}

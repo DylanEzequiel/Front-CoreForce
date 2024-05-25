@@ -39,6 +39,7 @@ import StripeView from "./view/stripeForm/StripeView";
 import { Chatbot } from "./view/chatbot/chatbot";
 
 import UploadRoutines from "./view/UploadRoutines/UploadRoutines";
+import AddStudent from "./view/AddStudent/AddStudent";
 
 
 
@@ -94,6 +95,7 @@ function App() {
         { path: "trainer/upload-exercises", element: <UploadRoutines /> },
         { path: "trainer/create-routine", element: <CreateRoutine /> },
         { path: "trainer/student-list", element: <StudentList /> },
+        { path: "trainer/add-student", element: <AddStudent /> },
         { path: "profile", element: <DasboardUser /> },
         { path: "routines", element: <Programs /> },
         { path: "select-trainer", element: <SelectTrainer /> },
@@ -103,8 +105,6 @@ function App() {
         { path: "chatbot", element: <Chatbot /> },
       ],
     },
-      
-
   ]);
 
   return (
