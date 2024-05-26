@@ -8,6 +8,7 @@ import { useAuthStore } from "../../store/auth/authStore";
 import clienteAxios from "../../service/axiosService";
 import { AuthGoogle } from "../Google/AuthGoogle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { IoHome } from "react-icons/io5";
 
 function LoginForm(): React.ReactElement {
   const navigate = useNavigate();
@@ -68,9 +69,14 @@ function LoginForm(): React.ReactElement {
   return (
     <div className="w-full p-4 sm:p-12 xl:p-16">
       <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
-        <span className="mb-1.5 block font-medium text-gray-400">
-          Start for free
-        </span>
+        <div className="flex justify-between items-center">
+          <span className="mb-1.5 block font-medium text-gray-400">
+            Start for free
+          </span>
+          <Link to={'/'}>
+            <IoHome  size={20} className="text-primary block xl:hidden"/>
+          </Link>
+        </div>
         <h2 className="mb-9 text-2xl font-bold text-black sm:text-2xl">
           Sign In to CoreForce
         </h2>

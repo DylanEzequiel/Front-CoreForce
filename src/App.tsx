@@ -27,7 +27,6 @@ import { AuthLayout } from "./layout/AuthLayout";
 import { UserLayout } from "./layout/UserLayout";
 import { Trainer } from "./view/trainer/Trainer";
 import { TrainerChat } from "./view/trainer/TrainerChat";
-import { CreateRoutine } from "./Components/trainer/CreateRoutine";
 import { StudentList } from "./Components/trainer/StudentList";
 import Programs from "./Components/programs/Programs";
 import { SelectTrainer } from "./Components/user/SelectTrainer";
@@ -39,6 +38,7 @@ import StripeView from "./view/stripeForm/StripeView";
 import { Chatbot } from "./view/chatbot/chatbot";
 
 import UploadRoutines from "./view/UploadRoutines/UploadRoutines";
+import { ChatUser } from "./Components/user/ChatUser";
 import AddStudent from "./view/AddStudent/AddStudent";
 
 
@@ -93,7 +93,6 @@ function App() {
         { path: "trainer", element: <Trainer /> },
         { path: "trainer/chat", element: <TrainerChat /> },
         { path: "trainer/upload-exercises", element: <UploadRoutines /> },
-        { path: "trainer/create-routine", element: <CreateRoutine /> },
         { path: "trainer/student-list", element: <StudentList /> },
         { path: "trainer/add-student", element: <AddStudent /> },
         { path: "profile", element: <DasboardUser /> },
@@ -103,6 +102,7 @@ function App() {
         { path: "update-plan", element: <Pricing /> },
         { path: "payment", element: <StripeView /> },
         { path: "chatbot", element: <Chatbot /> },
+        { path: "chat-trainer", element: <ChatUser /> },
       ],
     },
   ]);
@@ -125,37 +125,7 @@ function App() {
 
         <RouterProvider router={router} />
 
-        {/* <Routes>
-          <Route path="/" element={<HomeLayout />}>
-            <Route index element={<Home />}></Route>
-            <Route path="profile" element={<DasboardUser />} />
-            <Route path="profile/setting" element={<SettingUser />} />
-            <Route path="auth/register" element={<Register />} />
-            <Route path="auth/login" element={<Login /> }/>
-            <Route path="pricing" element={<PricingPage />}/>
-            <Route path="gallery" element={<Galleries />}/>
-            <Route path="about" element={<About />}/>
-
-        
-            <Route path="payment" element={<PayForm/>}/>
-            <Route path="ratepage" element={<RatePage/>}/>
-           
-          </Route>
-        </Routes>
-
-        <Routes>
-          <Route path="/dashboard" element={<PrivateLayout />}>
-            <Route index path="admin" element={<DashboardAdmin />} />
-            <Route path="users" element={<ListUsers />} />
-            <Route path="admin/:id" element={<UpdateUsers />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-        </Routes>
-
-    
-        <Routes>
-          
-        </Routes> */}
+     
       </Elements>
     </div>
   );
