@@ -1,17 +1,40 @@
-import { Link } from "react-router-dom";
+import { IoLogOut } from "react-icons/io5";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/auth/authStore";
+import { MdDashboard } from "react-icons/md";
+import { FaFileUpload } from "react-icons/fa";
+import { IoMdChatbubbles } from "react-icons/io";
+import { PiUsersFill } from "react-icons/pi";
 
 export const TrainerLinks = () => {
+
+  const navigate = useNavigate();
+
+  const { logout } = useAuthStore();
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <>
+    <li>
+        <Link
+          to="trainer"
+          className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"
+        >
+          <MdDashboard size={20}/>
+          <span className="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
+        </Link>
+      </li>
       <li>
         <Link
-          to="/upload-exercises"
+          to="trainer/upload-exercises"
           className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
         >
+          <FaFileUpload size={20}/>
           <span className="flex-1 ms-3 whitespace-nowrap">Upload Exercises</span>
-          <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-            New
-          </span>
+        
         </Link>
       </li>
       
@@ -20,10 +43,9 @@ export const TrainerLinks = () => {
           to="trainer/chat"
           className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
         >
+          <IoMdChatbubbles size={20}/>
           <span className="flex-1 ms-3 whitespace-nowrap">Chat</span>
-          <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-            3
-          </span>
+          
         </Link>
       </li>
       
@@ -32,24 +54,22 @@ export const TrainerLinks = () => {
           to="trainer/student-list"
           className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
         >
+          <PiUsersFill />
           <span className="flex-1 ms-3 whitespace-nowrap">Student List</span>
-          <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-            New
-          </span>
+        
         </Link>
       </li>
 
       <li>
-        <Link
-          to="trainer/create-routine"
-          className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        <button
+          onClick={handleLogout}
+          className="flex justify-start gap-2 items-center p-2 text-white  hover:bg-gray-700 group w-full"
         >
-          <span className="flex-1 ms-3 whitespace-nowrap">Create Routine</span>
-          <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-            New
-          </span>
-        </Link>
+          <IoLogOut size={25} className="text-red-600"/>
+          <span className="whitespace-nowrap">Logout</span>
+        </button>
       </li>
+
     </>
   );
 };

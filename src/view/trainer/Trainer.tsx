@@ -6,7 +6,7 @@ export const Trainer = () => {
     <div className="mx-auto p-4 min-h-screen container">
       <header className="items-center grid grid-cols-1 md:grid-cols-2 mb-4">
         <div className="text-center">
-        <h1 className="font-bold text-6xl">Welcome, Trainer!</h1>
+        <h1 className="font-bold text-6xl text-slate-700">Welcome, Trainer!</h1>
         <p className="text-gray-700 text-lg">Here are your latest updates and quick access to important features.</p>
         </div>
         <img src="/img/home-img.png" className="mx-auto w-2/3"/>
