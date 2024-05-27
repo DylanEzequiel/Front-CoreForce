@@ -11,8 +11,8 @@ export default {
         bodyAdmin: "#AEB7C0",
         stroke: "#E2E8F0",
         gray2: "#EFF4FB",
-        gray3: "#DDD",
-        gray4: "#CFCFCF",
+        gray3: "#CFCFCF",
+        gray4: "#C7C7C7",
         graydark: "#333A48",
       },
       screens: {
