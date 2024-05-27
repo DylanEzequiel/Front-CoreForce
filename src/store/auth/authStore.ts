@@ -15,6 +15,35 @@ export interface UserStore {
   weight: string;
   role: string;
   user_membership: UserMembership[];
+  user_routines: IUserRoutine[]
+}
+
+// user_routines
+// : 
+// Array(1)
+// 0
+// : 
+// id
+// : 
+// "118d94e7-83b9-49a7-8d01-25345b7ae1d6"
+// routine
+// : 
+// id
+// : 
+// "359a9b05-1481-468d-8dcd-a0f9badc620d"
+// name
+// : 
+// "Morning Cardio Routine"
+// pdf_url
+// : 
+// "https://res.cloudinary.com/dwim6d20e/image/upload/v1716415558/rj0pgm4yamufkkbpubng.pdf"
+// type
+// : 
+// "cardio"
+
+export interface IUserRoutine{
+  id:string,
+  routine:{id:string,name:"string",pdf_url:string,type:"cardio"| "strenght"|"hiit"|"flexibility"}
 }
 
 export interface UserMembership {
