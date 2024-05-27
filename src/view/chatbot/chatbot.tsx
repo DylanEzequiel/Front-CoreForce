@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 
 interface ChatMessage {
@@ -8,8 +8,66 @@ interface ChatMessage {
 
 export const Chatbot = () => {
   const [value, setValue] = useState("");
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
+    {
+      role: "user",
+      parts: [
+        {
+          text: "Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu ",
+        },
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {
+          text: "orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu",
+        },
+      ],
+    },
+    {
+      role: "user",
+      parts: [
+        {
+          text: "orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu",
+        },
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {
+          text: "orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu",
+        },
+      ],
+    },
+    {
+      role: "user",
+      parts: [
+        {
+          text: "orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu",
+        },
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {
+          text: "orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu orem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu Lorem ipsu",
+        },
+      ],
+    },
+  ]);
   const [buttonBgColor, setButtonBgColor] = useState("transparent");
+
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [chatHistory]);
 
   const getResponse = async () => {
     try {
@@ -52,26 +110,33 @@ export const Chatbot = () => {
   };
 
   return (
-    <div className="chatbot flex flex-col justify-end items-center overflow-y-auto max-h-[calc(100vh-10rem)]">
-      <section className="search-section bottom-10 pr-10 w-1/2 relative ">
-        <div className="search-result h-[calc(100vh-10rem)] mb-10 relative">
-          {chatHistory.map((chatItem, index) => (
-            <div key={index}>
-              <p className="answer font-bold">
-                {chatItem.role === "user" ? "You" : "Fitness trainer"} {""}
-              </p>
-              <p className="mb-10 pr-10">
-                {chatItem.parts.map((part) => part.text).join(", ")}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="input-container bottom-10 w-2/5 fixed bottom-0 transform -translate-x-10">
+    <div>
+      <div className="chatbot flex flex-col justify-end items-center max-h-[calc(100vh-10rem)] overflow-y-auto">
+        <section
+          className="search-section bottom-10 relative flex flex-col items-center w-full overflow-y-auto"
+          ref={chatContainerRef}
+        >
+          <div className="search-result mb-10 relative w-1/2">
+            {chatHistory.map((chatItem, index) => (
+              <div key={index}>
+                <p className="answer font-bold">
+                  {chatItem.role === "user" ? "You" : "Fitness trainer"} {""}
+                </p>
+                <p className="mb-10 w-full">
+                  {chatItem.parts.map((part) => part.text).join(", ")}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+      <div className="input-container w-full ">
+        <div className="relative w-full flex justify-center">
           <input
             value={value}
             placeholder="Enter a prompt here"
             onChange={handleInputChange}
-            className="w-full p-4 bg-gray3 rounded-3xl border text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-gray4"
+            className="w-1/2 p-4 bg-gray3 rounded-3xl border text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-gray4"
           />
           <button
             onClick={getResponse}
@@ -81,7 +146,7 @@ export const Chatbot = () => {
             <IoMdSend className="m-auto text-xl" />{" "}
           </button>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
