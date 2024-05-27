@@ -14,7 +14,8 @@ export const SettingUser = () => {
   const { fetchUserData } = useAuthStore();
 
   const [userInfo, setUserInfo] = useState(user!);
-
+console.log(  user!.user_membership[0].membership.name!
+)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { user_membership, ...resto } = userInfo;

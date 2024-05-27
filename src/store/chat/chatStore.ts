@@ -10,6 +10,7 @@ interface ChatState {
   messages: { [key: string]: Message[] };
   addMessage: (room: string, message: Message) => void;
   loadMessages: (room: string) => Message[];
+  clearMessages: (room: string) => void;
 }
 
 export const useChatStore = create<ChatState>((set, get) => ({
@@ -27,5 +28,14 @@ export const useChatStore = create<ChatState>((set, get) => ({
   loadMessages: (room) => {
     const storedMessages = localStorage.getItem(`messages-${room}`);
     return storedMessages ? JSON.parse(storedMessages) : [];
+  },
+  clearMessages: (room) => {
+    localStorage.removeItem(`messages-${room}`);
+    set(state => ({
+      messages: {
+        ...state.messages,
+        [room]: []
+      }
+    }));
   }
 }));

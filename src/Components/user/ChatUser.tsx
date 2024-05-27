@@ -3,6 +3,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useAuthStore } from "../../store/auth/authStore";
+import { useChatStore } from "../../store/chat/chatStore";
 
 const socket = io(apiUrl, {
   autoConnect: true,
@@ -10,19 +11,27 @@ const socket = io(apiUrl, {
 interface Message {
   user: string;
   body: string;
+  room: string
 }
 
 export const ChatUser: React.FC = () => {
   const [message, setMessage] = useState<string>("");
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [currentMessages, setCurrentMessages] = useState<Message[]>([]);
 
   const { user, userId, token } = useAuthStore((state) => ({
     userId: state.userId,
     user: state.userData,
     token: state.token,
   }));
+  const {  addMessage, loadMessages } = useChatStore();
 
+  console.log(token)
   useEffect(() => {
+    if (!userId) return;
+
+    const loadedMessages = loadMessages(userId!);
+    setCurrentMessages(loadedMessages);
+
     socket.emit("joinRoom", userId);
 
     if (user) {
@@ -30,26 +39,32 @@ export const ChatUser: React.FC = () => {
       socket.connect();
     }
 
-    socket.on("message", (data) => {
-      console.log(data);
-      setMessages((prevMessages) => [...prevMessages, data]);
-    });
+    const handleNewMessage = (data: Message) => {
+      if (data.user !== user?.name) {  // Evitar duplicación de mensajes
+        addMessage(userId, data);
+        setCurrentMessages(loadMessages(userId));
+      }
+    };
 
+    socket.on("message", handleNewMessage);
+    
     return () => {
-      socket.off("message");
+      socket.off("message", handleNewMessage);
       socket.disconnect();
     };
-  }, [userId, user]);
+  }, [userId, user, addMessage, loadMessages]);
 
   const handleSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newMessage = {
       body: message,
-      from: "Me",
-      room: userId,
+      user: user?.name || 'Anonymous',
+      room: userId!,
     };
-    setMessage("");
     socket.emit("message", { body: newMessage.body, room: newMessage.room });
+    addMessage(userId!, newMessage);
+    setCurrentMessages(loadMessages(userId!));
+    setMessage("");
   };
 
   return (
@@ -64,14 +79,14 @@ export const ChatUser: React.FC = () => {
         </p>
       </div>
 
-      <div className="  grid grid-cols-1 md:grid-cols-2 max-w-screen-xl mx-auto">
+      <div className="  grid grid-cols-1 xl:grid-cols-2 max-w-screen-xl mx-auto">
         <div className="container mx-auto p-4 bg-white rounded-lg shadow-lg">
           <div className="mb-4">
             <h2 className="text-2xl font-semibold">Chat</h2>
           </div>
           <form onSubmit={handleSend}>
             <div className="mb-4 h-64 overflow-y-auto border border-gray-200 p-4 rounded-lg flex flex-col">
-              {messages.map((message, index) => (
+              {currentMessages.map((message, index) => (
                 <div
                   key={index}
                   className={`mb-2 p-2 w-auto ${
@@ -104,7 +119,7 @@ export const ChatUser: React.FC = () => {
           </form>
         </div>
 
-        <img src="/img/chat-bg.svg" alt="" className="w-auto h-96"/>
+        <img src="/img/chat-bg.svg" alt="" className="w-auto h-96 hidden xl:block"/>
       </div>
     </>
   );
