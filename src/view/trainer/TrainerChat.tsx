@@ -103,9 +103,9 @@ export const TrainerChat = () => {
 
 
   return (
-    <div className="container mx-auto p-4 bg-white rounded-lg shadow-lg flex w-full md:max-w-6xl">
-      <div className="w-1/4 border-r border-gray-300 pr-4">
-        <h2 className="text-2xl font-semibold mb-4 text-slate-700">My Students</h2>
+    <div className="flex bg-white shadow-lg mx-auto p-4 rounded-lg w-full md:max-w-6xl container">
+      <div className="border-gray-300 pr-4 border-r w-1/4">
+        <h2 className="mb-4 font-semibold text-2xl text-slate-700">My Students</h2>
         <ul>
           {users.map(user => (
             <li
@@ -118,11 +118,11 @@ export const TrainerChat = () => {
           ))}
         </ul>
       </div>
-      <div className="w-3/4 pl-4">
-        <h2 className="text-2xl font-semibold mb-4 text-slate-700">Your Chats</h2>
+      <div className="pl-4 w-3/4">
+        <h2 className="mb-4 font-semibold text-2xl text-slate-700">Your Chats</h2>
         {selectedUser ? (
          <form onSubmit={handleSend}>
-         <div className="mb-4 h-64 overflow-y-auto border border-gray-200 p-4 rounded-lg flex flex-col">
+         <div className="flex flex-col border-gray-200 mb-4 p-4 border rounded-lg h-64 overflow-y-auto">
            {messages.map((message, index) => (
              <div
                key={index}
@@ -144,20 +144,20 @@ export const TrainerChat = () => {
          <div className="flex">
            <input
              type="text"
-             className="flex-1 p-2 border border-gray-300 rounded-l-lg"
+             className="flex-1 border-gray-300 p-2 border rounded-l-lg"
              placeholder="Type a message"
              onChange={(e) => setMessage(e.target.value)}
              value={message}
            />
            <button
-             className="p-2 bg-slate-800 text-white rounded-r-lg hover:bg-slate-700"
+             className="bg-slate-800 hover:bg-slate-700 p-2 rounded-r-lg text-white"
            >
              Send
            </button>
          </div>
        </form>
         ) : (
-          <p className="text-gray-400 font-semibold">Please select a Student to start chatting.</p>
+          <p className="font-semibold text-gray-400">Please select a Student to start chatting.</p>
         )}
       </div>
     </div>

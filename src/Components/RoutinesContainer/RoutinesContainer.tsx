@@ -64,7 +64,7 @@ function RoutinesContainer():React.ReactNode {
             {/* si existe el estado rendRoutines renderizo estas mismas  */}
         <div className=''>
             {rendRoutines?
-            rendRoutines.map((routine,index)=><PDFViewer {...routine} key={index}></PDFViewer>
+            rendRoutines.map((routine)=><PDFViewer {...routine} key={routine.id}></PDFViewer>
             ):null}
         </div>
     </div>

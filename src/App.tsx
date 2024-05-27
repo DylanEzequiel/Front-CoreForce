@@ -40,6 +40,7 @@ import { Chatbot } from "./view/chatbot/chatbot";
 import UploadRoutines from "./view/UploadRoutines/UploadRoutines";
 import { ChatUser } from "./Components/user/ChatUser";
 import AddStudent from "./view/AddStudent/AddStudent";
+import UserRoutines from "./Components/userRoutines/UserRoutines";
 
 
 
@@ -96,7 +97,7 @@ function App() {
         { path: "trainer/student-list", element: <StudentList /> },
         { path: "trainer/add-student", element: <AddStudent /> },
         { path: "profile", element: <DasboardUser /> },
-        { path: "routines", element: <Programs /> },
+        { path: "routines", element: <UserRoutines /> },
         { path: "select-trainer", element: <SelectTrainer /> },
         { path: "payment-history", element: <PaymentHistorial /> },
         { path: "update-plan", element: <Pricing /> },

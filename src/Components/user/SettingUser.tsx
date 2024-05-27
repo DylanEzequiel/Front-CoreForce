@@ -45,13 +45,13 @@ export const SettingUser = () => {
   };
 
   return (
-    <div className="mx-auto container min-h-screen">
-      <div className="flex flex-col justify-center md:flex-row gap-5 flex-wrap items-center py-6">
+    <div className="mx-auto min-h-screen container">
+      <div className="flex md:flex-row flex-col flex-wrap justify-center items-center gap-5 py-6">
         <div>
-          <h2 className="text-center text-5xl text-slate-700 font-semibold">
+          <h2 className="font-semibold text-5xl text-center text-slate-700">
             Welcome to Your Dashboard
           </h2>
-          <p className="text-gray-500 mt-2 font-semibold">
+          <p className="mt-2 font-semibold text-gray-500">
             Here you can manage your routines, track your progress, and stay
             updated with your fitness plan.
           </p>
@@ -59,25 +59,25 @@ export const SettingUser = () => {
 
       </div>
 
-      <div className="grid grid-cols-5 gap-8 mt-4">
+      <div className="gap-8 grid grid-cols-5 mt-4">
         <div className="col-span-5 xl:col-span-3">
-          <div className="rounded-sm border border-stroke bg-white shadow-md">
-            <div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
+          <div className="border-stroke bg-white shadow-md border rounded-sm">
+            <div className="border-stroke dark:border-strokedark px-7 py-4 border-b">
               <h3 className="font-medium text-black">Personal Information</h3>
             </div>
 
             <div className="p-7">
               <form onSubmit={handleSubmit}>
-                <div className="mb-5 flex flex-col gap-5 sm:flex-row">
+                <div className="flex sm:flex-row flex-col gap-5 mb-5">
                   <div className="w-full sm:w-1/2">
                     <label
                       htmlFor="name"
-                      className="mb-3 block text-sm font-medium text-black"
+                      className="block mb-3 font-medium text-black text-sm"
                     >
                       Full Name
                     </label>
                     <input
-                      className="w-full rounded border border-stroke bg-stroke py-3 pl-11 pr-4 text-black focus:border-primary focus-visible:outline-none"
+                      className="border-stroke focus:border-primary bg-stroke py-3 pr-4 pl-11 border rounded w-full text-black focus-visible:outline-none"
                       type="text"
                       name="name"
                       id="name"
@@ -95,12 +95,12 @@ export const SettingUser = () => {
                   <div className="w-full sm:w-1/2">
                     <label
                       htmlFor="phoneNumber"
-                      className="mb-3 block text-sm font-medium text-black"
+                      className="block mb-3 font-medium text-black text-sm"
                     >
                       Phone Number
                     </label>
                     <input
-                      className="w-full rounded border border-stroke bg-stroke py-3 pl-11 pr-4 text-black focus:border-primary focus-visible:outline-none"
+                      className="border-stroke focus:border-primary bg-stroke py-3 pr-4 pl-11 border rounded w-full text-black focus-visible:outline-none"
                       type="text"
                       name="phoneNumber"
                       id="phoneNumber"
@@ -118,12 +118,12 @@ export const SettingUser = () => {
                 <div className="mb-5">
                   <label
                     htmlFor="email"
-                    className="mb-3 block text-sm font-medium text-black"
+                    className="block mb-3 font-medium text-black text-sm"
                   >
                     Email
                   </label>
                   <input
-                    className="w-full rounded border border-stroke bg-stroke py-3 pl-11 pr-4 text-black focus:border-primary focus-visible:outline-none"
+                    className="border-stroke focus:border-primary bg-stroke py-3 pr-4 pl-11 border rounded w-full text-black focus-visible:outline-none"
                     type="text"
                     name="email"
                     id="email"
@@ -141,12 +141,12 @@ export const SettingUser = () => {
                 <div className="mb-5">
                   <label
                     htmlFor="address"
-                    className="mb-3 block text-sm font-medium text-black"
+                    className="block mb-3 font-medium text-black text-sm"
                   >
                     Address
                   </label>
                   <input
-                    className="w-full rounded border border-stroke bg-stroke py-3 pl-11 pr-4 text-black focus:border-primary focus-visible:outline-none"
+                    className="border-stroke focus:border-primary bg-stroke py-3 pr-4 pl-11 border rounded w-full text-black focus-visible:outline-none"
                     type="text"
                     name="address"
                     id="address"
@@ -164,12 +164,12 @@ export const SettingUser = () => {
                 <div className="mb-5">
                   <label
                     htmlFor="birthdate"
-                    className="mb-3 block text-sm font-medium text-black"
+                    className="block mb-3 font-medium text-black text-sm"
                   >
                     Birthdate
                   </label>
                   <input
-                    className="w-full rounded border border-stroke bg-stroke py-3 pl-11 pr-4 text-black focus:border-primary focus-visible:outline-none"
+                    className="border-stroke focus:border-primary bg-stroke py-3 pr-4 pl-11 border rounded w-full text-black focus-visible:outline-none"
                     type="date"
                     name="birthdate"
                     id="birthdate"
@@ -186,7 +186,7 @@ export const SettingUser = () => {
                 <div className="mb-5">
                   <label
                     htmlFor="address"
-                    className="mb-3 block text-sm font-medium text-black"
+                    className="block mb-3 font-medium text-black text-sm"
                   >
                     Gender
                   </label>
@@ -209,16 +209,16 @@ export const SettingUser = () => {
                   </select>
                 </div>
 
-                <div className="mb-5 flex flex-col gap-5 sm:flex-row">
+                <div className="flex sm:flex-row flex-col gap-5 mb-5">
                   <div className="w-full sm:w-1/2">
                     <label
                       htmlFor="weight"
-                      className="mb-3 block text-sm font-medium text-black"
+                      className="block mb-3 font-medium text-black text-sm"
                     >
                       Weight
                     </label>
                     <input
-                      className="w-full rounded border border-stroke bg-stroke py-3 pl-11 pr-4 text-black focus:border-primary focus-visible:outline-none"
+                      className="border-stroke focus:border-primary bg-stroke py-3 pr-4 pl-11 border rounded w-full text-black focus-visible:outline-none"
                       type="text"
                       name="weight"
                       id="weight"
@@ -236,12 +236,12 @@ export const SettingUser = () => {
                   <div className="w-full sm:w-1/2">
                     <label
                       htmlFor="height"
-                      className="mb-3 block text-sm font-medium text-black"
+                      className="block mb-3 font-medium text-black text-sm"
                     >
                       Height
                     </label>
                     <input
-                      className="w-full rounded border border-stroke bg-stroke py-3 pl-11 pr-4 text-black focus:border-primary focus-visible:outline-none"
+                      className="border-stroke focus:border-primary bg-stroke py-3 pr-4 pl-11 border rounded w-full text-black focus-visible:outline-none"
                       type="text"
                       name="height"
                       id="height"
@@ -258,7 +258,7 @@ export const SettingUser = () => {
                 </div>
 
                 <div className="flex justify-end mt-10">
-                  <button className="px-6 py-2 bg-primary text-white rounded-sm w-full md:w-auto">
+                  <button className="bg-primary px-6 py-2 rounded-sm w-full md:w-auto text-white">
                     Save
                   </button>
                 </div>
@@ -268,36 +268,36 @@ export const SettingUser = () => {
         </div>
 
         <div className="col-span-5 xl:col-span-2">
-          <div className="rounded-sm border border-stroke bg-white shadow-sm mb-2">
+          <div className="border-stroke bg-white shadow-sm mb-2 border rounded-sm">
             <MembershipUCard name={user!.user_membership[0].membership.name!} />
           </div>
 
-          <div className="rounded-sm border border-stroke bg-white shadow-sm">
-            <div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
+          <div className="border-stroke bg-white shadow-sm border rounded-sm">
+            <div className="border-stroke dark:border-strokedark px-7 py-4 border-b">
               <h3 className="font-medium text-black">Your Photo</h3>
             </div>
             <div className="p-7">
               <form action="#">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="h-14 w-14 rounded-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="rounded-full w-14 h-14">
                     <img src={userInfo?.profile_image} alt="User" />
                   </div>
                   <div>
-                    <span className="mb-1.5 text-black ">Edit your photo</span>
+                    <span className="mb-1.5 text-black">Edit your photo</span>
                   </div>
                 </div>
 
                 <div
                   id="FileUpload"
-                  className="relative mb-5 block w-full cursor-pointer appearance-none rounded border border-dashed border-primary bg-gray py-4 px-4  sm:py-7"
+                  className="block relative border-primary bg-gray mb-5 px-4 py-4 sm:py-7 border border-dashed rounded w-full cursor-pointer appearance-none"
                 >
                   <input
                     type="file"
                     accept="image/*"
-                    className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
+                    className="z-50 absolute inset-0 opacity-0 m-0 p-0 w-full h-full cursor-pointer outline-none"
                   />
-                  <div className="flex flex-col items-center justify-center space-y-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-strokedark dark:bg-boxdark">
+                  <div className="flex flex-col justify-center items-center space-y-3">
+                    <span className="flex justify-center items-center border-stroke dark:border-strokedark bg-white dark:bg-boxdark border rounded-full w-10 h-10">
                       <svg
                         width="16"
                         height="16"
@@ -335,7 +335,7 @@ export const SettingUser = () => {
                 </div>
 
                 <div className="flex justify-end mt-10">
-                  <button className="px-6 py-2 bg-primary text-white rounded-sm w-full md:w-auto">
+                  <button className="bg-primary px-6 py-2 rounded-sm w-full md:w-auto text-white">
                     Save
                   </button>
                 </div>
