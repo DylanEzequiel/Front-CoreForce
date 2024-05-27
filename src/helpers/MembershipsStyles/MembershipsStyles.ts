@@ -9,7 +9,7 @@ export const MembershipsStyles:IMembershipStyle[]=[{
     styles:"hover:outline hover:outline-gray-800 shadow-black shadow-md",
     description:"Limited access"
   },{
-    name:"Bronce",
+    name:"Silver",
     styles:"bg-gradient-to-br from-yellow-500 via-yellow-600 to-orange-500 hover:outline hover:outline-amber-900  hover:shadow-lg hover:shadow-amber-500",
     description:"Access to basic features. Limited customer support. No access to premium content"
   },{

@@ -4,6 +4,7 @@ import { fornatDateEdit } from "../../helpers/date/formatDate";
 import clienteAxios from "../../service/axiosService";
 import Swal from "sweetalert2";
 import MembershipUCard from "../UserCard/MembershipUCard";
+import { GetUserMembership } from "../../helpers/getactivemembership/getMembership";
 
 export const SettingUser = () => {
   const { user, userId, token } = useAuthStore((state) => ({
@@ -11,6 +12,8 @@ export const SettingUser = () => {
     user: state.userData,
     token: state.token,
   }));
+  const userMembership=GetUserMembership(user!)
+  sessionStorage.setItem("UserMembership",JSON.stringify(userMembership))
   const { fetchUserData } = useAuthStore();
 
   const [userInfo, setUserInfo] = useState(user!);
@@ -270,7 +273,7 @@ console.log(  user!.user_membership[0].membership.name!
 
         <div className="col-span-5 xl:col-span-2">
           <div className="border-stroke bg-white shadow-sm mb-2 border rounded-sm">
-            <MembershipUCard name={user!.user_membership[0].membership.name!} />
+            <MembershipUCard name={userMembership!.membership!.name!} />
           </div>
 
           <div className="border-stroke bg-white shadow-sm border rounded-sm">
