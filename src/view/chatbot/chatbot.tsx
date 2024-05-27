@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { IoMdSend } from "react-icons/io";
 
 interface ChatMessage {
   role: "user" | "model";
@@ -8,6 +9,7 @@ interface ChatMessage {
 export const Chatbot = () => {
   const [value, setValue] = useState("");
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+  const [buttonBgColor, setButtonBgColor] = useState("transparent");
 
   const getResponse = async () => {
     try {
@@ -44,6 +46,11 @@ export const Chatbot = () => {
     }
   };
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    setButtonBgColor(e.target.value.trim() === "" ? "transparent" : "#1e293b");
+  };
+
   return (
     <div className="chatbot flex flex-col justify-end items-center overflow-y-auto max-h-[calc(100vh-10rem)]">
       <section className="search-section bottom-10 pr-10 w-1/2 relative ">
@@ -62,15 +69,16 @@ export const Chatbot = () => {
         <div className="input-container bottom-10 w-2/5 fixed bottom-0 transform -translate-x-10">
           <input
             value={value}
-            placeholder="When is Christmas?"
-            onChange={(e) => setValue(e.target.value)}
-            className="w-full p-4 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Enter a prompt here"
+            onChange={handleInputChange}
+            className="w-full p-4 bg-gray3 rounded-3xl border text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-gray4"
           />
           <button
             onClick={getResponse}
-            className="absolute right-2 top-2 bottom-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="absolute right-2 top-2 bottom-2 text-white p-2 rounded-full bg-transparent hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-100"
+            style={{ backgroundColor: buttonBgColor }}
           >
-            Ask me
+            <IoMdSend className="m-auto text-xl" />{" "}
           </button>
         </div>
       </section>
