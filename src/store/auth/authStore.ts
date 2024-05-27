@@ -50,6 +50,7 @@ export interface UserMembership {
   id: string;
   start_date: Date;
   end_date: Date;
+  is_active:true | false;
   membership: {id?: string, name?: string, description?: string, duration?: string, price?: number}
 }
 

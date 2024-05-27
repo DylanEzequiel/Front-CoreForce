@@ -3,6 +3,7 @@ import { FaCheck } from "react-icons/fa6";
 import PayPopUp from "../payPopUp/PayFormComp";
 import { useAuthStore } from "../../store/auth/authStore";
 import Swal from "sweetalert2";
+import { Button } from "@react-pdf-viewer/core";
 
 const subscriptionPlans = [
   {
@@ -30,7 +31,7 @@ const subscriptionPlans = [
     duration: "365 days",
   },
 ];
-
+const membershipUser=JSON.parse(sessionStorage.getItem("UserMembership")!)
 const membershipPlans = subscriptionPlans.map((plan) => ({
   ...plan,
   description: plan.description
@@ -110,12 +111,16 @@ export const Pricing = () => {
               </ul>
             </div>
 
-            <button
-              className="block bg-secondary py-3 w-full font-medium text-center text-text px6"
+            {membershipUser!.membership!.name! != membership!.name! 
+            ?<button
+              className="block bg-secondary px-6 py-3 w-full font-bold text-center text-white text-xl"
               onClick={() => handleClick(membership.id, membership.name,userId)}
             >
               Get Started
-            </button>
+            </button>:
+              <button className="block bg-green-500 px-6 py-3 w-full font-bold text-center text-white text-xl hover:cursor-default">
+                Current
+              </button>}
           </div>
         ))}
         {popUp && 

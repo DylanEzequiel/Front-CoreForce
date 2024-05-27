@@ -47,7 +47,7 @@ function UploadRoutines():React.ReactElement {
                     <select onChange={handleDataChange} name='typeRoutine' className='relative z-20 border-stroke focus:border-primary active:border-primary bg-transparent bg-white m-2 px-6 py-2 border rounded w-1/2 transition outline-none' >
                         <option disabled >Select the type</option>
                         <option>cardio</option>
-                        <option>strenght</option>
+                        <option>strength</option>
                         <option>flexibility</option>
                         <option>hiit</option>
                     </select>

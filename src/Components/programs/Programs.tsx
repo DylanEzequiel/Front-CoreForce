@@ -3,6 +3,7 @@ import { FaHeartPulse } from "react-icons/fa6";
 import { GiBodyBalance, GiMightyForce } from "react-icons/gi";
 import { GrRun } from "react-icons/gr";
 import RoutinesContainer from "../RoutinesContainer/RoutinesContainer";
+import { useAuthStore } from "../../store/auth/authStore";
 
 
 
@@ -45,10 +46,12 @@ const trainingPrograms: CategoryListProps[] = [
 
 
 const Programs: React.FC = () => {
-
- 
+  const {user}=useAuthStore((state)=>({
+    user:state.userData
+  }))
+  
   return (
-    <section>
+    <section className="p-48">
       <h2 className="font-semibold text-5xl text-center text-slate-700">
         Select Programs
       </h2>
@@ -74,8 +77,10 @@ const Programs: React.FC = () => {
         }
     
       </div>
-        
-        <RoutinesContainer />
+        {user?
+          <RoutinesContainer />
+          :null
+        }
      
     </section>
   );
