@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useAuthStore } from "../../store/auth/authStore";
 
+import { useTrainerStore } from "../../store/trainer/trainerStore";
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const socket = io(apiUrl, {
@@ -20,7 +22,6 @@ export const TrainerChat = () => {
 
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [room, setRoom] = useState<string>('');
 
@@ -30,7 +31,11 @@ export const TrainerChat = () => {
     token: state.token,
   }));
 
-  console.log(userId, token)
+  const { students, fetchStudents } = useTrainerStore((state) => ({
+    students: state.students,
+    fetchStudents: state.fetchStudents,
+  }));
+
 
 
   const saveMessagesToLocalStorage = (room: string, messages: Message[]) => {
@@ -43,16 +48,13 @@ export const TrainerChat = () => {
   };
 
   useEffect(()=> {
-    setUsers([
-      { id: '4c544d19-8e10-4647-a303-926abf91eac2', name: 'ryan' },
-      { id: 'c5c57f79-57f9-41de-b029-807513dcf589', name: 'pepita' },
-    ]);
-
-
+  
     if (user) {
+      fetchStudents(userId!, token!)
       socket.auth = { name: user.name };
       socket.connect();
     }
+
 
     socket.on("message", (data) => {
       console.log(data);
@@ -69,7 +71,7 @@ export const TrainerChat = () => {
       socket.disconnect();
     };
 
-  }, [ user, room]);
+  }, [ user, room, fetchStudents, userId, token]);
 
   useEffect(() => {
     if (room) {
@@ -103,16 +105,17 @@ export const TrainerChat = () => {
 
 
   return (
-    <div className="flex bg-white shadow-lg mx-auto p-4 rounded-lg w-full md:max-w-6xl container">
-      <div className="border-gray-300 pr-4 border-r w-1/4">
+    <div className="flex bg-white shadow-lg mx-auto p-4 rounded-lg w-full md:max-w-[80rem]">
+      <div className="border-gray-300 pr-4 border-r w-1/3">
         <h2 className="mb-4 font-semibold text-2xl text-slate-700">My Students</h2>
         <ul>
-          {users.map(user => (
+          {students.map(user => (
             <li
               key={user.id}
-              className={`cursor-pointer p-2 rounded-lg mb-2 font-semibold text-gray-400 ${selectedUser?.id === user.id ? 'bg-slate-800 text-white' : 'bg-gray-100'}`}
+              className={`flex gap-2 items-center cursor-pointer p-2 rounded-lg mb-2 font-semibold text-gray-400 ${selectedUser?.id === user.id ? 'bg-slate-800 text-white' : 'bg-gray-100'}`}
               onClick={() => handleUserSelect(user)}
             >
+              <img src={user.profile_image} alt="" className="rounded-full w-7 h-7"/>
               {user.name}
             </li>
           ))}
