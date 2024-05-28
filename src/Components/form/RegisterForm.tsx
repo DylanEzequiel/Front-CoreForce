@@ -67,7 +67,7 @@ export const RegisterForm = (): React.ReactElement => {
         membershipName: "Free",
       });
       toast.success("Register Succes! Log in please");
-      navigate("/auth/login");
+      navigate("/auth/signin");
       console.log(data);
     } catch (error: any) {
       toast.error(error.response.data.message);

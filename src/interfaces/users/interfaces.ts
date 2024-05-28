@@ -18,7 +18,7 @@ export interface User {
   id:              string;
   name:            string;
   email:           string;
-  profile_image:   null;
+  profile_image:   undefined;
   phoneNumber:     string;
   birthdate:       Date;
   signup_date:     string;

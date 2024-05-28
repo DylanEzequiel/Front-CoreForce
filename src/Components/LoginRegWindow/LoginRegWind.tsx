@@ -28,7 +28,7 @@ function LoginRegWind(): React.ReactNode {
       onClick={handleClick}
     >
       <b onClick={handleClick}>
-        {userId ? "user" : <FaRegCircleUser size={30}/>}
+        {userId ? user?.name : <FaRegCircleUser size={30}/>}
         {display ? (
           <div className="z-50 right-0 mt-4 flex w-64 flex-col rounded-md border border-comp bg-white shadow-md absolute">
             <ul
@@ -40,16 +40,11 @@ function LoginRegWind(): React.ReactNode {
                 <>
                   {user?.role === "user" ? (
                     <>
-                      <Link to={"/profile"}>
+                      <Link to={"/user/profile"}>
                         <p className="hover:bg-slate-500 px-4 py-2 duration-300">
-                          Perfil
+                          Profile
                         </p>
                       </Link>
-                      <Link to={"/profile/setting"}>
-                      <p className="hover:bg-slate-500 px-4 py-2 duration-300">
-                        Setting
-                      </p>
-                    </Link>
                     </>
                   ) : null}
                   {user?.role === "admin" ? (

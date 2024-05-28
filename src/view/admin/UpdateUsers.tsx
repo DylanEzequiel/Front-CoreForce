@@ -20,7 +20,7 @@ export const UpdateUsers = () => {
     id: '',
     name: '',
     email: '',
-    profile_image: null,
+    profile_image: undefined,
     phoneNumber: '',
     birthdate: new Date(),
     signup_date: '',

@@ -51,10 +51,10 @@ export const AuthGoogle: React.FC = () => {
  
 
   return (
-    <button className="flex items-center gap-2 bg-gray-100 text-slate-400 p-4 rounded-md mt-5 w-full text-center justify-center"
+    <button className="flex items-center gap-2 bg-blue-700 text-gray-100 p-4 rounded-md mt-5 w-full text-center justify-center"
     onClick={handleClick}
     >
-      <FaGoogle className="text-blue-500"/>
+      <FaGoogle className="text-gray-100"/>
       Sign in with Google 
     </button>
   );

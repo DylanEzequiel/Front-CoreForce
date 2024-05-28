@@ -42,31 +42,34 @@ const [navbarColor, setNavbarColor] = useState('transparent');
 
   return (
     <nav className={`fixed top-0 z-50 w-full pb-1 select-none ${location.pathname === '/dashboard' ? 'hidden': 'block'} shadow-md` } style={{ backgroundColor: navbarColor }}>
-        <div className='flex px-2 py-4 md:py-2 md:px-6 flex-wrap justify-between items-center  ' id={style.navbar} >
-            <Link to={'/'} className='text-gray-300 text-xl font-semibold flex gap-2 items-center justify-center'>
+        <div className='flex flex-wrap justify-between items-center px-2 md:px-6 py-4 md:py-2' id={style.navbar} >
+            <Link to={'/'} className='flex justify-center items-center gap-2 font-semibold text-gray-300 text-xl'>
                 <span>CoreForce</span>
                 <span>
                     <GiBiceps />
                 </span>
             </Link>
             {/**Navbar 768px  */}
-            <div id="links" className='hidden md:flex'>
+            <div id="links" className='md:flex hidden'>
                 <ul className='flex font-medium text-text'>
 
-                    <li className='m-3 hover:text-secondary duration-300 transition-all' >
+                    <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to={'/about'}>About us</Link>
                     </li>
-                    <li className='m-3 hover:text-secondary duration-300 transition-all' >
+                    <li className='m-3 hover:text-secondary transition-all duration-300' >
+                        <Link to={'/routines'}>Routines</Link>
+                    </li>
+                    <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to="/pricing">Pricing</Link> 
                     </li>
-                    <li className='m-3 hover:text-secondary duration-300 transition-all' >
+                    <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to="/gallery">Gallery</Link> 
                     </li>
                 </ul>
             </div>
             <ToggleButton onClosed={handleOpen}/>
         
-            <div className='m-4 text-text items-center hidden md:flex'>
+            <div className='md:flex items-center hidden m-4 text-text'>
                 <LoginRegWind/>
                 
             </div>

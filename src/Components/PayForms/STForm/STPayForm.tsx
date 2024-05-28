@@ -8,16 +8,21 @@ import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router'
 
 function STPayForm():React.ReactNode {
-    const [loading, setLoading]=useState(false)
+  // defino estados y funciones  
+  const [loading, setLoading]=useState(false)
     const { userId } = useAuthStore((state) => ({
         userId: state.userId,
         user: state.userData,
       }));
-      const { fetchUserData  } = useAuthStore();
-      const navigate = useNavigate()
-      const membershipName=localStorage.getItem("MembershipName")
+  //defino hooks
+    const navigate = useNavigate()
     const stripe = useStripe()
     const elements = useElements()
+
+    const { fetchUserData  } = useAuthStore();
+    const membershipName=localStorage.getItem("MembershipName")
+
+    //defino  handle submit
     async function handleSubmit(e:any){
         e.preventDefault()
          
@@ -25,8 +30,6 @@ function STPayForm():React.ReactNode {
             type:"card",
             card: elements!.getElement(CardElement)!
         })
-
-
         setLoading(!loading)
         if(!error){
             console.log(paymentMethod)
@@ -39,8 +42,7 @@ function STPayForm():React.ReactNode {
                     userData:{
                         userId,
                         membershipName
-                    }
-                }).then((res) => {
+                    }})
                     Swal.fire({
                       icon: "success",
                       title: "Suscription complete!",
@@ -49,25 +51,24 @@ function STPayForm():React.ReactNode {
                     setLoading(!loading)
                     fetchUserData();
                     navigate("/profile")
-                    console.log(res);
-                  })
-                  .catch((err) => {
-                    Swal.fire({
-                      icon: "error",
-                      title: "Oops...",
-                      text: "Something went wrong!",
-                    });
-                    console.log(err);
-                    setLoading(!loading)
-                  });
+                  
                 elements?.getElement(CardElement)?.clear()
                 
-            } catch (error) {
-                console.log(error)    
-            }
+            } 
+            catch (error) {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+              });
+              console.log(error);
+              setLoading(!loading)
+}
         }
         setLoading(!loading)
     }
+
+
   return (
     <div className="border-gray-700 bg-gray-800 shadow m-auto md:mt-0 xl:p-0 border rounded-lg w-full sm:max-w-2xl h-full">
         
@@ -86,7 +87,7 @@ function STPayForm():React.ReactNode {
             <button
             type="submit"
             className="inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md mt-8 py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200">
-                {loading?<LoadingIcons.ThreeDots  className='m-auto'/>:"Pay"} 
+                {loading? <LoadingIcons.ThreeDots  className='m-auto'/> :"Pay"} 
           </button>
         </form>
     </div>

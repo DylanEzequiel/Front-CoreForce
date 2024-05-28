@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth/authStore";
 
 interface ResponsiveNavbarProps {
@@ -12,6 +12,23 @@ export const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({
     userId: state.userId,
     user: state.userData,
   }));
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    if( user?.role === 'user' ) {
+      navigate('/user/profile');
+      return;
+    }
+
+    if(user?.role === 'trainer') {
+      navigate('/user/trainer');
+      return;
+    }
+
+    if(user?.role === 'admin') {
+      navigate('/dashboard/admin')
+    }
+  }
 
   return (
     <div
@@ -36,14 +53,14 @@ export const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({
       <div className="border-t border-slate-600 w-full py-5 flex items-center justify-center">
         {userId ? (
           <>
-            <Link to={user?.role === 'admin' ? '/dashboard/admin': '/profile'}>
-              {user?.role === 'admin' ? 'dashboard': 'perfil'}
-            </Link>
+            <button onClick={handleNavigate} className="bg-primary hover:bg-slate-900 transition-all duration-200 px-4 py-2 text-white font-semibold rounded-sm">
+              Dashboard
+            </button>
           </>
         ) : (
-          <button className="bg-secondary hover:bg-orange-600 transition-all duration-200 px-4 py-2 text-white font-semibold rounded-sm">
+          <Link to={'/auth/signin'} className="bg-secondary hover:bg-orange-600 transition-all duration-200 px-4 py-2 text-white font-semibold rounded-sm">
             Get Started
-          </button>
+          </Link>
         )}
       </div>
     </div>
