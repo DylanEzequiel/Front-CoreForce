@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { FaFileUpload } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import clienteAxios from '../../service/axiosService';
 import { useAuthStore } from '../../store/auth/authStore';
 
 
 
-const UploadPFP = ({ setUserImage}:any):React.ReactNode => {
+const UploadPFP = ():React.ReactNode => {
   const { user } = useAuthStore((state) => ({
     user: state.userData,
   }));
@@ -29,7 +28,7 @@ const UploadPFP = ({ setUserImage}:any):React.ReactNode => {
         setTimeout(()=>{
           toast("You look nice! 😉",{autoClose:2000})
         },1000)
-        setUserImage(res.data.imageUrl)
+        setUserInfo(res.data.imageUrl)
       })
       
         .catch(err=>{
