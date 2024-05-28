@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 const subscriptionPlans = [
   {
-    id: "acbcfe0b-37f6-4b2e-894e-bfe501309ed6",
+    id: "75734824-e5c6-4b56-811a-dfbf8dda058c",
     name: "Silver",
     description:
       "Extended access with additional perks. Enhanced customer support. Limited access to premium content.",
@@ -14,7 +14,7 @@ const subscriptionPlans = [
     duration: "60 days",
   },
   {
-    id: "5e44acdb-5e94-4f8f-8374-ff1b5e9fdb25",
+    id: "6fe5a96a-4e34-4f75-b760-327d98ef92ec",
     name: "Gold",
     description:
       "Enjoy premium benefits. Priority customer support. Access to exclusive premium content.",
@@ -22,7 +22,7 @@ const subscriptionPlans = [
     duration: "90 days",
   },
   {
-    id: "a3b74948-ae9b-4a4a-beb5-4044c554d26f",
+    id: "4829ed97-689b-47d1-a3d7-409d4e26072d",
     name: "Platinum",
     description:
       "Get exclusive privileges. Dedicated customer support. Access to all premium content. Priority access to new features.",
