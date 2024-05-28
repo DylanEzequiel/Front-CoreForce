@@ -17,7 +17,7 @@ export const StudentList = () => {
   const [students, setstudents] = useState<IUserComplete[]>([
     // Añade más estudiantes según sea necesario
   ]);
-  console.log(students)
+ 
   const [isLoaded, setIsLoaded] = useState(false)
   const [display,setDisplay]=useState(false)
 
@@ -36,6 +36,7 @@ export const StudentList = () => {
         setIsLoaded(true);
       } catch (error) {
         console.log(error);
+        setIsLoaded(true)
       }
     };
 
@@ -53,10 +54,10 @@ export const StudentList = () => {
       {students.length === 0 ? (
         <NotStudent />
       ) : (
-        <div className="max-w-6xl">
+        <div className="lg:max-w-6xl">
           <h2 className="mb-6 font-light text-3xl text-primary/80">My Students</h2>
 
-          <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 mb-10 sm:mb-0">
+          <div className="gap-4 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-10 mb-10 sm:mb-0">
             <Link
               to="/user/trainer/add-student"
               className="flex flex-col items-center space-y-2 bg-primary/90 hover:bg-green-600/80 px-4 py-20 rounded-md hover:smooth-hover cursor-pointer group"
@@ -84,7 +85,6 @@ export const StudentList = () => {
                         {student.name}
                       </h3>
                       <div className="mt-2 text-center">
-                        <p className="py-2 text-white/50">{student.email}</p>
                         <p className="text-white/50">
                           Weight: {student.weight} kg
                         </p>
@@ -93,7 +93,7 @@ export const StudentList = () => {
                         </p>
                       </div>
                     </div>
-                    <button onClick={handleDisplay} className="block bg-secondary active:bg-orange-700 px-6 py-3 w-full font-bold text-center text-white text-xl">Add Routine</button>
+                    <button onClick={handleDisplay} className="block bg-secondary active:bg-orange-700 px-6 py-2 w-full font-semibold text-center text-white text-lg rounded-full">Add Routine</button>
                     {/* Renderizado condicional si hay o no rutinas */}
                     {display&&
                       <div className="z-50 fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50">

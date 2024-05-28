@@ -110,8 +110,8 @@ export const Pricing = () => {
               </ul>
             </div>
 
-            {membershipUser?.membership!.name! != membership?.name! 
-            ?<button
+            {membershipUser?.membership.name != membership?.name
+              ?<button
               className="block bg-secondary px-6 py-3 w-full font-bold text-center text-white text-xl"
               onClick={() => handleClick(membership.id, membership.name,userId)}
             >
