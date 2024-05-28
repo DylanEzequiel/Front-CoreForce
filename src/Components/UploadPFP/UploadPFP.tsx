@@ -5,7 +5,7 @@ import { useAuthStore } from '../../store/auth/authStore';
 
 
 
-const UploadPFP = ({ setUserImage}:any):React.ReactNode => {
+const UploadPFP = ():React.ReactNode => {
   const { user } = useAuthStore((state) => ({
     user: state.userData,
   }));
