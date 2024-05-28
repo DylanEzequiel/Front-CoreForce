@@ -3,7 +3,6 @@ import { FaCheck } from "react-icons/fa6";
 import PayPopUp from "../payPopUp/PayFormComp";
 import { useAuthStore } from "../../store/auth/authStore";
 import Swal from "sweetalert2";
-import { Button } from "@react-pdf-viewer/core";
 
 const subscriptionPlans = [
   {
@@ -111,7 +110,7 @@ export const Pricing = () => {
               </ul>
             </div>
 
-            {membershipUser!.membership!.name! != membership!.name! 
+            {membershipUser?.membership!.name! != membership?.name! 
             ?<button
               className="block bg-secondary px-6 py-3 w-full font-bold text-center text-white text-xl"
               onClick={() => handleClick(membership.id, membership.name,userId)}
