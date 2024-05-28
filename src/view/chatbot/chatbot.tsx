@@ -5,9 +5,17 @@ interface ChatMessage {
   role: "user" | "model";
   parts: { text: string }[];
 }
+const predefinedQuestions = [
+  "Consejos para mantenerse activo durante un día ajetreado",
+  "Alternativas a los ejercicios cardiovasculares tradicionales",
+  "Nutrición adecuada para el crecimiento muscular",
+  "¿Por qué es importante el entrenamiento cruzado?",
+];
 
 export const Chatbot = () => {
   const [value, setValue] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [showPredefinedQuestions, setShowPredefinedQuestions] = useState(true);
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
     {
       role: "user",
@@ -68,7 +76,10 @@ export const Chatbot = () => {
     }
   }, [chatHistory]);
 
-  const getResponse = async () => {
+  const getResponse = async (value: string) => {
+    if (value.trim() === "") return;
+
+    setIsButtonDisabled(true);
     try {
       const options = {
         method: "POST",
@@ -96,7 +107,7 @@ export const Chatbot = () => {
           parts: [{ text: data }],
         },
       ]);
-
+      setIsButtonDisabled(false);
       setValue("");
     } catch (error) {
       console.error(error);
@@ -107,20 +118,26 @@ export const Chatbot = () => {
     setValue(e.target.value);
   };
 
+  const handlePredefinedQuestionClick = (question: string) => {
+    setShowPredefinedQuestions(false);
+    setValue(question);
+    getResponse(question);
+  };
+
   return (
-    <div>
-      <div className="chatbot flex flex-col justify-end items-center max-h-[calc(100vh-10rem)] overflow-y-auto">
+    <div className="flex flex-col h-screen overflow-hidden">
+      <div className="flex flex-col justify-end items-center overflow-y-auto flex-grow bg-gray-100">
         <section
-          className="search-section bottom-10 relative flex flex-col items-center w-full overflow-y-auto pt-20"
+          className="search-section relative flex flex-col items-center w-full py-10 px-4"
           ref={chatContainerRef}
         >
-          <div className="search-result mb-10 relative w-1/2">
+          <div className="search-result mb-10 w-full max-w-lg">
             {chatHistory.map((chatItem, index) => (
-              <div key={index}>
-                <p className="answer font-bold">
-                  {chatItem.role === "user" ? "You" : "Fitness trainer"} {""}
+              <div key={index} className="bg-white p-4 rounded-lg shadow-md mb-4">
+                <p className="font-bold text-gray-800">
+                  {chatItem.role === "user" ? "You" : "Fitness trainer"}{" "}
                 </p>
-                <p className="mb-10 w-full">
+                <p className="text-gray-800 mb-2">
                   {chatItem.parts.map((part) => part.text).join(", ")}
                 </p>
               </div>
@@ -128,22 +145,34 @@ export const Chatbot = () => {
           </div>
         </section>
       </div>
-      <div className="input-container w-full flex justify-center ">
-        <div className="relative w-1/2">
+      {showPredefinedQuestions && (
+        <div className="predefined-questions flex justify-center gap-4 mb-4">
+          {predefinedQuestions.map((question, index) => (
+            <button
+              key={index}
+              onClick={() => handlePredefinedQuestionClick(question)}
+              className="p-4 bg-white rounded-lg shadow-md text-gray-800 hover:bg-blue-200 transition-colors duration-200"
+            >
+              {question}
+            </button>
+          ))}
+        </div>
+      )}
+      <div className="input-container flex justify-center py-4">
+        <div className="relative w-full max-w-lg">
           <input
             value={value}
             placeholder="Enter a prompt here"
             onChange={handleInputChange}
-            className="w-full p-4 bg-gray3 rounded-3xl border text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-gray4 resize-x"
+            className="w-full p-4 bg-white rounded-lg shadow-md border text-gray-800 placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-300 focus:border-blue-300"
           />
           <button
-            onClick={getResponse}
-            className="absolute right-2 top-2 bottom-2 text-white p-2 rounded-full bg-transparent hover:bg-gray-800 focus:outline-none transition-colors duration-100 "
-            style={{
-              backgroundColor: value ? "#1e293b" : "transparent",
-            }}
+            onClick={() => getResponse(value)}
+            disabled={isButtonDisabled}
+            className="absolute right-2 top-2 bottom-2 text-white p-2 rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none transition-colors duration-200"
+            style={{ backgroundColor: value && !isButtonDisabled ? "#1e293b" : "#a5b4fc" }}
           >
-            <IoMdSend className="m-auto text-xl" />{" "}
+            <IoMdSend className="m-auto text-xl" />
           </button>
         </div>
       </div>
