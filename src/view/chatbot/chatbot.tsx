@@ -59,6 +59,8 @@ export const Chatbot = () => {
     },
   ]);
 
+  
+
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -106,6 +108,8 @@ export const Chatbot = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+
+  
 
   return (
     <div>
