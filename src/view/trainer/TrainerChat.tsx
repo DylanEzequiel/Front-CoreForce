@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useAuthStore } from "../../store/auth/authStore";
 
 import { useTrainerStore } from "../../store/trainer/trainerStore";
+import { useChatStore } from "../../store/chat/chatStore";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const socket = io(apiUrl, {
   autoConnect: true,
 });
-interface Message {
-  user?: string;
-  body?: string;
-  room?: string
-}
+
 interface User {
   id: string;
   name: string;
 }
+
+
 export const TrainerChat = () => {
 
   const [message, setMessage] = useState<string>('');
-  const [messages, setMessages] = useState<Message[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [room, setRoom] = useState<string>('');
+  // const [isConnected, setIsConnected] = useState<boolean>(socket.connected)
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { user, userId, token } = useAuthStore((state) => ({
     userId: state.userId,
@@ -36,33 +36,24 @@ export const TrainerChat = () => {
     fetchStudents: state.fetchStudents,
   }));
 
+  const { messages, loadMessages } = useChatStore((state) => ({
+    messages: state.chats,
+    loadMessages: state.loadMessages,
+  }));
 
-
-  const saveMessagesToLocalStorage = (room: string, messages: Message[]) => {
-    localStorage.setItem(`messages-${room}`, JSON.stringify(messages));
-  };
-
-  const loadMessagesFromLocalStorage = (room: string): Message[] => {
-    const storedMessages = localStorage.getItem(`messages-${room}`);
-    return storedMessages ? JSON.parse(storedMessages) : [];
-  };
 
   useEffect(()=> {
   
     if (user) {
       fetchStudents(userId!, token!)
-      socket.auth = { name: user.name };
+      socket.auth = { name: user.name, room: room };
       socket.connect();
     }
 
 
     socket.on("message", (data) => {
       console.log(data);
-      setMessages((prevMessages) => {
-        const newMessages = [...prevMessages, data];
-        saveMessagesToLocalStorage(room, newMessages);
-        return newMessages;
-      });
+      loadMessages(room)
 
     });
 
@@ -71,19 +62,23 @@ export const TrainerChat = () => {
       socket.disconnect();
     };
 
-  }, [ user, room, fetchStudents, userId, token]);
+  }, [ user,  fetchStudents, userId, token, loadMessages, room]);
 
   useEffect(() => {
     if (room) {
       socket.emit("joinRoom", room);
-      const storedMessages = loadMessagesFromLocalStorage(room);
-      setMessages(storedMessages);
+      loadMessages(room)
     }
-  }, [room]);
+  }, [room, loadMessages]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleUserSelect = (user: User) => {
     setSelectedUser(user);
     setRoom(user.id);
+    loadMessages(room)
   };
 
   const handleSend = (event: React.FormEvent<HTMLFormElement>) => {
@@ -102,7 +97,7 @@ export const TrainerChat = () => {
       alert('Please select a user to chat with.');
     }
   };
-
+  const currentMessages = selectedUser ? messages[room]?.messages || [] : [];
 
   return (
     <div className="flex bg-white shadow-lg mx-auto p-4 rounded-lg w-full md:max-w-[80rem]">
@@ -126,19 +121,20 @@ export const TrainerChat = () => {
         {selectedUser ? (
          <form onSubmit={handleSend}>
          <div className="flex flex-col border-gray-200 mb-4 p-4 border rounded-lg h-64 overflow-y-auto">
-           {messages.map((message, index) => (
+           {currentMessages?.map((message, index) => (
              <div
                key={index}
                className={`mb-2 p-2 w-auto ${
                  message.user === user?.name
-                   ? "bg-slate-300 text-slate-800 self-end rounded-t-md rounded-br-md"
-                   : "bg-orange-500 text-gray-100 self-start rounded-t-md rounded-bl-md"
+                   ? "bg-slate-300 text-slate-800 self-end rounded-t-xl rounded-br-xl"
+                   : "bg-orange-500 text-gray-100 self-start rounded-t-xl rounded-bl-xl"
                }`}
                style={{
                  alignSelf:
                    message.user === user?.name ? "flex-start" : "flex-end",
                  maxWidth: "70%",
                }}
+               ref={messagesEndRef}
              >
                <b>{message.user}</b>: {message.body}
              </div>

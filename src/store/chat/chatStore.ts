@@ -1,4 +1,6 @@
 import {create} from 'zustand';
+import { getMessageByRoom } from './chat-service';
+
 
 interface Message {
   user: string;
@@ -6,36 +8,36 @@ interface Message {
   room: string;
 }
 
-interface ChatState {
-  messages: { [key: string]: Message[] };
-  addMessage: (room: string, message: Message) => void;
-  loadMessages: (room: string) => Message[];
-  clearMessages: (room: string) => void;
+interface Chat {
+  id: string;
+  userId: string;
+  idTrainer: string | null;
+  room: string;
+  messages: Message[];
+  createdAt: string;
 }
 
-export const useChatStore = create<ChatState>((set, get) => ({
-  messages: {},
-  addMessage: (room, message) => {
-    const newMessages = [...(get().messages[room] || []), message];
-    localStorage.setItem(`messages-${room}`, JSON.stringify(newMessages));
-    set(state => ({
-      messages: {
-        ...state.messages,
-        [room]: newMessages
-      }
-    }));
+interface ChatState {
+  chats: { [key: string]: Chat };
+  
+  loadMessages: (room: string) => Promise<void>;
+}
+
+export const useChatStore = create<ChatState>((set) => ({
+  chats: {},
+  loadMessages: async(room) => {
+    try {
+      const  data  = await getMessageByRoom(room);
+      console.log(data)
+      const chat = data[0];
+      set((state) => ({
+        chats: {
+          ...state.chats,
+          [room]: chat,
+        },
+      }));
+    } catch (error) {
+      console.error('Error loading messages:', error);
+    }
   },
-  loadMessages: (room) => {
-    const storedMessages = localStorage.getItem(`messages-${room}`);
-    return storedMessages ? JSON.parse(storedMessages) : [];
-  },
-  clearMessages: (room) => {
-    localStorage.removeItem(`messages-${room}`);
-    set(state => ({
-      messages: {
-        ...state.messages,
-        [room]: []
-      }
-    }));
-  }
 }));
