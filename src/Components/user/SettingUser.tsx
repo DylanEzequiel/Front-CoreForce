@@ -21,7 +21,7 @@ console.log(  user!.user_membership[0].membership.name!
 )
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { user_membership, ...resto } = userInfo;
+    const { user_membership, user_routines, ...resto } = userInfo;
     console.log(user_membership);
 
     try {
