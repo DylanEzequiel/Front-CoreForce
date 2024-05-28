@@ -11,7 +11,7 @@ function MembershipUCard(props: { name: string }): React.ReactNode {
   const { user } = useAuthStore((state) => ({
     user: state.userData,
   }));
-
+  const { fetchUserData } = useAuthStore();
   const getStyles = (name: string) => {
     return MembershipsStyles.find((element) => element.name === name);
   };
@@ -20,7 +20,9 @@ function MembershipUCard(props: { name: string }): React.ReactNode {
 
   function handleCancel(){
     clienteAxios.put(`/payments/${user?.id}` )
-    .then(res=>setMemberName(res.data.membership_Name))
+    .then(res=>{setMemberName(res.data.membership_Name)
+      fetchUserData()
+    })
     .catch(err=>console.log(err))
   }
 
