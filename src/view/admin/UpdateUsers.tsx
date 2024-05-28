@@ -30,6 +30,7 @@ export const UpdateUsers = () => {
     weight: '',
     role: '',
     user_membership: [],
+    user_routines: []
   });
 
   
@@ -55,7 +56,7 @@ export const UpdateUsers = () => {
 
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {user_membership, ...resto} = user
+    const {user_membership, user_routines, ...resto} = user
     console.log(user_membership)
   
     
