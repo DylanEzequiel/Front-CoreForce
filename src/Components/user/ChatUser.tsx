@@ -1,6 +1,6 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useAuthStore } from "../../store/auth/authStore";
 import { useChatStore } from "../../store/chat/chatStore";
@@ -16,34 +16,35 @@ interface Message {
 
 export const ChatUser: React.FC = () => {
   const [message, setMessage] = useState<string>("");
-  const [currentMessages, setCurrentMessages] = useState<Message[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { user, userId, token } = useAuthStore((state) => ({
+  const { user, userId } = useAuthStore((state) => ({
     userId: state.userId,
     user: state.userData,
     token: state.token,
   }));
-  const {  addMessage, loadMessages } = useChatStore();
 
-  console.log(token)
+  const { messages, loadMessages } = useChatStore((state) => ({
+    messages: state.chats,
+    loadMessages: state.loadMessages,
+  }));
+
+ 
   useEffect(() => {
     if (!userId) return;
 
-    const loadedMessages = loadMessages(userId!);
-    setCurrentMessages(loadedMessages);
-
+    loadMessages(userId!);
+    
     socket.emit("joinRoom", userId);
 
     if (user) {
-      socket.auth = { name: user.name };
+      socket.auth = { name: user.name, room: userId };
       socket.connect();
     }
 
     const handleNewMessage = (data: Message) => {
-      if (data.user !== user?.name) {  // Evitar duplicación de mensajes
-        addMessage(userId, data);
-        setCurrentMessages(loadMessages(userId));
-      }
+        console.log(data) // Evitar duplicación de mensajes
+        loadMessages(userId);
     };
 
     socket.on("message", handleNewMessage);
@@ -52,7 +53,11 @@ export const ChatUser: React.FC = () => {
       socket.off("message", handleNewMessage);
       socket.disconnect();
     };
-  }, [userId, user, addMessage, loadMessages]);
+  }, [userId, user, loadMessages]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,10 +67,10 @@ export const ChatUser: React.FC = () => {
       room: userId!,
     };
     socket.emit("message", { body: newMessage.body, room: newMessage.room });
-    addMessage(userId!, newMessage);
-    setCurrentMessages(loadMessages(userId!));
     setMessage("");
   };
+
+  const currentMessages =  messages[userId!]?.messages || [] 
 
   return (
     <>
@@ -99,6 +104,7 @@ export const ChatUser: React.FC = () => {
                       message.user === user?.name ? "flex-start" : "flex-end",
                     maxWidth: "70%",
                   }}
+                  ref={messagesEndRef}
                 >
                   <b>{message.user}</b>: {message.body}
                 </div>
