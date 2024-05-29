@@ -15,6 +15,9 @@ export default {
         gray4: "#C7C7C7",
         graydark: "#333A48",
       },
+      boxShadow: {
+        blue: "0 4px 6px -1px rgba(59, 130, 246, 0.5), 0 2px 4px -1px rgba(59, 130, 246, 0.25)",
+      },
       screens: {
         "3xl": "1560px",
         "2xsm": "375px",

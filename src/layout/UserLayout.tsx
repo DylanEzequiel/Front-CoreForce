@@ -5,11 +5,21 @@ import { NavLink } from "react-router-dom";
 import { TrainerLinks } from "../Components/trainer/TrainerLinks";
 import { useAuthStore } from "../store/auth/authStore";
 import { UserLinks } from "../Components/user/UserLinks";
+import { useEffect } from "react";
+import { useSocket } from "../providers/SocketProvider";
 
 export const UserLayout = () => {
   const { user } = useAuthStore((state) => ({
     user: state.userData,
   }));
+
+  const { socket } = useSocket();
+
+  useEffect(() => {
+    if(user?.role === 'user') {
+      socket?.emit('joinRoom', user.id)
+    }
+  }, [user, socket])
 
   return (
     <>
@@ -18,7 +28,7 @@ export const UserLayout = () => {
         data-drawer-toggle="default-sidebar"
         aria-controls="default-sidebar"
         type="button"
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2  text-gray-400 bg-gray-700 focus:ring-gray-600"
       >
         <span className="sr-only">Open sidebar</span>
         <IoMenuOutline className="text-primary" scale={40} />
@@ -29,7 +39,7 @@ export const UserLayout = () => {
         className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-800">
           <ul className="space-y-2 font-medium">
             <div className="flex items-center justify-between gap-2 px-6 py-5 lg:py-6">
               <NavLink to={"/"}>

@@ -51,7 +51,7 @@ const Programs: React.FC = () => {
   }))
   
   return (
-    <section className="p-48">
+    <section className="md:p-24">
       <h2 className="font-semibold text-5xl text-center text-slate-700">
         Select Programs
       </h2>
@@ -59,13 +59,13 @@ const Programs: React.FC = () => {
         Build your personal routine
       </p>
 
-      <div className="gap-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mt-10 px-2">
+      <div className="gap-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-10 px-2">
 
 {/* mapeamos y renderizamos los tipos de rutinas que hay disponibles */}
 
         {
           trainingPrograms.map( program => (
-            <div className="border-gray-200 bg-slate-800 shadow-2xl mx-auto px-10 py-28 border rounded-md max-w-sm text-white transition-all hover:scale-105 cursor-pointer" key={program.id}>
+            <div className="border-gray-200 bg-slate-800 shadow-2xl mx-auto px-10 py-28 border rounded-md md:max-w-sm text-white transition-all hover:scale-105 cursor-pointer" key={program.id}>
             <program.icon size={30} className="text-orange-500" />
             <h3 className="py-2 text-2xl">{program.name}</h3>
             <p className="font-light text-gray-400 text-lg">

@@ -50,7 +50,7 @@ function STPayForm():React.ReactNode {
                     });
                     setLoading(!loading)
                     fetchUserData();
-                    navigate("/profile")
+                    navigate("/user/profile")
                   
                 elements?.getElement(CardElement)?.clear()
                 
@@ -86,6 +86,7 @@ function STPayForm():React.ReactNode {
             <CardElement className='block bg-white m-4 h-8'/>
             <button
             type="submit"
+            disabled={loading}
             className="inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md mt-8 py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200">
                 {loading? <LoadingIcons.ThreeDots  className='m-auto'/> :"Pay"} 
           </button>

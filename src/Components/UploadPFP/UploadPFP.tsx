@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { toast } from 'react-toastify';
 import clienteAxios from '../../service/axiosService';
 import { useAuthStore } from '../../store/auth/authStore';
@@ -9,7 +9,7 @@ const UploadPFP = ():React.ReactNode => {
   const { user } = useAuthStore((state) => ({
     user: state.userData,
   }));
-  const [userInfo, setUserInfo] = useState(user!);
+  const { fetchUserData } = useAuthStore();
   const formPFP=new FormData()
 
     const sessionUser= sessionStorage.getItem("UserId")
@@ -24,11 +24,12 @@ const UploadPFP = ():React.ReactNode => {
       event.preventDefault()
       await clienteAxios.post(`/files/uploadImage/${sessionUser}`,formPFP)
       .then(res=>{
+        console.log(res.data)
         toast.success("Photo Updated!",{autoClose:1500})
         setTimeout(()=>{
           toast("You look nice! 😉",{autoClose:2000})
         },1000)
-        setUserInfo(res.data.imageUrl)
+        fetchUserData();
       })
       
         .catch(err=>{
@@ -53,7 +54,7 @@ const UploadPFP = ():React.ReactNode => {
               <form action="#" onSubmit={handleSubmit}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="rounded-full w-14 h-14">
-                    <img src={userInfo?.profile_image} alt="User" />
+                    <img src={user!.profile_image} alt="User" />
                   </div>
                   <div>
                     <span className="mb-1.5 text-black">Edit your photo</span>
