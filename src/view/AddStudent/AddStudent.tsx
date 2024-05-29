@@ -5,6 +5,7 @@ import { IUserComplete } from '../../interfaces/interfaces';
 import { formatDate } from '../../helpers/date/formatDate';
 import { RiUserAddFill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 function AddStudent():React.ReactElement {
     
@@ -14,6 +15,7 @@ function AddStudent():React.ReactElement {
         userId: state.userId,
         userToken: state.token
     }));
+    const navigate=useNavigate()
     console.log(`trainer token: ${userId}`)
     const [student,setStudent]=useState<string>()
     console.log(student)
@@ -27,20 +29,15 @@ function AddStudent():React.ReactElement {
             setStudentsList(res.data)}
         get()
     },[])
-    
     async function handleSubmit(){
-        if(!student){
-            Swal.fire({
-                title:"Add a student",
-                icon:"error"
-            })
-        }
+
         try {
             const body={userId:student}
             
             console.log(body)
             const data=await clienteAxios.post(`/trainers/students/${userId}`,body,{headers:{"Authorization":`Bearer ${userToken}`}})
             console.log(data)
+            navigate("/user/trainer/student-list")
         } catch (error) {
             console.log(error)
         }
@@ -48,6 +45,24 @@ function AddStudent():React.ReactElement {
     }
     function handleStudent(studentId:string){
         setStudent(studentId)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#85f702",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, add student"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                handleSubmit()
+                Swal.fire({
+                    title: "Success!",
+                    text: "Student added",
+                    icon: "success"
+                });
+            }
+        });
     }
   return (
     <div>
@@ -144,7 +159,7 @@ function AddStudent():React.ReactElement {
                         
             </table>
         </div>
-    <button className='bg-primary hover:bg-slate-950 m-4 px-6 py-2 rounded-sm w-full md:w-auto text-white transition-colors duration-75 ease-in' onClick={handleSubmit}>Enviar</button>
+    {/* <button className='bg-primary hover:bg-slate-950 m-4 px-6 py-2 rounded-sm w-full md:w-auto text-white transition-colors duration-75 ease-in' onClick={handleSubmit}>Enviar</button> */}
     </div>
   )
 }
