@@ -18,7 +18,7 @@ function RoutinesContainer():React.ReactNode {
   const [routines,setRoutines]=useState<IRoutine[] | null>()
   const [rendRoutines,setRendRoutines]=useState<IRoutine[] | null>()
   const [filter,setFilter]=useState<string | null>("cardio")
-  console.log(routines)
+
 
   //utilizo un use effect para obtener todas las rutinas
   useEffect(()=>{

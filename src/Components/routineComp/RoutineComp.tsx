@@ -6,7 +6,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { IRoutine } from '../RoutinesContainer/RoutinesContainer';
 import DeleteRoutine from '../deleteRotine/DeleteRoutine';
 
-const PDFViewer = ( routine:IRoutine ):React.ReactNode => {
+const PDFViewer = ( routine:IRoutine):React.ReactNode => {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
     return (

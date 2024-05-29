@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "../../store/auth/authStore";
 import { fornatDateEdit } from "../../helpers/date/formatDate";
 import clienteAxios from "../../service/axiosService";
@@ -24,6 +24,10 @@ export const SettingUser = () => {
   const [userInfo, setUserInfo] = useState(user!);
 console.log(  user!.user_membership[0].membership.name!
 )
+  useEffect(()=>{
+    fetchUserData()
+  },[])
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { user_membership, user_routines, ...resto } = userInfo;
