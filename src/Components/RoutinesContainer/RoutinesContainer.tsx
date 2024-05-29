@@ -1,7 +1,7 @@
 import React from 'react'
-import clienteAxios from "../../service/axiosService";
 import PDFViewer from "../routineComp/RoutineComp";
 import { useEffect, useState } from "react";
+import { useRoutineStore } from '../../store/routines/RoutineStore';
 
 
 export interface IRoutine {
@@ -15,33 +15,40 @@ export interface IRoutine {
 
 function RoutinesContainer():React.ReactNode {
      // defino los estados que se utilizaran para tener el filtro, y las rutinas generales y a renderizar 
-  const [routines,setRoutines]=useState<IRoutine[] | null>()
+  // const [routines,setRoutines]=useState<IRoutine[] | null>()
   const [rendRoutines,setRendRoutines]=useState<IRoutine[] | null>()
   const [filter,setFilter]=useState<string | null>("cardio")
-
+  
+  const { routines, fetchRoutines } = useRoutineStore();
+  console.log(routines)
 
   //utilizo un use effect para obtener todas las rutinas
   useEffect(()=>{
-    async function getRoutines() {
-      try {
-        const res=await clienteAxios.get("/files/routines")
-        setRoutines(res.data)
-        setRendRoutines(res.data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getRoutines()
+   fetchRoutines()
   },[])
 
+  useEffect(() => {
+    applyFilter();
+  }, [routines, filter]);
+
+  function applyFilter() {
+    if (routines) {
+      if (filter) {
+        setRendRoutines(routines.filter(routine => routine.type === filter));
+      } else {
+        setRendRoutines(routines);
+      }
+    }
+  }
+
   //defino los handles para los cambios (poner el filtro y aplicarlo en las rend cards)
-  function handleChange (e:any){
+  function handleChange (e:React.ChangeEvent<HTMLSelectElement>){
     setFilter(e.target.value)
   }
 
-  function handleFilter(){
-    const filt=routines?.filter(rutine=>rutine.type==filter)
-    setRendRoutines(filt)
+  function handleShowAll() {
+    setRendRoutines(routines);
+    setFilter(null);
   }
 
   return (
@@ -56,8 +63,8 @@ function RoutinesContainer():React.ReactNode {
                     <option>flexibility</option>
                     <option>hiit</option>
                 </select>
-                <button className="bg-primary m-2 px-6 py-2 rounded-sm w-full md:w-auto text-white" onClick={handleFilter}>Filter</button>
-                <button className="bg-primary m-2 px-6 py-2 rounded-sm w-full md:w-auto text-white" onClick={()=>{setRendRoutines(routines)}}>Show All</button>
+                <button className="bg-primary m-2 px-6 py-2 rounded-sm w-full md:w-auto text-white" onClick={applyFilter}>Filter</button>
+                <button className="bg-primary m-2 px-6 py-2 rounded-sm w-full md:w-auto text-white" onClick={handleShowAll}>Show All</button>
 
         </div>
 
@@ -65,7 +72,7 @@ function RoutinesContainer():React.ReactNode {
         <div className=''>
             {rendRoutines?
             rendRoutines.map((routine)=><PDFViewer {...routine} key={routine.id}></PDFViewer>
-            ):null}
+            ):(routines?.map((routine)=><PDFViewer {...routine} key={routine.id}></PDFViewer>) )}
         </div>
     </div>
   )

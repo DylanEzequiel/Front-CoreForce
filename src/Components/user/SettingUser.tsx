@@ -32,6 +32,7 @@ console.log(  user!.user_membership[0].membership.name!
     e.preventDefault();
     const { user_membership, user_routines, ...resto } = userInfo;
     console.log(user_membership);
+    console.log(user_routines)
 
     try {
       await clienteAxios.put(`/users/${userId}`, resto, {
@@ -292,9 +293,6 @@ console.log(  user!.user_membership[0].membership.name!
               <h3 className="font-medium text-black">Your Photo</h3>
               <UploadPFP></UploadPFP>
             </div>
-<<<<<<< Updated upstream
-            
-=======
             <div className="p-7">
               <form action="#">
                 <div className="flex items-center gap-3 mb-4">
@@ -361,7 +359,6 @@ console.log(  user!.user_membership[0].membership.name!
                 </div>
               </form>
             </div>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>
