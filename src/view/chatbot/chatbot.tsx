@@ -88,7 +88,7 @@ export const Chatbot = () => {
       window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
-    recognition.onresult = async (e) => {
+    recognition.onresult = async (e:any) => {
       const transcript = e.results[0][0].transcript;
       setValue(transcript);
     };
@@ -99,12 +99,12 @@ export const Chatbot = () => {
   return (
     <div className="flex flex-col h-screen">
       <div
-        className="flex flex-col flex-grow overflow-y-scroll max-h-full"
+        className="flex flex-col flex-grow max-h-full overflow-y-scroll"
         ref={chatContainerRef}
       >
-        <div className="w-full md:w-1/2 p-4 mx-auto ">
+        <div className="mx-auto p-4 w-full md:w-1/2">
           {chatHistory.map((chatItem, index) => (
-            <div key={index} className="mb-4 bg-white rounded-lg shadow-lg">
+            <div key={index} className="bg-white shadow-lg mb-4 rounded-lg">
               <p
                 className={`font-bold bg-white p-2 rounded-lg ${
                   chatItem.role === "user" ? "text-blue-500" : "text-green-500"
@@ -112,7 +112,7 @@ export const Chatbot = () => {
               >
                 {chatItem.role === "user" ? "You" : "Fitness trainer"}
               </p>
-              <p className="p-2 bg-white rounded-lg">
+              <p className="bg-white p-2 rounded-lg">
                 {chatItem.parts.map((part, partIndex) => (
                   <span key={partIndex}>{part.text}</span>
                 ))}
@@ -122,12 +122,12 @@ export const Chatbot = () => {
         </div>
       </div>
       {showFaqs && (
-        <div className="w-full p-4 flex justify-center">
+        <div className="flex justify-center p-4 w-full">
           <div className="flex flex-wrap justify-center gap-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="p-4 bg-gray-100 rounded-lg shadow-blue cursor-pointer transition border border-transparent hover:border-blue-500"
+                className="bg-gray-100 shadow-blue p-4 border border-transparent hover:border-blue-500 rounded-lg transition cursor-pointer"
                 onClick={() => handleFaqClick(faq)}
               >
                 {faq}
@@ -136,18 +136,18 @@ export const Chatbot = () => {
           </div>
         </div>
       )}
-      <div className="w-full p-4 sticky bottom-0">
-        <div className="relative w-full md:w-1/2 mx-auto">
+      <div className="bottom-0 sticky p-4 w-full">
+        <div className="relative mx-auto w-full md:w-1/2">
           <input
             value={value}
             placeholder="Enter a prompt here"
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
-            className="w-full p-4 rounded-full border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+            className="border-gray-300 p-4 border focus:border-blue-500 rounded-full w-full text-gray-800 placeholder-gray-500 focus:outline-none"
             disabled={isSending}
           />
           <button
-            className="absolute right-14 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full active:bg-gray-300"
+            className="top-1/2 right-14 absolute active:bg-gray-300 p-2 rounded-full text-white transform -translate-y-1/2"
             style={{
               backgroundColor: value ? "#1e293b" : "transparent",
             }}
@@ -155,13 +155,13 @@ export const Chatbot = () => {
             aria-label="Send message"
           >
             <IoMdSend
-              className="text-xl inline"
+              className="inline text-xl"
               onClick={() => getResponse(value)}
             />
           </button>
-          <button className="absolute  inline  -translate-y-1/2 right-2 top-1/2 transform  p-2 rounded-full hover:outline-2 hover:outline hover:outline-blue-500">
+          <button className="inline top-1/2 right-2 absolute p-2 rounded-full transform -translate-y-1/2 hover:outline-2 hover:outline hover:outline-blue-500">
             <IoMdMic
-              className="text-xl hover:cursor-pointer "
+              className="text-xl hover:cursor-pointer"
               onClick={handleOnRecord}
             />
           </button>
