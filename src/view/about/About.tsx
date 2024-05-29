@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
+
 export const About = () => {
   return (
-    <main className="min-h-screen py-24 container mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-5 mt-8 p-8 justify-items-center">
-        <div className="md:col-span-3 lg:col-span-2  lg:col-start-2 lg:col-end-4 py-5 lg:py-0">
-          <h1 className="text-4xl font-bold text-pretty py-6 text-primary">
+    <main className="mx-auto py-24 min-h-screen container">
+      <div className="justify-items-center gap-5 grid grid-cols-1 lg:grid-cols-6 mt-8 p-8">
+        <div className="md:col-span-3 lg:col-span-2 lg:col-start-2 lg:col-end-4 py-5 lg:py-0">
+          <h1 className="py-6 font-bold text-4xl text-pretty text-primary">
             Welcome to CoreForce
           </h1>
 
-          <p className="text-lg font-semibold text-gray-500">
+          <p className="font-semibold text-gray-500 text-lg">
             Welcome to Gym Tone, where we specialize in providing high-quality
             workouts and fitness training in a welcoming and supportive
             environment. Our team of expert trainers is committed to excellence
@@ -17,9 +19,10 @@ export const About = () => {
               Come and discover why we're much more than just a typical gym!
             </span>
           </p>
-
-          <button className="mt-8 bg-slate-800 hover:bg-slate-900 px-6 py-2 text-white font-semibold text-lg rounded-sm transition w-full lg:w-auto">
-            Learn More
+          <button className="bg-slate-800 hover:bg-slate-900 mt-8 px-6 py-2 rounded-sm w-full lg:w-auto font-semibold text-lg text-white transition">
+            <Link to={"/"} className="" >
+              Learn More
+            </Link>
           </button>
         </div>
 
@@ -30,17 +33,17 @@ export const About = () => {
             height={800}
             width={800}
             loading="lazy"
-            className="rounded-md w-full h-full object-cover object-top"
+            className="object-top rounded-md w-full h-full object-cover"
           />
         </div>
       </div>
 
-      <section className="relative bg-[url(/img/hero-1.jpg)] bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0  sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
-        <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 h-auto lg:px-8 text-center">
-          <h2 className="text-white text-2xl font-bold my-3">Our Vision</h2>
+      <section className="relative bg-[url(/img/hero-1.jpg)] bg-cover bg-no-repeat bg-center">
+        <div className="absolute inset-0 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l sm:from-white/95 sm:to-white/25"></div>
+        <div className="relative mx-auto px-4 sm:px-6 lg:px-8 py-32 max-w-screen-xl h-auto text-center">
+          <h2 className="my-3 font-bold text-2xl text-white">Our Vision</h2>
 
-          <p className="text-white/85 font-semibold text-lg text-pretty">
+          <p className="font-semibold text-lg text-pretty text-white/85">
             At CoreForce, we envision a future where technology seamlessly
             integrates into your fitness journey, making workouts more
             efficient, connections within the fitness community stronger, and

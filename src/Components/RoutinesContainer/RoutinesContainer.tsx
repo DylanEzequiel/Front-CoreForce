@@ -55,7 +55,7 @@ function RoutinesContainer():React.ReactNode {
     <div>
             {/* muestro el header para filtrar las rutinas  */}
         <div className="pt-4 m-4">
-            <label htmlFor="typeRoutine" className='m-2 font-bold text-2xl text-slate-800'>Type of the routine: </label>
+            <label htmlFor="typeRoutine" className='m-2 font-bold text-2xl text-slate-800'>Routine type: </label>
                 <select onChange={handleChange} name='typeRoutine' className='relative z-20 border-stroke focus:border-primary active:border-primary bg-transparent bg-white m-2 px-6 py-2 border rounded w-1/4 transition outline-none' >
                     <option disabled >Select the type</option>
                     <option>cardio</option>

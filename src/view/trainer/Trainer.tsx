@@ -19,7 +19,7 @@ export const Trainer = () => {
           <li>
             <Link
               to="/user/trainer/upload-exercises"
-              className="flex items-center bg-white hover:bg-gray-100 dark:hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
+              className="flex items-center bg-white hover:bg-gray-100 dark:hover:bg-gray-300 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
               <span className="flex-1 whitespace-nowrap ms-3">Upload Exercises</span>
               <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
@@ -30,7 +30,7 @@ export const Trainer = () => {
           <li>
             <Link
               to="/#"
-              className="flex items-center bg-white hover:bg-gray-100 dark:hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
+              className="flex items-center bg-white hover:bg-gray-100 dark:hover:bg-gray-300 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
               <span className="flex-1 whitespace-nowrap ms-3">Chat</span>
               <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
@@ -41,7 +41,7 @@ export const Trainer = () => {
           <li>
             <Link
               to="/#"
-              className="flex items-center bg-white hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
+              className="flex items-center bg-white hover:bg-gray-300 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
               <span className="flex-1 whitespace-nowrap ms-3">Progress Tracking</span>
               <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
@@ -53,7 +53,7 @@ export const Trainer = () => {
             <Link
               to="/
               #"
-              className="flex items-center bg-white hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
+              className="flex items-center bg-white hover:bg-gray-300 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
               <span className="flex-1 whitespace-nowrap ms-3">Diet Plans</span>
               <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">
@@ -64,7 +64,7 @@ export const Trainer = () => {
           <li>
             <Link
               to="/#"
-              className="flex items-center bg-white hover:bg-gray-700 shadow mb-2 p-4 rounded-lg text-gray-900"
+              className="flex items-center bg-white hover:bg-gray-300 shadow mb-2 p-4 rounded-lg text-gray-900"
             >
               <span className="flex-1 whitespace-nowrap ms-3">Notifications</span>
               <span className="inline-flex justify-center items-center bg-gray-700 px-2 rounded-full font-medium text-gray-300 text-sm ms-3">

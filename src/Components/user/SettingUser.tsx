@@ -190,11 +190,15 @@ console.log(  user!.user_membership[0].membership.name!
                     name="birthdate"
                     id="birthdate"
                     value={fornatDateEdit(userInfo!.birthdate)}
-                    onChange={(e) =>
+                    onChange={(e) =>{
+                      const selectedDate = e.target.value;
+                      const [year, month, day] = selectedDate.split('-');
+                      const birth = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day) +1))
                       setUserInfo({
                         ...userInfo,
-                        birthdate: new Date(e.target.value),
+                        birthdate: birth,
                       })
+                    }
                     }
                   />
                 </div>

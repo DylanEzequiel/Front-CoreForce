@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import clienteAxios from '../../service/axiosService';
 import { FaRegFilePdf } from 'react-icons/fa';
+import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 function UploadRoutines():React.ReactElement {
+    const navigate=useNavigate()
     const [file, setFile]=useState<File | null>(null)
     const [data,setData]=useState({
         "typeRoutine":"cardio",
@@ -32,6 +35,11 @@ function UploadRoutines():React.ReactElement {
         try {
           const res=await clienteAxios.post("/files/uploadPdf",formPFP)
           console.log(res)
+          Swal.fire({
+            "title":"Routine Uploaded",
+            "icon":"success"
+          })
+          navigate("/routines")
         } catch (error) {
           console.log(error)
         }
