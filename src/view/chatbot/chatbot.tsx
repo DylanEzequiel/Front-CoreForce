@@ -1,5 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { IoMdSend } from "react-icons/io";
+import { IoMdMic } from "react-icons/io";
+("use client");
 
 interface ChatMessage {
   role: "user" | "model";
@@ -8,14 +10,12 @@ interface ChatMessage {
 
 export const Chatbot = () => {
   const [value, setValue] = useState("");
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
-  ]);
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [isSending, setIsSending] = useState(false);
   const [showFaqs, setShowFaqs] = useState(true);
-  
-  
+
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  
+
   const faqs = [
     "What is the best way to lose weight?",
     "How often should I exercise?",
@@ -25,11 +25,16 @@ export const Chatbot = () => {
   ];
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [chatHistory]);
 
   const getResponse = async (value: string) => {
+    setIsSending(true);
+
+    setShowFaqs(false);
+
     try {
       const options = {
         method: "POST",
@@ -58,9 +63,12 @@ export const Chatbot = () => {
       ]);
 
       setValue("");
+      setIsSending(false);
     } catch (error) {
+      setIsSending(false);
       console.error(error);
     }
+    setIsSending(false);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,17 +83,36 @@ export const Chatbot = () => {
     getResponse(faq);
     setShowFaqs(false);
   };
+  const handleOnRecord = () => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+
+    recognition.onresult = async (e) => {
+      const transcript = e.results[0][0].transcript;
+      setValue(transcript);
+    };
+
+    recognition.start();
+  };
 
   return (
-    <div className="flex flex-col h-screen bg-white">
-      <div className="flex flex-col flex-grow bg-white" ref={chatContainerRef}>
-        <div className="w-full md:w-1/2 p-4 mx-auto">
+    <div className="flex flex-col h-screen">
+      <div
+        className="flex flex-col flex-grow overflow-y-scroll max-h-full"
+        ref={chatContainerRef}
+      >
+        <div className="w-full md:w-1/2 p-4 mx-auto ">
           {chatHistory.map((chatItem, index) => (
-            <div key={index} className="mb-4">
-              <p className={`font-bold ${chatItem.role === "user" ? "text-blue-500" : "text-green-500"}`}>
+            <div key={index} className="mb-4 bg-white rounded-lg shadow-lg">
+              <p
+                className={`font-bold bg-white p-2 rounded-lg ${
+                  chatItem.role === "user" ? "text-blue-500" : "text-green-500"
+                }`}
+              >
                 {chatItem.role === "user" ? "You" : "Fitness trainer"}
               </p>
-              <p className="p-2 bg-gray-200 rounded-lg">
+              <p className="p-2 bg-white rounded-lg">
                 {chatItem.parts.map((part, partIndex) => (
                   <span key={partIndex}>{part.text}</span>
                 ))}
@@ -95,12 +122,12 @@ export const Chatbot = () => {
         </div>
       </div>
       {showFaqs && (
-        <div className="w-full p-4 bg-white flex justify-center">
+        <div className="w-full p-4 flex justify-center">
           <div className="flex flex-wrap justify-center gap-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="p-4 bg-gray-100 rounded-lg shadow-md cursor-pointer hover:bg-gray-200 transition"
+                className="p-4 bg-gray-100 rounded-lg shadow-blue cursor-pointer transition border border-transparent hover:border-blue-500"
                 onClick={() => handleFaqClick(faq)}
               >
                 {faq}
@@ -109,26 +136,34 @@ export const Chatbot = () => {
           </div>
         </div>
       )}
-      <div className="w-full p-4 bg-white sticky bottom-0">
+      <div className="w-full p-4 sticky bottom-0">
         <div className="relative w-full md:w-1/2 mx-auto">
           <input
             value={value}
             placeholder="Enter a prompt here"
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
-            className="w-full p-4 bg-white rounded-full border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+            className="w-full p-4 rounded-full border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-blue-500"
             disabled={isSending}
           />
           <button
-            onClick={() => getResponse(value)}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full"
+            className="absolute right-14 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full active:bg-gray-300"
             style={{
               backgroundColor: value ? "#1e293b" : "transparent",
             }}
             disabled={isSending || value.trim() === ""}
             aria-label="Send message"
           >
-            <IoMdSend className="text-xl" />
+            <IoMdSend
+              className="text-xl inline"
+              onClick={() => getResponse(value)}
+            />
+          </button>
+          <button className="absolute  inline  -translate-y-1/2 right-2 top-1/2 transform  p-2 rounded-full hover:outline-2 hover:outline hover:outline-blue-500">
+            <IoMdMic
+              className="text-xl hover:cursor-pointer "
+              onClick={handleOnRecord}
+            />
           </button>
         </div>
       </div>
