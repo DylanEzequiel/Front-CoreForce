@@ -1,7 +1,7 @@
 import { IoLogOut } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth/authStore";
-import { MdChat, MdDashboard, MdHistory, MdUpgrade } from "react-icons/md";
+import { MdChat, MdDashboard,MdUpgrade } from "react-icons/md";
 import { GiWeightLiftingUp } from "react-icons/gi";
 
 export const UserLinks = () => {
