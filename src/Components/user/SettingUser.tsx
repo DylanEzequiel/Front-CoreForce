@@ -16,6 +16,7 @@ export const SettingUser = () => {
   }));
 
 
+
   const userMembership=GetUserMembership(user!)
   sessionStorage.setItem("UserMembership",JSON.stringify(userMembership))
   const { fetchUserData } = useAuthStore();
@@ -41,7 +42,6 @@ console.log(  user!.user_membership[0].membership.name!
           Authorization: `Bearer ${token}`,
         },
       });
-
       Swal.fire({
         position: "center",
         icon: "success",
@@ -293,7 +293,7 @@ console.log(  user!.user_membership[0].membership.name!
               <h3 className="font-medium text-black">Your Photo</h3>
               <UploadPFP></UploadPFP>
             </div>
-            <div className="p-7">
+            {/* <div className="p-7">
               <form action="#">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="rounded-full w-14 h-14">
@@ -357,8 +357,8 @@ console.log(  user!.user_membership[0].membership.name!
                     Save
                   </button>
                 </div>
-              </form>
-            </div>
+              </form> 
+            </div> */}
           </div>
         </div>
       </div>

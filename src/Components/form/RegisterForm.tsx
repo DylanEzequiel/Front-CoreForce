@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import clienteAxios from "../../service/axiosService";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import LoadingIcons from "react-loading-icons";
 
 export const RegisterForm = (): React.ReactElement => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export const RegisterForm = (): React.ReactElement => {
     birthdate: "",
     gender: "",
   });
-
+  const [loading,setLoading]=useState(false)
   const [errors, setErrors] = useState<RegisterErrors>({});
   const validationErrors = validateRegister(formState);
   const [showPassword, setShowPassword] = useState(false);
@@ -49,9 +50,10 @@ export const RegisterForm = (): React.ReactElement => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setLoading(true)
     if (Object.keys(validationErrors).length !== 0) {
       setErrors(validationErrors);
+      setLoading(false)
       return;
     }
     try {
@@ -66,13 +68,16 @@ export const RegisterForm = (): React.ReactElement => {
         phoneNumber,
         membershipName: "Free",
       });
+      setLoading(false)
       toast.success("Register Succes! Log in please");
       navigate("/auth/signin");
       console.log(data);
     } catch (error: any) {
+      setLoading(false)
       toast.error(error.response.data.message);
-      console.log(error);
     }
+    setLoading(false)
+
   };
 
   const toggleShowPassword = () => {
@@ -84,12 +89,12 @@ export const RegisterForm = (): React.ReactElement => {
   };
 
   return (
-    <div className="w-full p-4 sm:p-12 xl:p-16">
+    <div className="p-4 sm:p-12 xl:p-16 w-full">
       <div className="space-y-4 md:space-y-6 p-6 sm:p-8">
-        <span className="mb-1.5 block font-medium text-gray-400">
+        <span className="block mb-1.5 font-medium text-gray-400">
           Start for free
         </span>
-        <h2 className="mb-9 text-2xl font-bold text-slate-700 sm:text-2xl">
+        <h2 className="mb-9 font-bold text-2xl text-slate-700 sm:text-2xl">
         Sign Up to CoreForce
         </h2>
 
@@ -251,7 +256,7 @@ export const RegisterForm = (): React.ReactElement => {
             </label>
             <div
                 onClick={toggleShowPassword}
-                className="absolute top-5 right-6 text-slate-800 cursor-pointer"
+                className="top-5 right-6 absolute text-slate-800 cursor-pointer"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
@@ -282,18 +287,25 @@ export const RegisterForm = (): React.ReactElement => {
             </label>
             <div
                 onClick={toggleShowRepPassword}
-                className="absolute top-5 right-6 text-slate-800 cursor-pointer"
+                className="top-5 right-6 absolute text-slate-800 cursor-pointer"
               >
                 {showRepPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
           </div>
-
+{/* 
           <button
             type="submit"
             className="inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200"
           >
             Register
-          </button>
+          </button> */}
+          <button
+              type="submit"
+              disabled={loading}
+              className={`inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md mt-4 py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200 ${loading? "bg-orange-700":null}`}
+            >
+               {loading? <LoadingIcons.ThreeDots  className='m-auto'/> :"Login"}
+            </button>
 
           <div className="mt-4 font-light text-center text-neutral-500">
             <div className="flex flex-row justify-center items-center gap-2">
