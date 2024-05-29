@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import PayPopUp from "../payPopUp/PayFormComp";
 import { useAuthStore } from "../../store/auth/authStore";
 import Swal from "sweetalert2";
+import { GetUserMembership } from "../../helpers/getactivemembership/getMembership";
 
 const subscriptionPlans = [
   {
@@ -30,7 +31,6 @@ const subscriptionPlans = [
     duration: "365 days",
   },
 ];
-const membershipUser=JSON.parse(sessionStorage.getItem("UserMembership")!)
 const membershipPlans = subscriptionPlans.map((plan) => ({
   ...plan,
   description: plan.description
@@ -41,11 +41,17 @@ const membershipPlans = subscriptionPlans.map((plan) => ({
 
 export const Pricing = () => {
   const [popUp,setPopUp]=useState(false)
-  const { userId } = useAuthStore((state) => ({
+  const { userId,user } = useAuthStore((state) => ({
     userId: state.userId,
-    user: state.userData,
+    user:state.userData
   }));
-
+  const [userMembership,setUserMembership]=useState<any>()
+  useEffect(()=>{
+    if(user){
+      const a=GetUserMembership(user!) 
+      setUserMembership(a)
+    }
+  },[])
 
   function handleClick(id: string, name: string, userId:string | null) {
     if(!userId){
@@ -109,17 +115,20 @@ export const Pricing = () => {
                 ))}
               </ul>
             </div>
-
-            {membershipUser?.membership.name != membership?.name
-              ?<button
+            
+            {
+             userMembership?.membership.name != membership?.name
+              ?
+              (<button
               className="block bg-secondary px-6 py-3 w-full font-bold text-center text-white text-xl"
-              onClick={() => handleClick(membership.id, membership.name,userId)}
-            >
+              onClick={() => handleClick(membership.id, membership.name,userId)}>
               Get Started
-            </button>:
+            </button>):
+            (
               <button className="block bg-green-500 px-6 py-3 w-full font-bold text-center text-white text-xl hover:cursor-default">
                 Current
-              </button>}
+              </button>)
+              }
           </div>
         ))}
         {popUp && 

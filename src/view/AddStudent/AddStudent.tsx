@@ -18,7 +18,6 @@ function AddStudent():React.ReactElement {
     const navigate=useNavigate()
     console.log(`trainer token: ${userId}`)
     const [student,setStudent]=useState<string>()
-    console.log(student)
     const [studentsList,setStudentsList]=useState<IUserComplete[]|null>(null)
 
 
@@ -26,6 +25,7 @@ function AddStudent():React.ReactElement {
         //funcion para ver a los usuarios
         async function get(){
             const res=await clienteAxios.get("/trainers/students",{headers:{"Authorization":`Bearer ${userToken}`}})
+            console.log(res.data)
             setStudentsList(res.data)}
         get()
     },[])
