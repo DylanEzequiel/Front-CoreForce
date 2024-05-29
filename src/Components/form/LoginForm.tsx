@@ -9,12 +9,15 @@ import clienteAxios from "../../service/axiosService";
 import { AuthGoogle } from "../Google/AuthGoogle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
+import LoadingIcons from "react-loading-icons";
 
 function LoginForm(): React.ReactElement {
   const navigate = useNavigate();
   const { fetchUserData, setTokenAndUserId } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
+  
 
+  const [loading,setLoading]=useState(false)
   //obtengo funcionalidades del custom hook de juampi (que buen hook loco)
   const { onInputChange, formState, touched, email, password } = useForm({
     email: "",
@@ -40,6 +43,7 @@ function LoginForm(): React.ReactElement {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true)
     
     await clienteAxios
       .post(`/auth/login`, {
@@ -48,7 +52,7 @@ function LoginForm(): React.ReactElement {
       })
       .then((data) => {
         console.log(data.data);
-        toast.success("Login succes! welcome back");
+        toast.success("Login success! welcome back");
         return data.data;
       })
       .then((user) => {
@@ -56,9 +60,11 @@ function LoginForm(): React.ReactElement {
         sessionStorage.setItem("UserId", user.userId);
         setTokenAndUserId(user.token, user.userId);
         fetchUserData();
+        setLoading(false)
         navigate("/");
       })
       .catch((error) => {
+        setLoading(false)
         toast.error(error.response.data.message);
       });
   };
@@ -137,9 +143,10 @@ function LoginForm(): React.ReactElement {
 
             <button
               type="submit"
-              className="inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md mt-4 py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200"
+              disabled={loading}
+              className={`inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md mt-4 py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200 ${loading? "bg-orange-700":null}`}
             >
-              Login
+               {loading? <LoadingIcons.ThreeDots  className='m-auto'/> :"Login"}
             </button>
           </div>
         </form>
