@@ -17,6 +17,7 @@ interface Message {
 export const ChatUser: React.FC = () => {
   const [message, setMessage] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
 
   const { user, userId } = useAuthStore((state) => ({
     userId: state.userId,
@@ -43,7 +44,7 @@ export const ChatUser: React.FC = () => {
     }
 
     const handleNewMessage = (data: Message) => {
-        console.log(data) // Evitar duplicación de mensajes
+        console.log(data) 
         loadMessages(userId);
     };
 
