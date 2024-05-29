@@ -99,7 +99,7 @@ export const Chatbot = () => {
   return (
     <div className="flex flex-col h-screen">
       <div
-        className="flex flex-col flex-grow max-h-full overflow-y-scroll"
+        className="flex flex-col flex-grow m-0 pr-0 max-h-full overflow-y-scroll"
         ref={chatContainerRef}
       >
         <div className="mx-auto p-4 w-full md:w-1/2">

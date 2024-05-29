@@ -7,6 +7,7 @@ import LoginRegWind from '../LoginRegWindow/LoginRegWind'
 import { GiBiceps } from 'react-icons/gi'
 import { ToggleButton } from './ToggleButton'
 import { ResponsiveNavbar } from './ResponsiveNavbar'
+import { useAuthStore } from '../../store/auth/authStore'
 
 
 export function NavBar ():React.ReactNode {
@@ -17,7 +18,9 @@ const handleOpen=():void=>{
 
 const [navbarColor, setNavbarColor] = useState('transparent');
   const location = useLocation();
-
+  const {user} = useAuthStore((state)=>({
+    user:state.userData
+  }))
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -56,12 +59,14 @@ const [navbarColor, setNavbarColor] = useState('transparent');
                     <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to={'/about'}>About us</Link>
                     </li>
-                    <li className='m-3 hover:text-secondary transition-all duration-300' >
+                   <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to={'/routines'}>Routines</Link>
                     </li>
+                    {user?.role !=="trainer"?
                     <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to="/pricing">Pricing</Link> 
                     </li>
+                    : null}
                     <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to="/gallery">Gallery</Link> 
                     </li>

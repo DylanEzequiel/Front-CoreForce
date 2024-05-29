@@ -304,7 +304,7 @@ export const RegisterForm = (): React.ReactElement => {
               disabled={loading}
               className={`inline-block bg-secondary focus:ring-opacity-50 shadow-sm focus:shadow-sm hover:shadow-md mt-4 py-3 rounded-sm w-full font-semibold text-center text-lg text-white transition duration-200 ${loading? "bg-orange-700":null}`}
             >
-               {loading? <LoadingIcons.ThreeDots  className='m-auto'/> :"Login"}
+               {loading? <LoadingIcons.ThreeDots  className='m-auto'/> :"Register"}
             </button>
 
           <div className="mt-4 font-light text-center text-neutral-500">

@@ -52,7 +52,7 @@ function LoginForm(): React.ReactElement {
       })
       .then((data) => {
         console.log(data.data);
-        toast.success("Login success! welcome back");
+        toast.success("Login success! Welcome back");
         return data.data;
       })
       .then((user) => {
