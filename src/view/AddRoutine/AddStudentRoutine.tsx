@@ -3,7 +3,6 @@ import clienteAxios from '../../service/axiosService'
 import { IRoutine } from '../../Components/RoutinesContainer/RoutinesContainer'
 import { useAuthStore } from '../../store/auth/authStore'
 import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router'
 
 function AddStudentRoutine({id}:any):React.ReactElement {
   const {userToken}=useAuthStore((state)=>({
@@ -15,7 +14,6 @@ function AddStudentRoutine({id}:any):React.ReactElement {
     const [filter,setFilter]=useState<string>("cardio")
 
     //utilizo un use effect para obtener todas las rutinas
-    const navigate=useNavigate()
     useEffect(()=>{
       async function getRoutines() {
         try {
