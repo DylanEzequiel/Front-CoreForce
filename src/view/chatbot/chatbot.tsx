@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { IoMdMic } from "react-icons/io";
-import clienteAxios from "../../service/axiosService";
 ("use client");
 
 interface ChatMessage {
@@ -14,7 +13,7 @@ export const Chatbot = () => {
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [isSending, setIsSending] = useState(false);
   const [showFaqs, setShowFaqs] = useState(true);
-
+  const apiUrl= import.meta.env.VITE_API_URL
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const faqs = [
@@ -48,8 +47,8 @@ export const Chatbot = () => {
         },
       };
 
-      const response = await clienteAxios.get("/chatbot", options);
-      const {data} = await response;
+      const response = await fetch(`${apiUrl}/chatbot`, options);
+      const data = await response.text();
 
       setChatHistory((oldChatHistory) => [
         ...oldChatHistory,
