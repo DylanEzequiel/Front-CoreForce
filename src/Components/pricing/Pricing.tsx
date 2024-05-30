@@ -74,7 +74,7 @@ export const Pricing = () => {
   // console.log(membershipPlans);
 
   return (
-    <section className="mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-7xl">
+    <section className="mx-auto px-4 sm:px-6 lg:px-8 py-20 container">
       <h2 className="font-semibold text-5xl text-center text-slate-700">
         Choose Your Plan
       </h2>
@@ -83,10 +83,10 @@ export const Pricing = () => {
         Our pricing plans are designed with transparency and value in mind.
       </p>
 
-      <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+      <div className="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         {membershipPlans.map((membership) => (
           <div
-            className="flex flex-col justify-between bg-primary shadow-lg p-6 rounded-lg transform hover:scale-105 transition duration-300"
+            className="flex flex-col justify-between bg-primary shadow-lg p-6 rounded-lg transform hover:scale-105 transition duration-300 text-pretty"
             key={membership.id}
           >
             <div>
@@ -100,7 +100,7 @@ export const Pricing = () => {
               </div>
 
               <div className="mb-8">
-                <span className="font-extrabold text-5xl text-white">
+                <span className="font-extrabold text-3xl md:text-2xl lg:text-1xl xl:text-5xl text-white">
                   ${membership.price}
                 </span>
                 <span className="font-medium text-slate-300 text-xl">/mo</span>
@@ -120,12 +120,12 @@ export const Pricing = () => {
              userMembership?.membership.name != membership?.name
               ?
               (<button
-              className="block bg-secondary px-6 py-3 w-full font-bold text-center text-white text-xl"
+              className="block bg-secondary px-6 py-2 w-full font-bold text-center text-white text-lg rounded-md"
               onClick={() => handleClick(membership.id, membership.name,userId)}>
               Get Started
             </button>):
             (
-              <button className="block bg-green-500 px-6 py-3 w-full font-bold text-center text-white text-xl hover:cursor-default">
+              <button className="block bg-green-500 px-6 py-2 w-full font-bold text-center text-white text-lg hover:cursor-default rounded-md">
                 Current
               </button>)
               }

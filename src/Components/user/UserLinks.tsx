@@ -7,6 +7,12 @@ import { GiWeightLiftingUp } from "react-icons/gi";
 export const UserLinks = () => {
 
   const navigate = useNavigate();
+  const {  user } = useAuthStore((state) => ({
+    user: state.userData
+  }));
+
+  
+  const membershipName = user?.user_membership[0].membership.name
 
   const { logout } = useAuthStore();
   const handleLogout = () => {
@@ -38,13 +44,15 @@ export const UserLinks = () => {
       </li>
 
       <li>
-        <Link
+        { membershipName === 'Gold' || membershipName === 'Platinum'? (
+          <Link
           to="chat-trainer"
           className="flex items-center hover:bg-gray-700 p-2 rounded-lg text-white group"
         >
           <MdChat />
           <span className="flex-1 whitespace-nowrap ms-3">Chat</span>
         </Link>
+        ): null }
       </li>
 
 {/* 

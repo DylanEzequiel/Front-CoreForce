@@ -5,21 +5,14 @@ import { NavLink } from "react-router-dom";
 import { TrainerLinks } from "../Components/trainer/TrainerLinks";
 import { useAuthStore } from "../store/auth/authStore";
 import { UserLinks } from "../Components/user/UserLinks";
-import { useEffect } from "react";
-import { useSocket } from "../providers/SocketProvider";
+
 
 export const UserLayout = () => {
   const { user } = useAuthStore((state) => ({
     user: state.userData,
   }));
 
-  const { socket } = useSocket();
 
-  useEffect(() => {
-    if(user?.role === 'user') {
-      socket?.emit('joinRoom', user.id)
-    }
-  }, [user, socket])
 
   return (
     <>
