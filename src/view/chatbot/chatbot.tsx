@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { IoMdMic } from "react-icons/io";
+import clienteAxios from "../../service/axiosService";
 ("use client");
 
 interface ChatMessage {
@@ -47,8 +48,8 @@ export const Chatbot = () => {
         },
       };
 
-      const response = await fetch("http://localhost:3000/chatbot", options);
-      const data = await response.text();
+      const response = await clienteAxios.get("/chatbot", options);
+      const {data} = await response;
 
       setChatHistory((oldChatHistory) => [
         ...oldChatHistory,

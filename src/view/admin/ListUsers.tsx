@@ -104,11 +104,11 @@ export const ListUsers = () => {
   };
 
   return (
-    <div className="rounded-md border bg-white px-5 pt-6 pb-3 shadow-default border-comp  sm:px-7 xl:pb-1">
-      <div className="flex flex-1 items-center gap-2 justify-between">
-        <h1 className="text-2xl py-5 font-semibold">Users</h1>
+    <div className="border-comp bg-white shadow-default px-5 sm:px-7 pt-6 pb-3 xl:pb-1 border rounded-md">
+      <div className="flex flex-1 justify-between items-center gap-2">
+        <h1 className="py-5 font-semibold text-2xl">Users</h1>
 
-        <div className="flex gap-3 flex-1">
+        <div className="flex flex-1 gap-3">
           <select
             value={filters.userType}
             onChange={(e) => handleFilterChange("userType", e.target.value)}
@@ -141,7 +141,6 @@ export const ListUsers = () => {
             </option>
             <option value="all">All Memberships</option>
             <option value="Free">Free</option>
-            <option value="Bronze">Bronze</option>
             <option value="Silver">Silver</option>
             <option value="Gold">Gold</option>
             <option value="Platinum">Platinum</option>
@@ -163,7 +162,7 @@ export const ListUsers = () => {
 
           <button
             onClick={getUsersByFilters}
-            className="bg-primary text-white px-4"
+            className="bg-primary px-4 text-white"
           >
             Filter
           </button>
@@ -174,92 +173,92 @@ export const ListUsers = () => {
         <table className="w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-left">
-              <th className="min-w-[220px] py-4 px-4 font-medium text-black xl:pl-11">
+              <th className="px-4 py-4 xl:pl-11 min-w-[220px] font-medium text-black">
                 Image
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Name
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Email
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Adress
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Phone
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Birthday
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Gender
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Height
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Weight
               </th>
-              <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[150px] font-medium text-black">
                 Role
               </th>
-              <th className="min-w-[120px] py-4 px-4 font-medium text-black">
+              <th className="px-4 py-4 min-w-[120px] font-medium text-black">
                 Status
               </th>
-              <th className="py-4 px-4 font-medium text-black">Actions</th>
+              <th className="px-4 py-4 font-medium text-black">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.id}>
-                <td className="border-b border-[#eee] py-5 px-4 pl-9 xl:pl-11">
+                <td className="border-[#eee] px-4 py-5 pl-9 xl:pl-11 border-b">
                   <img
                     src={user.profile_image!}
-                    className="w-10 h-10 rounded-full"
+                    className="rounded-full w-10 h-10"
                   />
                 </td>
-                <td className="border-b border-[#eee] py-5 px-4">
-                  <h5 className="text-black font-medium">{user.name}</h5>
+                <td className="border-[#eee] px-4 py-5 border-b">
+                  <h5 className="font-medium text-black">{user.name}</h5>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4">
+                <td className="border-[#eee] px-4 py-5 border-b">
                   <p className="text-black">{user.email}</p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4">
+                <td className="border-[#eee] px-4 py-5 border-b">
                   <p className="text-black">{user.address}</p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4">
+                <td className="border-[#eee] px-4 py-5 border-b">
                   <p className="text-black">{user.phoneNumber}</p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4">
+                <td className="border-[#eee] px-4 py-5 border-b">
                   <p className="text-black">{formatDate(user.birthdate)}</p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4">
+                <td className="border-[#eee] px-4 py-5 border-b">
                   <p className="text-black">{user.gender}</p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                <td className="border-[#eee] dark:border-strokedark px-4 py-5 border-b">
                   <p className="text-black">
                     {user.height ? user.height : "0 cm"}
                   </p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                <td className="border-[#eee] dark:border-strokedark px-4 py-5 border-b">
                   <p className="text-black">
                     {user.weight ? user.weight : "0 kg"}
                   </p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                <td className="border-[#eee] dark:border-strokedark px-4 py-5 border-b">
                   <p className="text-black">{user.role}</p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                <td className="border-[#eee] dark:border-strokedark px-4 py-5 border-b">
                   <p
                     className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
                       user.isActive
@@ -271,7 +270,7 @@ export const ListUsers = () => {
                   </p>
                 </td>
 
-                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                <td className="border-[#eee] dark:border-strokedark px-4 py-5 border-b">
                   <div className="flex items-center space-x-3.5">
                     <Link
                       className="hover:text-primary"
