@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth/authStore";
 import { MdChat, MdDashboard,MdUpgrade } from "react-icons/md";
 import { GiWeightLiftingUp } from "react-icons/gi";
+import { GetUserMembership } from "../../helpers/getactivemembership/getMembership";
 
 export const UserLinks = () => {
 
@@ -12,7 +13,7 @@ export const UserLinks = () => {
   }));
 
   
-  const membershipName = user?.user_membership[0].membership.name
+  const membershipName = GetUserMembership(user!)
 
   const { logout } = useAuthStore();
   const handleLogout = () => {
@@ -44,7 +45,7 @@ export const UserLinks = () => {
       </li>
 
       <li>
-        { membershipName === 'Gold' || membershipName === 'Platinum'? (
+        { membershipName.membership.name === 'Gold' || membershipName.membership.name === 'Platinum'? (
           <Link
           to="chat-trainer"
           className="flex items-center hover:bg-gray-700 p-2 rounded-lg text-white group"
