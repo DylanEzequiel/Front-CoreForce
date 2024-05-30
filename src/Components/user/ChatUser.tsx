@@ -1,13 +1,14 @@
-const apiUrl = import.meta.env.VITE_API_URL;
+// const apiUrl = import.meta.env.VITE_API_URL;
 
 import { useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { useAuthStore } from "../../store/auth/authStore";
 import { useChatStore } from "../../store/chat/chatStore";
+import { useSocket } from "../../providers/SocketProvider";
 
-const socket = io(apiUrl, {
-  autoConnect: true,
-});
+// const socket = io(apiUrl, {
+//   autoConnect: false,
+// });
 interface Message {
   user: string;
   body: string;
@@ -30,19 +31,16 @@ export const ChatUser: React.FC = () => {
     loadMessages: state.loadMessages,
   }));
 
+  const { socket } = useSocket();
+
  
   useEffect(() => {
-    if (!userId) return;
+    if (!userId || !user || !socket) return;
 
-    loadMessages(userId!);
     
-    socket.emit("joinRoom", userId);
-
-    if (user) {
-      socket.auth = { name: user.name, room: userId };
-      socket.connect();
-    }
-
+    loadMessages(userId!);
+    socket.emit('joinRoom', user.id);
+    
     const handleNewMessage = (data: Message) => {
         console.log(data) 
         loadMessages(userId);
@@ -52,9 +50,8 @@ export const ChatUser: React.FC = () => {
     
     return () => {
       socket.off("message", handleNewMessage);
-      socket.disconnect();
     };
-  }, [userId, user, loadMessages]);
+  }, [userId, user, loadMessages, socket]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -62,13 +59,15 @@ export const ChatUser: React.FC = () => {
 
   const handleSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newMessage = {
-      body: message,
-      user: user?.name || 'Anonymous',
-      room: userId!,
-    };
-    socket.emit("message", { body: newMessage.body, room: newMessage.room });
-    setMessage("");
+    if(socket) {
+      const newMessage = {
+        body: message,
+        user: user?.name,
+        room: userId!,
+      };
+      socket.emit("message", { body: newMessage.body, room: newMessage.room });
+      setMessage("");
+    }
   };
 
   const currentMessages =  messages[userId!]?.messages || [] 
@@ -97,12 +96,12 @@ export const ChatUser: React.FC = () => {
                   key={index}
                   className={`mb-2 p-2 w-auto ${
                     message.user === user?.name
-                      ? "bg-slate-300 text-slate-800 self-end"
-                      : "bg-orange-500 text-gray-100 self-start"
+                      ? "bg-slate-300 text-slate-800 self-start rounded-t-xl rounded-bl-xl"
+                      : "bg-orange-500 text-gray-100 self-left rounded-t-xl rounded-br-xl"
                   }`}
                   style={{
                     alignSelf:
-                      message.user === user?.name ? "flex-start" : "flex-end",
+                      message.user === user?.name ? "flex-end" : "flex-start",
                     maxWidth: "70%",
                   }}
                   ref={messagesEndRef}

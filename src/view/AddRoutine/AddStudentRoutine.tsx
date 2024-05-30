@@ -45,6 +45,11 @@ function AddStudentRoutine({id}:any):React.ReactElement {
       try {
         const res=await clienteAxios.post(`/trainers/students/routine/${idRoutine}`,body,{headers:{"Authorization":`Bearer ${userToken}`}})
         console.log(res)
+        Swal.fire({
+          title:"Success!",
+          icon:"success",
+          text:"Routine added correctly"
+        })
       } catch (error:any) {
         Swal.fire({
           "title":"Error",

@@ -2,7 +2,7 @@ import { IoLogOut } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth/authStore";
 import { MdDashboard } from "react-icons/md";
-import { FaFileUpload } from "react-icons/fa";
+import { FaFileAlt, FaFileUpload } from "react-icons/fa";
 import { IoMdChatbubbles } from "react-icons/io";
 import { PiUsersFill } from "react-icons/pi";
 
@@ -30,10 +30,19 @@ export const TrainerLinks = () => {
       <li>
         <Link
           to="trainer/upload-exercises"
-          className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"
         >
           <FaFileUpload size={20}/>
           <span className="flex-1 ms-3 whitespace-nowrap">Upload Exercises</span>
+        
+        </Link>
+
+        <Link
+          to="/routines"
+          className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"
+        >
+          <FaFileAlt size={20}/>
+          <span className="flex-1 ms-3 whitespace-nowrap">Routines</span>
         
         </Link>
       </li>
@@ -41,7 +50,7 @@ export const TrainerLinks = () => {
       <li>
         <Link
           to="trainer/chat"
-          className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"
         >
           <IoMdChatbubbles size={20}/>
           <span className="flex-1 ms-3 whitespace-nowrap">Chat</span>
@@ -52,7 +61,7 @@ export const TrainerLinks = () => {
       <li>
         <Link
           to="trainer/student-list"
-          className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"
         >
           <PiUsersFill />
           <span className="flex-1 ms-3 whitespace-nowrap">Student List</span>

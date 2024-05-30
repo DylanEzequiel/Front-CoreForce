@@ -30,7 +30,7 @@ function STPayForm():React.ReactNode {
             type:"card",
             card: elements!.getElement(CardElement)!
         })
-        setLoading(!loading)
+        setLoading(true)
         if(!error){
             console.log(paymentMethod)
             try {
@@ -43,17 +43,15 @@ function STPayForm():React.ReactNode {
                         userId,
                         membershipName
                     }})
+                    fetchUserData();
                     Swal.fire({
                       icon: "success",
                       title: "Suscription complete!",
                       text: "Redirecting",
                     });
-                    setLoading(!loading)
-                    fetchUserData();
+                    setLoading(false)
+                    elements?.getElement(CardElement)?.clear()
                     navigate("/user/profile")
-                  
-                elements?.getElement(CardElement)?.clear()
-                
             } 
             catch (error) {
               Swal.fire({
@@ -62,10 +60,10 @@ function STPayForm():React.ReactNode {
                 text: "Something went wrong!",
               });
               console.log(error);
-              setLoading(!loading)
+              setLoading(false)
 }
         }
-        setLoading(!loading)
+        setLoading(false)
     }
 
 

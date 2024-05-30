@@ -1,12 +1,18 @@
 import { IoLogOut } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth/authStore";
-import { MdChat, MdDashboard, MdHistory, MdUpgrade } from "react-icons/md";
+import { MdChat, MdDashboard,MdUpgrade } from "react-icons/md";
 import { GiWeightLiftingUp } from "react-icons/gi";
 
 export const UserLinks = () => {
 
   const navigate = useNavigate();
+  const {  user } = useAuthStore((state) => ({
+    user: state.userData
+  }));
+
+  
+  const membershipName = user?.user_membership[0].membership.name
 
   const { logout } = useAuthStore();
   const handleLogout = () => {
@@ -20,58 +26,60 @@ export const UserLinks = () => {
     <li>
         <Link
           to="profile"
-          className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"
+          className="flex items-center hover:bg-gray-700 p-2 rounded-lg text-white group"
         >
           <MdDashboard size={20}/>
-          <span className="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
+          <span className="flex-1 whitespace-nowrap ms-3">Dashboard</span>
         </Link>
       </li>
 
       <li>
         <Link
           to="routines"
-          className="flex items-center p-2 rounded-lg text-white  hover:bg-gray-700 group"
+          className="flex items-center hover:bg-gray-700 p-2 rounded-lg text-white group"
         >
           <GiWeightLiftingUp size={20}/>
-          <span className="flex-1 ms-3 whitespace-nowrap">Routines</span>
+          <span className="flex-1 whitespace-nowrap ms-3">Routines</span>
         </Link>
       </li>
 
       <li>
-        <Link
+        { membershipName === 'Gold' || membershipName === 'Platinum'? (
+          <Link
           to="chat-trainer"
-          className="flex items-center p-2 rounded-lg text-white  hover:bg-gray-700 group"
+          className="flex items-center hover:bg-gray-700 p-2 rounded-lg text-white group"
         >
           <MdChat />
-          <span className="flex-1 ms-3 whitespace-nowrap">Chat</span>
+          <span className="flex-1 whitespace-nowrap ms-3">Chat</span>
         </Link>
+        ): null }
       </li>
 
-
+{/* 
       <li>
         <Link
           to="payment-history"
-          className="flex items-center p-2 t rounded-lg text-white  hover:bg-gray-700 group"
+          className="flex items-center hover:bg-gray-700 p-2 rounded-lg text-white group t"
         >
           <MdHistory size={20}/>
-          <span className="flex-1 ms-3 whitespace-nowrap">Payment History</span>
+          <span className="flex-1 whitespace-nowrap ms-3">Payment History</span>
         </Link>
-      </li>
+      </li> */}
 
       <li>
         <Link
           to="update-plan"
-          className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"
+          className="flex items-center hover:bg-gray-700 p-2 rounded-lg text-white group"
         >
           <MdUpgrade size={20}/>
-          <span className="flex-1 ms-3 whitespace-nowrap">Upgrade Plan</span>
+          <span className="flex-1 whitespace-nowrap ms-3">Upgrade Plan</span>
         </Link>
       </li>
 
       <li>
         <button
           onClick={handleLogout}
-          className="flex justify-start gap-2 items-center p-2 text-white  hover:bg-gray-700 group w-full"
+          className="flex justify-start items-center gap-2 hover:bg-gray-700 p-2 w-full text-white group"
         >
           <IoLogOut size={25} className="text-red-600"/>
           <span className="whitespace-nowrap">Logout</span>
