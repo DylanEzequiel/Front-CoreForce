@@ -5,6 +5,7 @@ import { auth } from "../../firebase/firebase";
 import { useNavigate } from "react-router";
 import clienteAxios from "../../service/axiosService";
 import { useAuthStore } from "../../store/auth/authStore";
+import { toast } from "react-toastify";
 
 /*
   Stages:
@@ -34,8 +35,9 @@ export const AuthGoogle: React.FC = () => {
       })
       console.log(data)
       setTokenAndUserId(data.token, data.userId);
-        fetchUserData();
-        navigate("/");
+      toast.success("Login success! Welcome back");
+      fetchUserData();
+      navigate("/");
       
       
     } catch (error) {
@@ -51,7 +53,7 @@ export const AuthGoogle: React.FC = () => {
  
 
   return (
-    <button className="flex items-center gap-2 bg-blue-700 text-gray-100 p-4 rounded-md mt-5 w-full text-center justify-center"
+    <button className="flex justify-center items-center gap-2 bg-blue-700 mt-5 p-4 rounded-md w-full text-center text-gray-100"
     onClick={handleClick}
     >
       <FaGoogle className="text-gray-100"/>
