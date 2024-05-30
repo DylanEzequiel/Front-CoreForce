@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { useAuthStore } from "../store/auth/authStore";
 
@@ -21,22 +21,31 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
     user: state.userData,
   }));
 
-  const socket = io(apiUrl, {
-    autoConnect: true,
-    auth: { name: user?.name },
-  });
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  
 
   useEffect(() => {
-    if (user?.role == 'user') {
-      socket.auth = { name: user.name };
-      socket.connect();
-      socket.emit('joinRoom', user.id);
-    }
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [user, socket]);
+    if(user) {
+      const newSocket = io(apiUrl, {
+        autoConnect: false,
+        auth: { name: user.name },
+      });
+
+      setSocket(newSocket);
+      
+      newSocket.connect();
+      if (user?.role == 'user') {
+        newSocket.emit('joinRoom', user.id);
+      }
+
+      return () => {
+        newSocket.disconnect();
+      };
+    }
+   
+  }, [user]);
 
   return (
     <SocketContext.Provider value={{ socket }}>

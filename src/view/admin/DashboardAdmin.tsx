@@ -3,6 +3,9 @@ import { CardData } from "../../Components/dashboard/cardData/CardData";
 import { MdPaid, MdVisibility } from "react-icons/md";
 import { PiSneakerMoveFill } from "react-icons/pi";
 import { useAuthStore } from "../../store/auth/authStore";
+import { BarChart } from "../../Components/chart/BarChart";
+import { PastelChart } from "../../Components/chart/PastelChart";
+import { ActiveChart } from "../../Components/chart/ActiveChart";
 
 export const DashboardAdmin: React.FC = () => {
   
@@ -43,6 +46,13 @@ export const DashboardAdmin: React.FC = () => {
         >
           <MdVisibility size={20} />
         </CardData>
+
+
+        <div className="py-5 md:flex justify-between gap-10 w-auto h-auto">
+          <BarChart />
+          <PastelChart />
+          <ActiveChart />
+        </div>
       </div>
     </div>
   );

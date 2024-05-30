@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { useAuthStore } from "../../store/auth/authStore";
 
 import { useTrainerStore } from "../../store/trainer/trainerStore";
 import { useChatStore } from "../../store/chat/chatStore";
+import { useSocket } from "../../providers/SocketProvider";
 
-const apiUrl = import.meta.env.VITE_API_URL;
+// const apiUrl = import.meta.env.VITE_API_URL;
 
-const socket = io(apiUrl, {
-  autoConnect: true,
-});
+// const socket = io(apiUrl, {
+//   autoConnect: true,
+// });
 
 interface User {
   id: string;
@@ -41,35 +42,36 @@ export const TrainerChat = () => {
     loadMessages: state.loadMessages,
   }));
 
+  const { socket } = useSocket();
+
 
   useEffect(()=> {
   
-    if (user) {
+    if (user && socket) {
       fetchStudents(userId!, token!)
       socket.auth = { name: user.name, room: room };
       socket.connect();
     }
 
 
-    socket.on("message", (data) => {
+    socket?.on("message", (data) => {
       console.log(data);
       loadMessages(room)
 
     });
 
     return () => {
-      socket.off("message");
-      socket.disconnect();
+      socket?.off("message");
     };
 
-  }, [ user,  fetchStudents, userId, token, loadMessages, room]);
+  }, [ user,  fetchStudents, userId, token, loadMessages, room, socket]);
 
   useEffect(() => {
-    if (room) {
+    if (room && socket) {
       socket.emit("joinRoom", room);
       loadMessages(room)
     }
-  }, [room, loadMessages]);
+  }, [room, loadMessages, socket]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -86,10 +88,10 @@ export const TrainerChat = () => {
     if (room && selectedUser) {
       const newMessage = {
         body: message,
-        from: "Me",
+        from: user?.name,
         room,
       };
-      socket.emit('message', {body: newMessage.body, room: newMessage.room});
+      socket?.emit('message', {body: newMessage.body, room: newMessage.room});
      
       setMessage('');
 
@@ -126,12 +128,12 @@ export const TrainerChat = () => {
                key={index}
                className={`mb-2 p-2 w-auto ${
                  message.user === user?.name
-                   ? "bg-slate-300 text-slate-800 self-end rounded-t-xl rounded-br-xl"
+                   ? "bg-slate-300 text-slate-800 self-left rounded-t-xl rounded-br-xl"
                    : "bg-orange-500 text-gray-100 self-start rounded-t-xl rounded-bl-xl"
                }`}
                style={{
                  alignSelf:
-                   message.user === user?.name ? "flex-start" : "flex-end",
+                   message.user === user?.name ? "flex-end" : "flex-start",
                  maxWidth: "70%",
                }}
                ref={messagesEndRef}

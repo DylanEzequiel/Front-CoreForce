@@ -29,6 +29,7 @@ export const ListUsers = () => {
       },
     });
     setusers(data);
+    console.log(data)
   };
 
   useEffect(() => {
@@ -61,6 +62,7 @@ export const ListUsers = () => {
         },
       });
       setusers(data);
+      console.log(data)
     } catch (error) {
       console.log(error);
     }

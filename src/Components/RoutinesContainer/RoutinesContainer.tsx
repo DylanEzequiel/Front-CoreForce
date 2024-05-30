@@ -20,11 +20,12 @@ function RoutinesContainer():React.ReactNode {
   const [filter,setFilter]=useState<string | null>(null)
   
   const { routines, fetchRoutines } = useRoutineStore();
+  console.log(routines)
 
   //utilizo un use effect para obtener todas las rutinas
   useEffect(()=>{
    fetchRoutines()
-  },[])
+},[fetchRoutines])
 
   useEffect(() => {
     applyFilter();
