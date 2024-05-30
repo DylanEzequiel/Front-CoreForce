@@ -62,7 +62,7 @@ const [navbarColor, setNavbarColor] = useState('transparent');
                    <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to={'/routines'}>Routines</Link>
                     </li>
-                    {user?.role !=="trainer"?
+                    {user?.role !== "trainer" ?
                     <li className='m-3 hover:text-secondary transition-all duration-300' >
                         <Link to="/pricing">Pricing</Link> 
                     </li>
